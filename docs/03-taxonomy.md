@@ -30,16 +30,19 @@ Difficulty: E = LC Easy, M = Medium, H = Hard.
 **Recognition cues:** "count subarrays with sum K", "anagram groups", "first non-repeating", "longest substring without ...".
 
 **Template (prefix-sum subarray):**
-```python
-seen = {0: 1}   # prefix sum -> count
-psum = ans = 0
-for x in arr:
-    psum += x
-    ans += seen.get(psum - k, 0)
-    seen[psum] = seen.get(psum, 0) + 1
+```csharp
+var seen = new Dictionary<long, int> { [0] = 1 }; // prefix sum -> count
+long psum = 0;
+int ans = 0;
+foreach (var x in arr)
+{
+    psum += x;
+    if (seen.TryGetValue(psum - k, out var c)) ans += c;
+    seen[psum] = seen.GetValueOrDefault(psum, 0) + 1;
+}
 ```
 
-**Traps:** off-by-one when initializing `seen = {0: 1}`; mutating `defaultdict` while iterating; using tuple keys when list keys would be faster (or vice versa); forgetting that `dict` insertion order in Python is guaranteed, but `set` is not.
+**Traps:** off-by-one when initializing `seen[0] = 1`; mutating a `Dictionary` while iterating (throws `InvalidOperationException`); choosing the wrong key type (use a `ValueTuple` for composite keys — reference-type keys hash by identity unless overridden); `HashSet<T>` enumeration order is not guaranteed.
 
 **Problems:**
 - **C** [LC 49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) (M)
@@ -60,23 +63,30 @@ for x in arr:
 **Recognition cues:** sorted array + target; remove duplicates in place; partition by predicate; "in O(1) extra space".
 
 **Template (triplet sum):**
-```python
-arr.sort()
-for i in range(len(arr)-2):
-    if i and arr[i] == arr[i-1]: continue
-    l, r = i+1, len(arr)-1
-    while l < r:
-        s = arr[i] + arr[l] + arr[r]
-        if s < 0: l += 1
-        elif s > 0: r -= 1
-        else:
-            res.append([arr[i], arr[l], arr[r]])
-            l += 1; r -= 1
-            while l < r and arr[l] == arr[l-1]: l += 1
-            while l < r and arr[r] == arr[r+1]: r -= 1
+```csharp
+Array.Sort(arr);
+var res = new List<int[]>();
+for (int i = 0; i < arr.Length - 2; i++)
+{
+    if (i > 0 && arr[i] == arr[i - 1]) continue;
+    int l = i + 1, r = arr.Length - 1;
+    while (l < r)
+    {
+        int s = arr[i] + arr[l] + arr[r];
+        if (s < 0) l++;
+        else if (s > 0) r--;
+        else
+        {
+            res.Add(new[] { arr[i], arr[l], arr[r] });
+            l++; r--;
+            while (l < r && arr[l] == arr[l - 1]) l++;
+            while (l < r && arr[r] == arr[r + 1]) r--;
+        }
+    }
+}
 ```
 
-**Traps:** dedup after appending, not before; integer overflow in C++ for `arr[l]+arr[r]`; forgetting that fast/slow cycle detection needs Floyd's two-phase to find cycle start.
+**Traps:** dedup after appending, not before; integer overflow on `arr[l] + arr[r]` (cast to `long` when values can be near `int.MaxValue`); forgetting that fast/slow cycle detection needs Floyd's two-phase to find the cycle start.
 
 **Problems:**
 - **C** [LC 15 3Sum](https://leetcode.com/problems/3sum/) (M)
@@ -95,20 +105,26 @@ for i in range(len(arr)-2):
 **Recognition cues:** "longest / shortest substring such that ...", "at most K distinct", "window of size k", "max sum subarray length k".
 
 **Template (variable window with counter):**
-```python
-from collections import Counter
-need = Counter(t); missing = len(t)
-l = 0; best = (0, 0, float('inf'))
-for r, c in enumerate(s):
-    if need[c] > 0: missing -= 1
-    need[c] -= 1
-    while missing == 0:
-        if r - l + 1 < best[2]:
-            best = (l, r+1, r-l+1)
-        need[s[l]] += 1
-        if need[s[l]] > 0: missing += 1
-        l += 1
-return s[best[0]:best[1]] if best[2] < float('inf') else ""
+```csharp
+var need = new Dictionary<char, int>();
+foreach (var ch in t) need[ch] = need.GetValueOrDefault(ch, 0) + 1;
+int missing = t.Length;
+int l = 0, bestL = 0, bestLen = int.MaxValue;
+for (int r = 0; r < s.Length; r++)
+{
+    char c = s[r];
+    if (need.GetValueOrDefault(c, 0) > 0) missing--;
+    need[c] = need.GetValueOrDefault(c, 0) - 1;
+    while (missing == 0)
+    {
+        if (r - l + 1 < bestLen) { bestLen = r - l + 1; bestL = l; }
+        char lc = s[l];
+        need[lc]++;
+        if (need[lc] > 0) missing++;
+        l++;
+    }
+}
+return bestLen == int.MaxValue ? "" : s.Substring(bestL, bestLen);
 ```
 
 **Traps:** updating `missing` only when crossing zero (not every char); forgetting to shrink after every right-move; off-by-one on result length.
@@ -131,15 +147,20 @@ return s[best[0]:best[1]] if best[2] < float('inf') else ""
 **Recognition cues:** "next greater element", "histogram", "remove k digits to make smallest", "valid parentheses", "asteroid collision", "stock span".
 
 **Template (next greater element):**
-```python
-n = len(arr); res = [-1]*n; stack = []
-for i in range(n):
-    while stack and arr[stack[-1]] < arr[i]:
-        res[stack.pop()] = arr[i]
-    stack.append(i)
+```csharp
+int n = arr.Length;
+var res = new int[n];
+Array.Fill(res, -1);
+var stack = new Stack<int>();
+for (int i = 0; i < n; i++)
+{
+    while (stack.Count > 0 && arr[stack.Peek()] < arr[i])
+        res[stack.Pop()] = arr[i];
+    stack.Push(i);
+}
 ```
 
-**Traps:** forgetting `<` vs `<=` (strict vs non-strict); not draining the stack at the end; in histogram, using sentinel `0` at end to flush.
+**Traps:** forgetting `<` vs `<=` (strict vs non-strict); not draining the stack at the end; in histogram, push a sentinel `0` at the end to flush.
 
 **Problems:**
 - **C** [LC 20 Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) (E) — speed only.
@@ -159,17 +180,19 @@ for i in range(n):
 **Recognition cues:** "minimum X such that ...", "maximum X such that ...", sorted-or-rotated input, "find Kth", time complexity hint `O(log n)`.
 
 **Template (binary search on answer):**
-```python
-def feasible(x): ...    # monotonic in x
-lo, hi = lo0, hi0
-while lo < hi:
-    mid = (lo + hi) // 2
-    if feasible(mid): hi = mid
-    else: lo = mid + 1
-return lo
+```csharp
+bool Feasible(int x) { /* monotonic in x */ return true; }
+int lo = lo0, hi = hi0;
+while (lo < hi)
+{
+    int mid = lo + (hi - lo) / 2;
+    if (Feasible(mid)) hi = mid;
+    else lo = mid + 1;
+}
+return lo;
 ```
 
-**Traps:** integer overflow in `(lo+hi)//2` in Java/C++ — use `lo + (hi-lo)//2`; the "feasible" predicate must be **monotonic** (verify on paper); off-by-one between `hi = mid` vs `hi = mid - 1`; rotated array with duplicates needs the linear fallback.
+**Traps:** integer overflow in `(lo + hi) / 2` — always write `lo + (hi - lo) / 2`; the "feasible" predicate must be **monotonic** (verify on paper); off-by-one between `hi = mid` vs `hi = mid - 1`; rotated array with duplicates needs the linear fallback.
 
 **Problems:**
 - **C** [LC 33 Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) (M)
@@ -190,16 +213,21 @@ return lo
 **Recognition cues:** "intervals", "meetings", "skyline", "calendar", "free time", "min number of X to cover", "Employee Free Time".
 
 **Template (line sweep):**
-```python
-events = []
-for s, e in intervals:
-    events.append((s, +1))
-    events.append((e, -1))
-events.sort()                  # ties: -1 before +1 if endpoints touch
-active = best = 0
-for _, d in events:
-    active += d
-    best = max(best, active)
+```csharp
+var events = new List<(int t, int delta)>();
+foreach (var iv in intervals)
+{
+    events.Add((iv[0], +1));
+    events.Add((iv[1], -1));
+}
+// ties: -1 before +1 if endpoints touch
+events.Sort((a, b) => a.t != b.t ? a.t.CompareTo(b.t) : a.delta.CompareTo(b.delta));
+int active = 0, best = 0;
+foreach (var (_, d) in events)
+{
+    active += d;
+    best = Math.Max(best, active);
+}
 ```
 
 **Traps:** start-vs-end tie-breaking (does a meeting ending at t conflict with one starting at t?); using `<` vs `<=` for merging; in Skyline, sorting `(x, -h, type)` to handle simultaneous starts/ends correctly.
@@ -224,19 +252,23 @@ for _, d in events:
 **Recognition cues:** "K largest / smallest", "merge K sorted ...", "median of stream", "minimum cost to ...", "process tasks by ...".
 
 **Template (k-way merge):**
-```python
-import heapq
-h = [(lst[0], i, 0) for i, lst in enumerate(lists) if lst]
-heapq.heapify(h)
-out = []
-while h:
-    v, i, j = heapq.heappop(h)
-    out.append(v)
-    if j+1 < len(lists[i]):
-        heapq.heappush(h, (lists[i][j+1], i, j+1))
+```csharp
+// PriorityQueue<TElement, TPriority> is a min-heap by priority.
+var pq = new PriorityQueue<(int listIdx, int pos), int>();
+for (int i = 0; i < lists.Count; i++)
+    if (lists[i].Count > 0) pq.Enqueue((i, 0), lists[i][0]);
+
+var outList = new List<int>();
+while (pq.Count > 0)
+{
+    var (i, j) = pq.Dequeue();
+    outList.Add(lists[i][j]);
+    if (j + 1 < lists[i].Count)
+        pq.Enqueue((i, j + 1), lists[i][j + 1]);
+}
 ```
 
-**Traps:** Python `heapq` is min-heap only — negate for max; tuples in heap must be fully comparable (add an index tiebreaker); Java's `PriorityQueue.remove(x)` is O(n); use lazy deletion or `TreeMap` instead.
+**Traps:** `PriorityQueue<T,TPriority>` is min-heap — negate the priority for a max-heap; it has no `Remove(x)` operation, so use lazy deletion or switch to `SortedSet<T>` / `SortedDictionary<TKey,TValue>` when you need ordered removal; equal priorities are **not** dequeued in insertion order — bake a tiebreaker into the priority if order matters.
 
 **Problems:**
 - **C** [LC 215 Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) (M) — also quickselect.
@@ -258,15 +290,19 @@ while h:
 **Recognition cues:** explicit `ListNode`; "in-place"; "without extra space".
 
 **Template (reverse):**
-```python
-prev = None; cur = head
-while cur:
-    nxt = cur.next; cur.next = prev
-    prev = cur; cur = nxt
-return prev
+```csharp
+ListNode prev = null, cur = head;
+while (cur != null)
+{
+    var nxt = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = nxt;
+}
+return prev;
 ```
 
-**Traps:** losing `head.next` reference before saving it; using `dummy = ListNode(0)` and forgetting to return `dummy.next`; in cycle problems, not handling head==None.
+**Traps:** losing `head.next` before saving it; creating `var dummy = new ListNode(0)` and forgetting to return `dummy.next`; in cycle problems, not handling `head == null`.
 
 **Problems:**
 - **C** [LC 206 Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) (E)
@@ -286,15 +322,18 @@ return prev
 **Recognition cues:** "binary tree", "BST", "path", "ancestor", "level", "serialize", "validate".
 
 **Template (return-tuple DFS):**
-```python
-def dfs(node):
-    if not node: return (0, 0)        # (e.g. depth, best)
-    L = dfs(node.left); R = dfs(node.right)
-    # combine
-    return (..., ...)
+```csharp
+(int depth, int best) Dfs(TreeNode node)
+{
+    if (node == null) return (0, 0);
+    var L = Dfs(node.left);
+    var R = Dfs(node.right);
+    // combine
+    return (/* depth */ 0, /* best */ 0);
+}
 ```
 
-**Traps:** confusing in-order vs pre-order for BST validation (in-order must be strictly increasing); recursion depth limit in Python (`sys.setrecursionlimit(10**6)` if needed); LCA assumptions about both nodes existing.
+**Traps:** confusing in-order vs pre-order for BST validation (in-order must be strictly increasing); deep recursion blows the default ~1 MB thread stack on Windows — for very deep trees, run on a dedicated `new Thread(..., maxStackSize: 16 << 20)` or convert to an explicit stack; LCA assumptions about both nodes existing.
 
 **Problems:**
 - **C** [LC 104 Max Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/) (E)
@@ -318,22 +357,41 @@ def dfs(node):
 **Recognition cues:** "prefix", "dictionary", "autocomplete", "find all words on board".
 
 **Template:**
-```python
-class Trie:
-    def __init__(self): self.root = {}
-    def insert(self, w):
-        n = self.root
-        for c in w: n = n.setdefault(c, {})
-        n['$'] = True
-    def search(self, w):
-        n = self.root
-        for c in w:
-            if c not in n: return False
-            n = n[c]
-        return '$' in n
+```csharp
+public class Trie
+{
+    private class Node
+    {
+        public Dictionary<char, Node> Children = new();
+        public bool End;
+    }
+    private readonly Node root = new();
+
+    public void Insert(string w)
+    {
+        var n = root;
+        foreach (var c in w)
+        {
+            if (!n.Children.TryGetValue(c, out var nxt))
+                n.Children[c] = nxt = new Node();
+            n = nxt;
+        }
+        n.End = true;
+    }
+
+    public bool Search(string w)
+    {
+        var n = root;
+        foreach (var c in w)
+        {
+            if (!n.Children.TryGetValue(c, out n!)) return false;
+        }
+        return n.End;
+    }
+}
 ```
 
-**Traps:** confusing prefix-exists vs word-exists; not pruning leaf nodes after DFS pop (memory); using `defaultdict(Trie)` recursively in Python — works but cascade-inits silently.
+**Traps:** confusing prefix-exists vs word-exists; not pruning leaf nodes after DFS pop (memory); using a fixed `Node[26]` array can be 5–10× faster than `Dictionary<char, Node>` for lowercase-only inputs — know both.
 
 **Problems:**
 - **C** [LC 208 Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) (M)
@@ -353,37 +411,52 @@ class Trie:
 **Templates:**
 
 Dijkstra:
-```python
-import heapq
-dist = {s: 0}; pq = [(0, s)]
-while pq:
-    d, u = heapq.heappop(pq)
-    if d > dist[u]: continue
-    for v, w in adj[u]:
-        nd = d + w
-        if nd < dist.get(v, float('inf')):
-            dist[v] = nd
-            heapq.heappush(pq, (nd, v))
+```csharp
+var dist = new Dictionary<int, int> { [s] = 0 };
+var pq = new PriorityQueue<int, int>();
+pq.Enqueue(s, 0);
+while (pq.TryDequeue(out int u, out int d))
+{
+    if (d > dist[u]) continue; // stale entry
+    foreach (var (v, w) in adj[u])
+    {
+        int nd = d + w;
+        if (nd < dist.GetValueOrDefault(v, int.MaxValue))
+        {
+            dist[v] = nd;
+            pq.Enqueue(v, nd);
+        }
+    }
+}
 ```
 
 Union-Find:
-```python
-parent = list(range(n)); rank = [0]*n
-def find(x):
-    while parent[x] != x:
-        parent[x] = parent[parent[x]]
-        x = parent[x]
-    return x
-def union(x, y):
-    rx, ry = find(x), find(y)
-    if rx == ry: return False
-    if rank[rx] < rank[ry]: rx, ry = ry, rx
-    parent[ry] = rx
-    if rank[rx] == rank[ry]: rank[rx] += 1
-    return True
+```csharp
+int[] parent = Enumerable.Range(0, n).ToArray();
+int[] rank = new int[n];
+
+int Find(int x)
+{
+    while (parent[x] != x)
+    {
+        parent[x] = parent[parent[x]]; // path compression (halving)
+        x = parent[x];
+    }
+    return x;
+}
+
+bool Union(int x, int y)
+{
+    int rx = Find(x), ry = Find(y);
+    if (rx == ry) return false;
+    if (rank[rx] < rank[ry]) (rx, ry) = (ry, rx);
+    parent[ry] = rx;
+    if (rank[rx] == rank[ry]) rank[rx]++;
+    return true;
+}
 ```
 
-**Traps:** forgetting visited marking in BFS (TLE / infinite loop); using DFS recursion on big grids → stack overflow; Dijkstra with negative weights (broken — use Bellman-Ford or rethink); topological sort failing silently when graph has a cycle (check final count == n); union-find without path compression (TLE).
+**Traps:** forgetting visited marking in BFS (TLE / infinite loop); deep DFS recursion on big grids blows the thread stack — switch to an explicit `Stack<T>` or a larger-stack `Thread`; Dijkstra with negative weights (broken — use Bellman-Ford or rethink); topological sort failing silently when the graph has a cycle (check final count == n); union-find without path compression (TLE); `PriorityQueue` has no decrease-key, so push duplicates and skip stale entries via the `d > dist[u]` check above.
 
 **Problems:**
 - **C** [LC 200 Number of Islands](https://leetcode.com/problems/number-of-islands/) (M)
@@ -412,18 +485,26 @@ def union(x, y):
 **Recognition cues:** "all possible ...", "generate all ...", "N-Queens", "Sudoku", word ladder DFS variant.
 
 **Template (subsets):**
-```python
-def bt(start, path):
-    res.append(path[:])
-    for i in range(start, len(nums)):
-        if i > start and nums[i] == nums[i-1]: continue   # dedup if sorted
-        path.append(nums[i])
-        bt(i+1, path)
-        path.pop()
-nums.sort(); res = []; bt(0, [])
+```csharp
+Array.Sort(nums);
+var res = new List<IList<int>>();
+var path = new List<int>();
+
+void Bt(int start)
+{
+    res.Add(new List<int>(path)); // copy!
+    for (int i = start; i < nums.Length; i++)
+    {
+        if (i > start && nums[i] == nums[i - 1]) continue; // dedup if sorted
+        path.Add(nums[i]);
+        Bt(i + 1);
+        path.RemoveAt(path.Count - 1);
+    }
+}
+Bt(0);
 ```
 
-**Traps:** forgetting `path[:]` copy when appending; dedup logic only works on sorted input; mutating the result inadvertently.
+**Traps:** forgetting to copy `path` when appending (you'll get N references to the same mutating list); dedup logic only works on sorted input; mutating the result inadvertently.
 
 **Problems:**
 - **C** [LC 78 Subsets](https://leetcode.com/problems/subsets/) (M)
@@ -444,15 +525,20 @@ nums.sort(); res = []; bt(0, [])
 **Recognition cues:** "min / max ways", "number of ways", "longest", asks for an optimum over many overlapping choices, constraints are small (n ≤ 1000 for O(n²) or n ≤ 100 for O(n³)).
 
 **Template (top-down memo):**
-```python
-from functools import lru_cache
-@lru_cache(None)
-def dp(i, state):
-    if base: return ...
-    return min(dp(i+1, ...), dp(i+1, ...))
+```csharp
+var memo = new Dictionary<(int i, int state), int>();
+
+int Dp(int i, int state)
+{
+    if (/* base */ false) return 0;
+    if (memo.TryGetValue((i, state), out var cached)) return cached;
+    int best = Math.Min(Dp(i + 1, /* ... */ state), Dp(i + 1, /* ... */ state));
+    memo[(i, state)] = best;
+    return best;
+}
 ```
 
-**Traps:** mutable args to `lru_cache` (broken); storing 2D state when 1D rolling suffices; off-by-one between length and index; forgetting to clear `lru_cache` between test cases when the cache references outer state.
+**Traps:** using reference-type keys (arrays, lists) in the memo dictionary — they hash by identity; storing 2D state when a 1D rolling array suffices; off-by-one between length and index; forgetting to reset the memo between test cases when it captures outer state.
 
 **Problems:**
 - **C** [LC 198 House Robber](https://leetcode.com/problems/house-robber/) (M)
@@ -480,13 +566,17 @@ def dp(i, state):
 **Recognition cues:** "minimum number of ...", optimal local choice obviously leads to global optimum, asks for a *feasibility* with greedy schedule.
 
 **Template (interval greedy "minimum X"):**
-```python
-intervals.sort(key=lambda x: x[1])  # by end
-count, end = 0, float('-inf')
-for s, e in intervals:
-    if s >= end:
-        count += 1
-        end = e
+```csharp
+Array.Sort(intervals, (a, b) => a[1].CompareTo(b[1])); // by end
+int count = 0, end = int.MinValue;
+foreach (var iv in intervals)
+{
+    if (iv[0] >= end)
+    {
+        count++;
+        end = iv[1];
+    }
+}
 ```
 
 **Traps:** assuming greedy works without justifying via exchange argument; sorting by the wrong field (start vs end vs length); breaking ties incorrectly.
@@ -508,15 +598,17 @@ for s, e in intervals:
 **Recognition cues:** "single number", "subsets via bitmask", "find missing", "max XOR", numbers within 32-bit constraint.
 
 **Template (subset of mask enumeration):**
-```python
-sub = mask
-while sub:
-    process(sub)
-    sub = (sub - 1) & mask
-process(0)
+```csharp
+int sub = mask;
+while (sub != 0)
+{
+    Process(sub);
+    sub = (sub - 1) & mask;
+}
+Process(0);
 ```
 
-**Traps:** Python ints are arbitrary precision — use `& 0xFFFFFFFF` for 32-bit XOR sims; precedence of `&` is lower than `==` in C-derived languages.
+**Traps:** precedence of `&` is lower than `==` in C# — always parenthesize `(x & mask) == 0`; use `uint`/`ulong` for unsigned shifts, or `>>>` (C# 11+) for logical right shift on signed types; `BitOperations.PopCount` / `TrailingZeroCount` from `System.Numerics` is your friend.
 
 **Problems:**
 - **C** [LC 136 Single Number](https://leetcode.com/problems/single-number/) (E)
@@ -534,22 +626,33 @@ process(0)
 **Recognition cues:** "implement atoi", "evaluate expression", "decode ways" (overlaps with DP), "next greater number with same digits".
 
 **Templates (calculator with stack):**
-```python
-def calculate(s):
-    s = s + '+'           # sentinel
-    stack = []; num = 0; op = '+'
-    for c in s:
-        if c.isdigit(): num = num*10 + int(c)
-        elif c in '+-*/':
-            if op == '+': stack.append(num)
-            elif op == '-': stack.append(-num)
-            elif op == '*': stack.append(stack.pop() * num)
-            else: stack.append(int(stack.pop() / num))   # truncate toward 0
-            op = c; num = 0
-    return sum(stack)
+```csharp
+int Calculate(string s)
+{
+    s += "+"; // sentinel
+    var stack = new Stack<int>();
+    int num = 0;
+    char op = '+';
+    foreach (var c in s)
+    {
+        if (char.IsDigit(c)) { num = num * 10 + (c - '0'); }
+        else if (c == '+' || c == '-' || c == '*' || c == '/')
+        {
+            switch (op)
+            {
+                case '+': stack.Push(num); break;
+                case '-': stack.Push(-num); break;
+                case '*': stack.Push(stack.Pop() * num); break;
+                case '/': stack.Push(stack.Pop() / num); break; // truncates toward 0
+            }
+            op = c; num = 0;
+        }
+    }
+    return stack.Sum();
+}
 ```
 
-**Traps:** integer division semantics differ (Python `//` rounds toward `-inf`, Java `/` rounds toward 0 — use `int(a/b)`); overflow in 32-bit langs; whitespace and signs in atoi; nested parens in Calculator II → III.
+**Traps:** C# integer `/` truncates toward 0 (good — matches LC's expected behavior); watch for `int` overflow on intermediate products — promote to `long` when in doubt; whitespace and signs in atoi; nested parens in Calculator II → III; `checked { }` blocks help catch overflow during testing.
 
 **Problems:**
 - **C** [LC 8 String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) (M)
@@ -596,12 +699,12 @@ def calculate(s):
 
 **Only invest here if** (a) you have free hours, or (b) your recruiter signaled Platform / Compute / Infra team. Otherwise: do 2 problems and move on.
 
-**Concepts (Java):** `synchronized`, `ReentrantLock`, `Semaphore`, `Condition`, `BlockingQueue`, `CountDownLatch`, `CyclicBarrier`, `volatile` semantics, `AtomicInteger`.
-**Concepts (Python):** `threading.Lock`, `Condition`, `Semaphore`, `queue.Queue`, GIL caveats.
+**Concepts (C#):** `lock` statement (syntactic sugar over `Monitor.Enter/Exit`), `Monitor.Wait/Pulse/PulseAll`, `SemaphoreSlim` (prefer over `Semaphore` for in-process), `ManualResetEventSlim` / `AutoResetEvent`, `CountdownEvent`, `Barrier`, `BlockingCollection<T>` (the BCL's bounded blocking queue), `Channel<T>` from `System.Threading.Channels` (modern producer-consumer), `Interlocked` (atomic ops), `volatile` keyword and `Volatile.Read/Write`, `CancellationToken`. For async-style problems: `Task`, `async`/`await`, `TaskCompletionSource<T>`.
+**Concepts (Java, for reference if the interviewer asks):** `synchronized`, `ReentrantLock`, `Semaphore`, `Condition`, `BlockingQueue`, `CountDownLatch`, `CyclicBarrier`, `volatile` semantics, `AtomicInteger`.
 
-**Templates:** memorize a single producer-consumer using BlockingQueue and a single ratelimiter using token bucket. That covers ~80% of likely asks.
+**Templates:** memorize a single producer-consumer using `BlockingCollection<T>` (or `Channel<T>`) and a single rate limiter using a token bucket backed by `SemaphoreSlim` + a refill timer. That covers ~80% of likely asks.
 
-**Traps:** spurious wakeups (always `while cond:` not `if cond:`); deadlock by lock ordering; using `synchronized` on `this` while exposing `this` to outside threads; releasing in `finally`.
+**Traps:** spurious wakeups (always `while (!cond) Monitor.Wait(...)`, never `if`); deadlock by lock ordering; locking on `this` or on a public object while exposing the reference to outside code \u2014 always `lock` on a `private readonly object _gate = new();`; releasing in `finally` (or just use `lock` / `using`); forgetting that `SemaphoreSlim.WaitAsync` accepts a `CancellationToken` \u2014 use it; `Task.Result` / `.Wait()` deadlocks in UI contexts \u2014 stay `async` end to end.
 
 **Problems:**
 - **C** [LC 1114 Print in Order](https://leetcode.com/problems/print-in-order/) (E)
