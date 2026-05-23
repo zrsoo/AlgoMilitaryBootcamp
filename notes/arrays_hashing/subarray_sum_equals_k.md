@@ -1,0 +1,11 @@
+# LC <560> — <Subarray Sum Equals K>
+- **Pattern:** <Prefix Sum + Hashing>
+- **Brute force:** <Two nested loops: for each start `l`, accumulate sum while extending `r`, increment counter when sum == k> — O(n^2) time, O(1) space
+- **Optimized:** <One pass, running prefix sum `psum`, hashmap `prefixSum → count`. For each element, look up `psum - k` in the map and add its count to answer; then insert current `psum`. Seed map with `{0: 1}` to count subarrays starting at index 0.> — O(n) time, O(n) space
+- **Key insight:** <`sum(l..r) = P[r+1] - P[l]`, so `sum == k` ⟺ `P[l] == P[r+1] - k`. Walking left→right, for each new prefix sum just ask "how many earlier prefixes equal `psum - k`?" — each match is a distinct valid subarray ending here.>
+- **Why hashmap (counts), not a set:** <Negatives/zeros let the same prefix sum recur (e.g. `[1,-1,1,-1]`, k=0). Each recurrence is a distinct subarray start, so you must sum the counts.>
+- **Why not sliding window:** <Sliding window needs monotonic shrink/expand behavior — only valid for all-non-negative arrays. This problem allows negatives, so the window breaks.>
+- **Edge cases I had to handle:** <Empty `psum - k` lookup on first iteration (handled by `TryGetValue`); subarrays starting at index 0 (handled by seeding `{0:1}`); overflow on long runs of large values (used `long` for psum); insert AFTER lookup so we don't count the empty subarray.>
+- **Where I got stuck and for how long:** <Didn't find the solution at all — wasn't aware of the prefix-sum + hashmap pattern. The "P[r+1] - P[l] = k → look up P[l]" reframing is the entire trick and I didn't see it. Brute force was the only thing I could reach on my own.>
+- **Template fragments I reused:** <`Dictionary<long, int>` seeded with `{0:1}`, `TryGetValue(psum - k, out var c)` then `seen[psum] = seen.GetValueOrDefault(psum, 0) + 1` — directly reusable for "count subarrays with sum/XOR/property == target" family (e.g. LC 974 Subarray Sums Divisible by K, LC 525 Contiguous Array, LC 1248 Count Nice Subarrays).>
+- **Would I solve this in 25 min cold next week? Y/N> No yet — needs the D+3 rep first since I learned the pattern fresh today.
