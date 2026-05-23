@@ -14,7 +14,8 @@ Date format: `YYYY-MM-DD` (sorts lexically — grep today's date to find what's 
 
 | LC  | Title          | Pattern         | First solve | D+3        | D+7        | D+14       | Status    | Notes |
 |-----|----------------|-----------------|-------------|------------|------------|------------|-----------|-------|
-| 49  | Group Anagrams | Arrays/Hashing  | 2026-05-23  | 2026-05-26 | 2026-05-30 | 2026-06-06 | scheduled | Needed sort hint at 25 min. C# friction: `Array.Sort(char[])` + `new string(arr)`, `IList<IList<T>>` invariance, `TryGetValue` + `out var` lazy-init. |
+| 49  | Group Anagrams              | Arrays/Hashing  | 2026-05-23  | 2026-05-26 | 2026-05-30 | 2026-06-06 | scheduled | Needed sort hint at 25 min. C# friction: `Array.Sort(char[])` + `new string(arr)`, `IList<IList<T>>` invariance, `TryGetValue` + `out var` lazy-init. |
+| 238 | Product of Array Except Self | Arrays/Hashing | 2026-05-23  | 2026-05-26 | 2026-05-30 | 2026-06-06 | scheduled | Solved with two prefix arrays (O(n) time, O(n) extra space). Missed the O(1)-aux-space follow-up: write left-prefix into `result`, then second pass with a running `right` scalar. Also special-cased `i==0` / `i==n-1` instead of seeding identity (1). |
 
 ---
 
