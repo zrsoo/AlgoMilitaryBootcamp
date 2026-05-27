@@ -1,0 +1,8 @@
+- **Pattern:** <Prefix Sum + Hashing>
+- **Brute force:** <Parse all subarrays> — Parse all subarrays, check if sum is 0, record length in maxLength.
+- **Optimized:** <Running Sum + Dict of Previous Sums> — Hold a running sum of the elements; if 0 add -1, if 1 add 1. Whenever `sum == 0`, we found a potential solution, record in `maxLength`. Besides this, whenever we encounter the same sum twice, that is also a candidate. Use Dictionary to keep track of previously seen sums (sum -> i), and, if found, record `i - dict[sum]` in `maxLength`. 
+- **Key insight:** <Use 0 as -1 in Sum; Running Sum == 0 & Same sums are candidates>
+- **Edge cases I had to handle:** <Same sum>
+- **Where I got stuck and for how long:** <Found brute force quite quickly, took ~1hr to find half of optimal solution but couldn't figure out same sums trick>
+- **Template fragments I reused:** <Prefix sums + Hashing>
+- **Would I solve this in 25 min cold next week? Y/N> Y, but added to tracker anyway
