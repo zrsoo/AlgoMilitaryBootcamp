@@ -1,0 +1,13 @@
+# LC 567 — Permutation in String
+- **Pattern:** Sliding Window (fixed size) + frequency count
+- **Brute force:** For each length-`m` window of `s2`, build a fresh `int[26]` for the window and compare to the `int[26]` of `s1`. — O(n·m) time (with m up to n, that's O(n²)), O(1) extra space.
+- **Optimized:** One pass. Build `freqA` for `s1` and `freqB` for the first length-`m` window of `s2` once. Then slide: at step `i`, decrement `freqB[s2[i]]` (char leaving on the left), increment `freqB[s2[i+m]]` (char entering on the right), and compare `freqA == freqB`. Return true on any match. — O(n · 26) = O(n) time, O(1) space.
+- **Key insight:** "Contains a permutation of `s1`" ⟺ "some length-`m` window of `s2` has the same character frequencies as `s1`." The window has fixed size `m = s1.Length`, so it's the canonical fixed-window slide — one in, one out — not the variable-window expand/shrink template.
+- **Edge cases I had to handle:** `s1.Length > s2.Length` → immediate false. Need to check the **initial** window before entering the slide loop (very easy to forget — the loop's first iteration would skip index 0). Off-by-one on the slide bound: loop while `i + m < n`, which means `i < n - m` (strict), since the next window enters char at `i + m`.
+- **Where I got stuck and for how long:** Found the O(n·m) brute force quickly (per-window rebuild of `freqB` + `SequenceEqual`). Didn't see the rolling-frequency optimization on my own — instinct was to keep recomputing the window from scratch. The "you already have the previous window, just patch the diff" reframe is the whole trick and I missed it.
+- **Template fragments I reused:** Fixed-size sliding window with `int[26]` rolling counts. Same shape will reappear in LC 438 (Find All Anagrams in a String) — literally the same algorithm, just collect every match index instead of returning on first.
+- **C# notes:**
+  - `freqA.AsSpan().SequenceEqual(freqB)` is much faster than `Enumerable.SequenceEqual(freqA, freqB)`. The LINQ version goes through `IEnumerable<int>` (allocates two enumerators, virtual `MoveNext`/`Current`). The span version is a vectorized intrinsic — no allocation, SIMD-friendly. For 26 ints called O(n) times the difference is measurable.
+  - Avoid `s2.Substring(i, m)` in a hot loop — it allocates a new string each call. Index directly into `s2[i]` / `s2[i+m]`.
+  - Further squeeze (not used here): maintain an `int matches` counter = how many of the 26 letters currently satisfy `freqB[c] == freqA[c]`. Update incrementally on each `++`/`--`. Turns the per-step check from O(26) into O(1) → strictly O(n).
+- **Would I solve this in 25 min cold next week?** Y — brute force was fast, and now that I've seen the rolling-window patch the diff should stick.
