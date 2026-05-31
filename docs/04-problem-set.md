@@ -14,39 +14,43 @@
 - **★ = Must-redo** — these are pattern-defining; redo at least twice during the 44 days.
 - **⚑ = Databricks-specific signal** — high probability of seeing this exact problem or a sibling.
 
+**Progress marks** (appended to Label as problems are worked):
+- **↻** = currently in `tracker.md` Active queue (spaced reps in flight)
+- **✓** = completed (clean first solve, or all 3 reps passed)
+
 ---
 
 ## Topic 1 — Arrays & hashing (7)
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 1 | [LC 49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) | M | C |
-| 2 | [LC 238 Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | M | C ★ |
-| 3 | [LC 560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | M | C ★ |
-| 4 | [LC 128 Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | M | C |
-| 5 | [LC 974 Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/) | M | R |
-| 6 | [LC 41 First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | H | R |
-| 7 | [LC 525 Contiguous Array](https://leetcode.com/problems/contiguous-array/) | M | R |
+| 1 | [LC 49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) | M | C ↻ |
+| 2 | [LC 238 Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | M | C ★ ✓ |
+| 3 | [LC 560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | M | C ★ ↻ |
+| 4 | [LC 128 Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | M | C ↻ |
+| 5 | [LC 974 Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/) | M | R ↻ |
+| 6 | [LC 41 First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | H | R ↻ |
+| 7 | [LC 525 Contiguous Array](https://leetcode.com/problems/contiguous-array/) | M | R ↻ |
 
 ## Topic 2 — Two pointers (5)
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 8 | [LC 15 3Sum](https://leetcode.com/problems/3sum/) | M | C ★ |
-| 9 | [LC 11 Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | M | C |
-| 10 | [LC 75 Sort Colors](https://leetcode.com/problems/sort-colors/) | M | C |
-| 11 | [LC 42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | H | C ★ |
-| 12 | [LC 287 Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | M | R |
+| 8 | [LC 15 3Sum](https://leetcode.com/problems/3sum/) | M | C ★ ↻ |
+| 9 | [LC 11 Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | M | C ✓ |
+| 10 | [LC 75 Sort Colors](https://leetcode.com/problems/sort-colors/) | M | C ↻ |
+| 11 | [LC 42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | H | C ★ ↻ |
+| 12 | [LC 287 Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | M | R ↻ |
 
 ## Topic 3 — Sliding window (7)
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 13 | [LC 3 Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | M | C |
-| 14 | [LC 76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | H | C ★ |
-| 15 | [LC 424 Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | M | C |
-| 16 | [LC 239 Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | H | C ★ |
-| 17 | [LC 567 Permutation in String](https://leetcode.com/problems/permutation-in-string/) | M | C |
+| 13 | [LC 3 Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | M | C ✓ |
+| 14 | [LC 76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | H | C ★ ↻ |
+| 15 | [LC 424 Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | M | C ↻ |
+| 16 | [LC 239 Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | H | C ★ ↻ |
+| 17 | [LC 567 Permutation in String](https://leetcode.com/problems/permutation-in-string/) | M | C ↻ |
 | 18 | [LC 992 Subarrays with K Different Integers](https://leetcode.com/problems/subarrays-with-k-different-integers/) | H | R |
 | 19 | [LC 480 Sliding Window Median](https://leetcode.com/problems/sliding-window-median/) | H | R |
 
@@ -54,7 +58,7 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 20 | [LC 20 Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | E | C |
+| 20 | [LC 20 Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | E | C ✓ |
 | 21 | [LC 739 Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | M | C ★ |
 | 22 | [LC 84 Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | H | C ★ |
 | 23 | [LC 85 Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/) | H | C |
