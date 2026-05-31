@@ -50,14 +50,16 @@ If you cannot find a partner: do **self-mock** — set a 45-min timer, narrate a
 
 ## Phase 1 — Foundations (Days 1–7, May 23–29)
 
+**Progress marks:** ↻ = in tracker (active spaced reps) · ✓ = completed (clean first solve, or all 3 reps done).
+
 | Day | Date | Topic | Problems (refs are #s in [04-problem-set.md](04-problem-set.md)) |
 |---|---|---|---|
-| 1 | Sat May 23 | Arrays/hashing | #1, #2, #3 (★) |
-| 2 | Sun May 24 | Arrays/hashing + analysis | #4, #5; redo #2 |
-| 3 | Mon May 25 | Two pointers | #8 (★), #9, #10 |
-| 4 | Tue May 26 | Two pointers + Hard | #11 (★), #12 |
-| 5 | Wed May 27 | Sliding window | #13, #15, #17 |
-| 6 | Thu May 28 | Sliding window Hard | #14 (★), #16 (★) |
+| 1 | Sat May 23 | Arrays/hashing | #1 ↻, #2 ✓, #3 (★) ↻ |
+| 2 | Sun May 24 | Arrays/hashing + analysis | #4 ↻, #5 ↻; redo #2 |
+| 3 | Mon May 25 | Two pointers | #8 (★) ↻, #9 ✓, #10 ↻ |
+| 4 | Tue May 26 | Two pointers + Hard | #11 (★) ↻, #12 ↻ |
+| 5 | Wed May 27 | Sliding window | #13 ✓, #15 ↻, #17 ↻ |
+| 6 | Thu May 28 | Sliding window Hard | #14 (★) ↻, #16 (★) |
 | 7 | Fri May 29 | Stack basics | #20, #21 (★), #24 |
 | (Mock) | Sat May 30 | **Phase-1 mock** | Hard from arrays/sliding window |
 
