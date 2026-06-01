@@ -59,7 +59,7 @@
 | # | Problem | Diff | Label |
 |---|---|---|---|
 | 20 | [LC 20 Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | E | C ✓ |
-| 21 | [LC 739 Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | M | C ★ |
+| 21 | [LC 739 Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | M | C ★ ✓ |
 | 22 | [LC 84 Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | H | C ★ |
 | 23 | [LC 85 Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/) | H | C |
 | 24 | [LC 394 Decode String](https://leetcode.com/problems/decode-string/) | M | C |
