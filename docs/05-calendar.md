@@ -60,7 +60,7 @@ If you cannot find a partner: do **self-mock** — set a 45-min timer, narrate a
 | 4 | Tue May 26 | Two pointers + Hard | #11 (★) ↻, #12 ↻ |
 | 5 | Wed May 27 | Sliding window | #13 ✓, #15 ↻, #17 ↻ |
 | 6 | Thu May 28 | Sliding window Hard | #14 (★) ↻, #16 (★) ↻ |
-| 7 | Fri May 29 | Stack basics | #20 ✓, #21 (★) ✓, #24 |
+| 7 | Fri May 29 | Stack basics | #20 ✓, #21 (★) ✓, #24 ↻ |
 | (Mock) | Sat May 30 | **Phase-1 mock** | Hard from arrays/sliding window |
 
 Cumulative: ~16 problems. You should be done with templates for: hashmap counting, prefix sum, two-pointer triplet, sliding window, monotonic stack.
