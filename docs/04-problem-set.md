@@ -63,7 +63,7 @@
 | 22 | [LC 84 Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | H | C ★ ↻ |
 | 23 | [LC 85 Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/) | H | C ↻ |
 | 24 | [LC 394 Decode String](https://leetcode.com/problems/decode-string/) | M | C ↻ |
-| 25 | [LC 71 Simplify Path](https://leetcode.com/problems/simplify-path/) | M | R |
+| 25 | [LC 71 Simplify Path](https://leetcode.com/problems/simplify-path/) | M | R ✓ |
 | 26 | [LC 32 Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | H | R |
 
 ## Topic 5 — Binary search (8)
