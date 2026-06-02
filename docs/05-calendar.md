@@ -71,7 +71,7 @@ Cumulative: ~16 problems. You should be done with templates for: hashmap countin
 |---|---|---|---|
 | 8 | Sat May 30 | **Mock + analysis** | Mock (above) + #22 (★) ↻ histogram |
 | 9 | Sun May 31 | Stack Hard + binary search | #23 ↻, #25 ✓; redo #16 |
-| 10 | Mon Jun 1 | Binary search | #27 ↻, #28 ✓, #29 (★) |
+| 10 | Mon Jun 1 | Binary search | #27 ↻, #28 ✓, #29 (★) ✓ |
 | 11 | Tue Jun 2 | Binary search on answer | #30 (★), #31 |
 | 12 | Wed Jun 3 | Binary search Hard | #32 (★); redo #14 |
 | 13 | Thu Jun 4 | Intervals | #35 (⚑), #36, #37 (★ ⚑) |
