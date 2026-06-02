@@ -12,7 +12,6 @@ public class Solution {
 
         int l = 1, r = max, mid;
         int hours, temp;
-        int minSpeed = Int32.MaxValue;
 
         while(l < r)
         {
