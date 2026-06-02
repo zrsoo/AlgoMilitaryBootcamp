@@ -70,7 +70,7 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 27 | [LC 33 Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | M | C |
+| 27 | [LC 33 Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | M | C ↻ |
 | 28 | [LC 153 Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) | M | C |
 | 29 | [LC 875 Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) | M | C ★ |
 | 30 | [LC 410 Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) | H | C ★ |
