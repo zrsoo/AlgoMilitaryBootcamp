@@ -73,7 +73,7 @@
 | 27 | [LC 33 Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | M | C ↻ |
 | 28 | [LC 153 Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) | M | C ✓ |
 | 29 | [LC 875 Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) | M | C ★ ✓ |
-| 30 | [LC 410 Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) | H | C ★ |
+| 30 | [LC 410 Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) | H | C ★ ↻ |
 | 31 | [LC 1011 Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) | M | C |
 | 32 | [LC 4 Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | H | C ★ |
 | 33 | [LC 162 Find Peak Element](https://leetcode.com/problems/find-peak-element/) | M | R |
