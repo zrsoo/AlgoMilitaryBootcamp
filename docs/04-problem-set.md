@@ -83,7 +83,7 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 35 | [LC 56 Merge Intervals](https://leetcode.com/problems/merge-intervals/) | M | C ⚑ |
+| 35 | [LC 56 Merge Intervals](https://leetcode.com/problems/merge-intervals/) | M | C ⚑ ✓ |
 | 36 | [LC 57 Insert Interval](https://leetcode.com/problems/insert-interval/) | M | C |
 | 37 | [LC 253 Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) | M | C ★ ⚑ |
 | 38 | [LC 435 Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | M | C |
