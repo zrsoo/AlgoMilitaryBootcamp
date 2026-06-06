@@ -74,7 +74,7 @@ Cumulative: ~16 problems. You should be done with templates for: hashmap countin
 | 10 | Mon Jun 1 | Binary search | #27 ↻, #28 ✓, #29 (★) ✓ |
 | 11 | Tue Jun 2 | Binary search on answer | #30 (★) ↻, #31 ✓ |
 | 12 | Wed Jun 3 | Binary search Hard | #32 (★) ↻; redo #14 |
-| 13 | Thu Jun 4 | Intervals | #35 (⚑) ✓, #36 ✓, #37 (★ ⚑) |
+| 13 | Thu Jun 4 | Intervals | #35 (⚑) ✓, #36 ✓, #37 (★ ⚑) ✓ |
 | 14 | Fri Jun 5 | Intervals + sweep | #38, #39 (★ ⚑) |
 | (Mock) | Sat Jun 6 | **Phase-2 mock** | Hard from binary search OR intervals |
 
