@@ -1,0 +1,15 @@
+C:\hustle\AlgoMilitaryBootcamp\scratch\bin\Debug\net9.0\scratch.exe
+C:\hustle\AlgoMilitaryBootcamp\scratch\bin\Debug\net9.0\scratch.deps.json
+C:\hustle\AlgoMilitaryBootcamp\scratch\bin\Debug\net9.0\scratch.runtimeconfig.json
+C:\hustle\AlgoMilitaryBootcamp\scratch\bin\Debug\net9.0\scratch.dll
+C:\hustle\AlgoMilitaryBootcamp\scratch\bin\Debug\net9.0\scratch.pdb
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.GeneratedMSBuildEditorConfig.editorconfig
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.AssemblyInfoInputs.cache
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.AssemblyInfo.cs
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.csproj.CoreCompileInputs.cache
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.sourcelink.json
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.dll
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\refint\scratch.dll
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.pdb
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\scratch.genruntimeconfig.cache
+C:\hustle\AlgoMilitaryBootcamp\scratch\obj\Debug\net9.0\ref\scratch.dll
