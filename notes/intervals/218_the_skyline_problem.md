@@ -1,0 +1,9 @@
+# LC <218> — <The Skyline Problem>
+- **Pattern:** <Sweep line + max-heap with lazy deletion. Output key points where the current max active height changes.>
+- **Brute force:** <For each x-coordinate, scan all buildings covering it for the tallest — O(n·coords) / O(n^2).>
+- **Optimized:** <Split each building [L,R,H] into a start event (L, -H) and end event (R, +H). Sort by x, then by encoded height so that at equal x: starts come before ends, taller starts first, shorter ends first. Sweep maintaining a max-heap of active heights with lazy deletion (a `pending` dict counts ends not yet purged). After each event, purge retired tops, read current max; if it changed from previous, emit `[x, curMax]`. Seed heap with 0 (ground) so it's never empty.> — O(n log n) time, O(n) space
+- **Key insight:** <You never search for the "next max" after a removal — a structure that always surfaces its own max does it for you. SortedDictionary in C# has NO O(log n) max accessor (`.Last()` is LINQ → O(n) enumeration), so use `PriorityQueue` + lazy deletion: never remove a middle element, just discard stale tops when they reach the top.>
+- **Edge cases I had to handle:** <Equal-x tie-breaking (start-before-end, taller-start-first, shorter-end-first) — wrong order produces phantom dips/spikes. Multiple buildings same height (need counts, not a set). Descent to ground (heap seeded with 0).>
+- **Where I got stuck and for how long:** <Couldn't finish. First attempt used `SortedDictionary` + `.Last()` which is O(n) per query (LINQ enumerates the whole tree) → secretly O(n^2). The fix is the lazy-deletion heap, which I didn't reach on my own.>
+- **Template fragments I reused:** <Sweep-line events (LC 253 Meeting Rooms II); max-heap with lazy deletion (heap topic / LC 23 family).>
+- **Would I solve this in 25 min cold next week? Y/N> 
