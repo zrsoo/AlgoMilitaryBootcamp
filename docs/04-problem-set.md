@@ -100,7 +100,7 @@
 | 44 | [LC 215 Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) | M | C ★ ✓ |
 | 45 | [LC 347 Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | M | C ✓ |
 | 46 | [LC 23 Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | H | C ★ ⚑ ↻ |
-| 47 | [LC 295 Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | H | C ★ ⚑ |
+| 47 | [LC 295 Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | H | C ★ ⚑ ↻ |
 | 48 | [LC 1167 Minimum Cost to Connect Sticks](https://leetcode.com/problems/minimum-cost-to-connect-sticks/) | M | C |
 | 49 | [LC 621 Task Scheduler](https://leetcode.com/problems/task-scheduler/) | M | R |
 | 50 | [LC 692 Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) | M | R |
@@ -110,8 +110,8 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 52 | [LC 206 Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | E | C |
-| 53 | [LC 21 Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | E | C |
+| 52 | [LC 206 Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | E | C ✓ |
+| 53 | [LC 21 Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | E | C ✓ |
 | 54 | [LC 143 Reorder List](https://leetcode.com/problems/reorder-list/) | M | C |
 | 55 | [LC 25 Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) | H | C ★ |
 | 56 | [LC 138 Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/) | M | C |
