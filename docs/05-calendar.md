@@ -87,7 +87,7 @@ Cumulative: ~32 problems.
 | 15 | Sat Jun 6 | **Mock** + skyline | Mock + #40 (★ ⚑) ↻ |
 | 16 | Sun Jun 7 | Heap | #44 (★) ✓, #45 ✓, #46 (★ ⚑) ↻ |
 | 17 | Mon Jun 8 | Heap streaming + linked list | #47 (★ ⚑) ↻, #52 ✓, #53 ✓ |
-| 18 | Tue Jun 9 | Linked list mid + Hard | #54 ↻, #55 (★), #56 |
+| 18 | Tue Jun 9 | Linked list mid + Hard | #54 ↻, #55 (★) ↻, #56 |
 | 19 | Wed Jun 10 | Trees core | #58, #59, #60 (★), #61 (★) |
 | 20 | Thu Jun 11 | Trees Hard | #62 (★), #63 (★ ⚑), #65 |
 | 21 | Fri Jun 12 | N-ary tree + tries | #64 (★ ⚑), #68, #69 |
