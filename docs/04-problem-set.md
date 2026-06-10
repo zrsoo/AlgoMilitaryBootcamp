@@ -112,7 +112,7 @@
 |---|---|---|---|
 | 52 | [LC 206 Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | E | C ✓ |
 | 53 | [LC 21 Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | E | C ✓ |
-| 54 | [LC 143 Reorder List](https://leetcode.com/problems/reorder-list/) | M | C |
+| 54 | [LC 143 Reorder List](https://leetcode.com/problems/reorder-list/) | M | C ↻ |
 | 55 | [LC 25 Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) | H | C ★ |
 | 56 | [LC 138 Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/) | M | C |
 | 57 | [LC 142 Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | M | R |
