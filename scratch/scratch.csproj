@@ -12,7 +12,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <!-- Point this at whichever problem you're currently solving. -->
-    <Compile Include="..\solutions\intervals\759_employee_free_time.cs" />
+    <Compile Include="..\solutions\trees\428_serialize_and_deserialize_n_ary_tree.cs" />
   </ItemGroup>
 
 </Project>
