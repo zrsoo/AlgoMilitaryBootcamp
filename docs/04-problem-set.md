@@ -137,7 +137,7 @@
 | # | Problem | Diff | Label |
 |---|---|---|---|
 | 68 | [LC 208 Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/) | M | C ✓ |
-| 69 | [LC 211 Design Add and Search Word](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | M | C |
+| 69 | [LC 211 Design Add and Search Word](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | M | C ✓ |
 | 70 | [LC 212 Word Search II](https://leetcode.com/problems/word-search-ii/) | H | C ★ |
 | 71 | [LC 642 Design Search Autocomplete System](https://leetcode.com/problems/design-search-autocomplete-system/) | H | C ⚑ |
 | 72 | [LC 1268 Search Suggestions System](https://leetcode.com/problems/search-suggestions-system/) | M | R |
