@@ -127,7 +127,7 @@
 | 61 | [LC 236 LCA of Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) | M | C ★ ↻ |
 | 62 | [LC 124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | H | C ★ ↻ |
 | 63 | [LC 297 Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | H | C ★ ⚑ ↻ |
-| 64 | [LC 428 Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/) | H | C ★ ⚑ |
+| 64 | [LC 428 Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/) | H | C ★ ⚑ ↻ |
 | 65 | [LC 199 Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) | M | C |
 | 66 | [LC 173 BST Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | M | C |
 | 67 | [LC 230 Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) | M | R |
