@@ -56,6 +56,7 @@ Date format: `YYYY-MM-DD` (sorts lexically — grep today's date to find what's 
 |----|-------|---------|-----------------|
 | 206 | Reverse Linked List | Linked list — in-place iterative reversal (prev/curr/next) | 2026-06-09 (first-try clean, no reps) |
 | 21 | Merge Two Sorted Lists | Linked list — merge with dummy head | 2026-06-09 (first-try clean, no reps) |
+| 200 | Number of Islands | Graphs — grid DFS flood fill | 2026-06-17 (first-try clean, no reps) |
 
 ---
 
