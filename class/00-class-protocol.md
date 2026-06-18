@@ -30,7 +30,7 @@ Topic folder names mirror the solving topics (snake_case), e.g.:
 1. **Context & when to reach for it** — what the topic is, what problem signals point to it.
 2. **Mental model** — the core way to *think* about problems in this topic (the framing that makes them tractable).
 3. **Core patterns / variants** — the handful of sub-patterns that cover most problems, each with its key idea.
-4. **Reusable templates** — copy-ready C# skeletons for the recurring shapes (traversals, searches, etc.).
+4. **Reusable templates** — copy-ready C# skeletons for the recurring shapes (traversals, searches, etc.). Each template should be **self-contained for a reader with no prior knowledge**: pair the code with a small ASCII **"Picture it"** diagram that traces a tiny concrete example, then a plain-language "What it does" walkthrough. Don't assume the reader already knows the algorithm.
 5. **Common pitfalls** — the mistakes that recur (off-by-one, missing base case, wrong complexity, language footguns).
 6. **Complexity cheat sheet** — typical time/space for the standard approaches.
 7. **Map to the problem set** — which `#`/LC problems in `docs/04-problem-set.md` this class equips you for.

@@ -94,6 +94,31 @@ public class Trie {
 }
 ```
 
+**Picture it.** A trie is one big tree where **each edge is a letter** and each node has up to 26 children (one slot per a–z). Words that share a prefix share the same path until they split. The `isWord` flag (shown as `*`) marks where a real word ends:
+
+```
+insert "app", "apple", "bat":
+
+        root
+        /  \
+       a    b
+       |    |
+       p    a
+       |    |
+       p*   t*          '*' = isWord (a word ends here)
+       |
+       l
+       |
+       e*
+
+Search("app")      -> walk a-p-p, land on node, isWord? YES -> true
+Search("ap")       -> walk a-p, land on node, isWord? NO  -> false
+StartsWith("ap")   -> walk a-p, reached a node at all? YES -> true
+Search("axe")      -> walk a, then 'x' child is null -> false
+```
+
+**What it does:** stores a set of words so prefix questions are cheap. `Insert` walks letter by letter, creating any missing child node (`??= new TrieNode()` means "make it if absent"), and flags the final node as a word-end. `Walk` is the shared engine for both lookups: follow the letters; if any child slot is null the path doesn't exist, so return null. **`Search` vs `StartsWith` differ only at the finish line** — search demands the landing node be flagged `isWord` (a *complete* word ends there), while startsWith only demands you reached a node at all (some word *continues* through here). The `c - 'a'` converts a letter to an array index (0–25); this only works for lowercase a–z (see the dictionary variant for other charsets).
+
 ### Dictionary-backed node (arbitrary charset)
 ```csharp
 public class TrieNode {
@@ -122,12 +147,51 @@ private bool Dfs(string word, int i, TrieNode node) {
 }
 ```
 
+**Picture it.** A normal search follows one fixed letter at each step. A `.` wildcard means "any letter fits here," so at that position we can't pick a single child — we must **try every child** and succeed if *any* branch leads to a match:
+
+```
+trie holds "bad", "dad", "mad":
+
+        root
+      /  |  \
+     b   d   m
+     |   |   |
+     a   a   a
+     |   |   |
+     d*  d*  d*
+
+Search(".ad"):
+   position 0 = '.'  -> branch into b, d, AND m
+        try b: match 'a','d' -> reaches d* -> TRUE  (stop, return early)
+Search("b.."):
+   'b' deterministic -> then '.' tries a's children, '.' again tries d... -> TRUE
+```
+
+**What it does:** searches with a `.` that matches any single character. For a normal character the step is deterministic — follow that one child (exactly like the plain trie). For a `.`, we **fan out into all non-null children** and recurse; the first branch that reaches an `isWord` node at the end wins. The base case `i == word.Length` checks `isWord` (did a complete word end exactly here?). This is precisely where a `HashSet` of words can't help — it can only test whole strings, not explore alternatives — so the trie's branching structure is what makes wildcards possible. Worst case (all dots) it explores up to 26 branches per position, but real queries prune fast.
+
 ### Trie-pruned grid DFS (LC 212 skeleton)
 ```csharp
 // Build trie of all target words; store the word string on its terminal node.
 // Then DFS the grid; at each cell follow node.children[grid[r][c]-'a'].
 // If that child is null -> prune. If child.word != null -> collect it (and null it to dedup).
 ```
+
+**Picture it.** Instead of searching the grid once per word (slow), you build **one trie of all the words** and let it steer a single DFS. At each grid cell you check: does the trie have a child for this letter? If not, the path can't spell any word — stop instantly (that's the "prune"):
+
+```
+words = ["oa","oaa"]            grid:  o a a
+                                       (we DFS from each cell)
+trie:   root                    DFS from (0,0)='o':
+        |                          trie has child 'o'? yes -> descend
+        o                          go to (0,1)='a': trie 'o'->'a'? yes
+        |                               this node has word "oa" -> COLLECT, null it
+        a*  (word "oa")                 go to (0,2)='a': 'a'->'a'? yes -> word "oaa" COLLECT
+        |
+        a*  (word "oaa")            DFS from a cell whose letter isn't a trie child:
+                                       child == null -> PRUNE immediately, no wasted walk
+```
+
+**What it does:** finds every dictionary word hidden in the grid in essentially one pass. The trie acts as a **prefix filter**: the DFS only continues down a grid path while that path is still a live prefix in the trie; the moment `node.children[letter]` is null, no word can possibly start that way, so we abandon the branch (huge savings versus re-scanning the grid for each word). Two standard optimizations: **store the full word string on its terminal node** so you don't rebuild it from the path, and **null that word out after collecting** to both deduplicate and shrink the trie. (Full code is in the backtracking class, pattern D′ — this fuses tries + grid backtracking.)
 
 ---
 

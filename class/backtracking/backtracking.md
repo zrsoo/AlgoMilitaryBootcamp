@@ -80,6 +80,26 @@ void Backtrack(State path /* + cursor */) {
 }
 ```
 
+**Picture it.** Every backtracking problem is a walk down a **decision tree**. Going *down* a branch = make a choice; hitting the bottom = record an answer; coming back *up* = undo that choice so the next sibling branch starts clean:
+
+```
+                       (   )  empty path
+             choose A /      \ choose B
+                   (A)        (B)
+          choose B /  \        \ choose C
+               (A,B)  (A,C)    (B,C)
+                 |
+            record, then UNDO back up to try the next sibling
+
+the four code lines map onto one edge of this tree:
+    Make   = step DOWN into a child
+    Backtrack = explore that child's whole subtree
+    Undo   = step back UP, erasing the choice
+    continue = slide to the next sibling
+```
+
+**What it does:** this is the shape *every* template below specializes. `IsComplete` checks if `path` is a finished answer (record a **copy** — see pitfalls). The `foreach` enumerates the legal next moves; `IsLegal`/`continue` prunes hopeless ones early. The trio **choose → explore → un-choose** is the heartbeat: because we reuse one shared `path` buffer, the `Undo` after recursion is what stops a choice from leaking into the sibling branches. Master this rhythm and the specific problems are just different fillings for `Choices`, `IsLegal`, and `IsComplete`.
+
 ### A. Subsets (LC 78)
 ```csharp
 IList<IList<int>> Subsets(int[] nums) {
@@ -97,6 +117,26 @@ IList<IList<int>> Subsets(int[] nums) {
     return res;
 }
 ```
+
+**Picture it.** For subsets, each element is a simple yes/no: include it or skip it. The `start` cursor means "only consider elements from here onward," which stops us from re-emitting `{1,2}` and `{2,1}` as different answers. **Every node** of the tree is a valid subset, so we record on entry, not just at leaves:
+
+```
+nums = [1,2,3]      record path at EVERY node (shown in [])
+
+                         [ ]
+            +1 /      +2 |        +3 \
+           [1]        [2]          [3]
+        +2 / +3 \      | +3
+     [1,2]    [1,3]   [2,3]
+      | +3
+   [1,2,3]
+
+all recorded: [], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]   = 2^3 = 8 subsets
+```
+
+After visiting `[1,2,3]` we `RemoveAt` to undo back to `[1,2]`, then up to `[1]`, etc. — each removal is the "un-choose."
+
+**What it does:** generates all 2ⁿ subsets. We `res.Add` a copy at the **top of every call** because every partial path is itself a complete subset (unlike permutations, which only count at the leaves). The loop starts at `start` and recurses with `i + 1` so each element is considered once and in order, which is what prevents duplicate subsets. The `path.Add` / `path.RemoveAt` pair is the choose/un-choose that lets the single `path` list serve the whole tree.
 
 ### B. Combination Sum (LC 39 — reuse allowed)
 ```csharp
@@ -118,6 +158,25 @@ IList<IList<int>> CombinationSum(int[] cand, int target) {
 }
 ```
 
+**Picture it.** We chase a target sum by subtracting candidates. Passing `i` (not `i+1`) into the recursion lets us **reuse** the same number; the `start` cursor still forbids going *backward*, so we never produce the same combo in a different order. Sorting lets us `break` the instant a candidate overshoots:
+
+```
+cand = [2,3,6,7]  sorted, target = 7      (remain shown at each node)
+
+                         remain 7
+          -2 /        -3 |        -6 \      -7 \
+        rem 5        rem 4       rem 1      rem 0  -> [7] ✓
+     -2 / -3 \        -3 |        (2>1 break)
+   rem 3    rem 2    rem 1
+   -2 |     (done)   (3>1 break)
+  rem 1
+ (2>1 break)   ... the path 2,2,3 reaches rem 0 -> [2,2,3] ✓
+
+results: [2,2,3], [7]
+```
+
+**What it does:** finds every combination (reuse allowed) that sums to `target`. `remain` tracks how much is left; reaching exactly 0 records the path. Recursing with the **same** `i` is what permits picking a number multiple times (`[2,2,3]`); use `i + 1` instead and you get the no-reuse variant. Because `cand` is sorted, `if (cand[i] > remain) break` abandons the rest of the loop at once — every later candidate is even bigger, so they'd all overshoot too. The `start` cursor keeps combinations canonical (ascending), so `{2,3}` is never re-emitted as `{3,2}`.
+
 ### C. Permutations (LC 46)
 ```csharp
 IList<IList<int>> Permute(int[] nums) {
@@ -137,6 +196,24 @@ IList<IList<int>> Permute(int[] nums) {
     return res;
 }
 ```
+
+**Picture it.** Permutations care about **order**, so there's no `start` cursor — at every position any *unused* element is fair game. A `used[]` array marks which numbers are already in the current path. We only record at the **leaves** (when the path is full-length):
+
+```
+nums = [1,2,3]      used[] tracks what's taken
+
+                          ( )
+          1 /          2 |           3 \
+          (1)          (2)           (3)
+       2 / 3 \       1 / 3 \       1 / 2 \
+    (1,2) (1,3)   (2,1) (2,3)   (3,1) (3,2)
+      |     |       |     |       |     |
+   (1,2,3)(1,3,2)(2,1,3)(2,3,1)(3,1,2)(3,2,1)   <- 6 leaves = 3! perms
+
+at (1,2): used=[T,T,F] -> only 3 is free -> go to (1,2,3), record, undo
+```
+
+**What it does:** generates all n! orderings. The `if (used[i]) continue` skips numbers already placed on the current path, so each appears exactly once per permutation; the loop scans *all* indices every level (not from a cursor) because order matters — `[1,2]` and `[2,1]` are both wanted. We record only when `path.Count == nums.Length` (a leaf = a complete ordering). The undo step restores **both** `path` and `used[i]` so the next sibling sees a clean slate. (An alternative avoids `used[]` by swapping elements in place.)
 
 ### D. Grid backtracking (LC 79 — single word)
 ```csharp
@@ -158,6 +235,24 @@ bool Exist(char[][] board, string word) {
     return false;
 }
 ```
+
+**Picture it.** We try to spell the word by walking neighbor-to-neighbor across the grid. At each step we either match the next letter and fan out to the 4 neighbors, or fail. Marking the current cell `'#'` stops the path from reusing it; restoring it on the way back frees it for *other* paths:
+
+```
+board:  A B C        word = "ABCC"
+        S F C
+        A D E
+
+start (0,0)='A' matches word[0]='A'  -> mark '#', try neighbors for 'B'
+   (0,1)='B' matches word[1]        -> mark '#', try neighbors for 'C'
+      (0,2)='C' matches word[2]     -> mark '#', try neighbors for 'C'
+         (1,2)='C' matches word[3]  -> k==len -> TRUE
+
+the '#' trail prevents stepping back onto A or B mid-path;
+when a branch fails, each cell is restored to its letter (un-choose).
+```
+
+**What it does:** decides whether `word` can be traced through adjacent cells (no cell reused). The base cases come **first and in order**: `k == word.Length` means we matched every letter (success); the bounds/mismatch check rejects off-grid cells, the `'#'` sentinel (already on this path), and wrong letters — this ordering matters so we never index `board[r][c]` out of range. On a match we temporarily blank the cell to `'#'`, recurse into all four directions (the `||` short-circuits on the first success), then **restore the original letter** so a different path can legitimately use that cell. The mark/restore *is* the choose/un-choose, done in-place on the board instead of a separate visited set.
 
 ### D′. Trie-pruned grid backtracking (LC 212 — many words, the payoff)
 ```csharp
@@ -211,6 +306,22 @@ void Dfs(int r) {
     }
 }
 ```
+
+**Picture it.** Place exactly **one queen per row**, top to bottom. A new queen is legal only if its column and both diagonals are still free. The trick: cells on the same `↖↘` diagonal share `r - c`; cells on the same `↗↙` diagonal share `r + c` — so three `HashSet`s give O(1) "is this square attacked?" checks:
+
+```
+4x4 board, r-c and r+c label the diagonals:
+
+      c=0  c=1  c=2  c=3
+ r=0   .    Q    .    .      Q at (0,1): cols={1}, diag(r-c)={-1}, anti(r+c)={1}
+ r=1   .    .    .    Q      row 1: c=0? anti 1+0=1 taken. c=2? diag 1-2=-1 taken.
+ r=2  ...                         c=3 ok -> place (1,3)
+ r=3  ...                    recurse row by row; when r==n, a full board is recorded.
+
+blocked squares from (0,1):  same col 1 | same ↖↘ (r-c=-1) | same ↗↙ (r+c=1)
+```
+
+**What it does:** finds all ways to place `n` non-attacking queens. By committing to one queen per row we only ever choose a *column* for the current row, shrinking the tree enormously. The three sets encode the columns and the two diagonal families already under attack; `r - c` is constant along one diagonal direction and `r + c` along the other, which is why membership tests are O(1). The choose step adds to all three sets and records the column; the un-choose removes them — standard backtracking, but the pruning via constraint sets is what makes N-Queens tractable. Reaching `r == n` means every row got a safe queen, so we render and store the board.
 
 ---
 
