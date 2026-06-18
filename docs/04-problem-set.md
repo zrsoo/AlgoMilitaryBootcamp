@@ -148,7 +148,7 @@
 |---|---|---|---|
 | 73 | [LC 200 Number of Islands](https://leetcode.com/problems/number-of-islands/) | M | C ★ ✓ |
 | 74 | [LC 133 Clone Graph](https://leetcode.com/problems/clone-graph/) | M | C ↻ |
-| 75 | [LC 207 Course Schedule](https://leetcode.com/problems/course-schedule/) | M | C ★ |
+| 75 | [LC 207 Course Schedule](https://leetcode.com/problems/course-schedule/) | M | C ★ ↻ |
 | 76 | [LC 210 Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) | M | C |
 | 77 | [LC 994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | M | C ⚑ |
 | 78 | [LC 261 Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/) | M | C |
