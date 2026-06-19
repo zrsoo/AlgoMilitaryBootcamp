@@ -104,7 +104,7 @@ Note: graphs slot in here on weekdays because graphs are the heaviest topic; do 
 | 22 | Sat Jun 13 | **Mock** + trie Hard | Mock + #70 (★) Word Search II ↻ |
 | 23 | Sun Jun 14 | Graphs grid + UF | #73 (★) ✓, #74 ↻, #79 ✓ |
 | 24 | Mon Jun 15 | Topo sort + valid tree | #75 (★) ↻, #76 ✓, #78 ↻ |
-| 25 | Tue Jun 16 | Graph BFS + Dijkstra | #77 (⚑), #80 (★), #81 |
+| 25 | Tue Jun 16 | Graph BFS + Dijkstra | #77 (⚑) ✓, #80 (★) ↻, #81 |
 | 26 | Wed Jun 17 | Graph Hard #1 | #82 (★ ⚑) Bus Routes, #87 |
 | 27 | Thu Jun 18 | Graph Hard #2 | #83 (★ ⚑) Alien Dict, #84 (⚑) Itinerary |
 | 28 | Fri Jun 19 | Graph Hard #3 | #85 (★ ⚑) Shortest-visit-all (BFS+bitmask) |

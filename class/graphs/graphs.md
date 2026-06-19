@@ -305,24 +305,33 @@ while (pq.Count > 0) {
 }
 ```
 
-**Picture it.** Now edges have *weights* (costs). BFS's ring trick breaks because a path with more edges can still be cheaper. Dijkstra fixes this with a **min-heap** that always hands back the cheapest-known node next:
+**Picture it.** Now edges have *weights* (costs). BFS's ring trick breaks because a path with more edges can still be cheaper. Dijkstra fixes this with a **min-heap** that always hands back the cheapest-known node next. Worked example, shortest paths from **A**:
 
+```mermaid
+graph LR
+    A -->|4| B
+    A -->|1| C
+    C -->|2| B
+    B -->|1| D
+    C -->|5| D
+    D -->|3| E
+    B -->|6| E
 ```
-graph (weights on edges):        find cheapest cost from 0 to all
 
-     0 --2--> 1 --1--> 3         dist starts: [0, ∞, ∞, ∞]
-     |                ^
-     5                |          heap holds (cost, node), smallest cost pops first
-     v                4
-     2 ---------------/
+Pop the unvisited node with smallest `dist`, then relax its outgoing edges:
 
-pop (0, node0): relax -> dist[1]=2, dist[2]=5   heap: [(2,1),(5,2)]
-pop (2, node1): relax -> dist[3]=3              heap: [(3,3),(5,2)]
-pop (3, node3): relax -> 2 via node3 = 3+4=7 > 5, no change   heap: [(5,2)]
-pop (5, node2): relax -> 2->... nothing better  heap: []
+| Step | Pop (dist) | Relaxations | dist after |
+|------|-----------|-------------|-----------|
+| init | — | — | A:0, B:∞, C:∞, D:∞, E:∞ |
+| 1 | **A** (0) | B: 0+4=4 ✓, C: 0+1=1 ✓ | A:0, B:4, C:1, D:∞, E:∞ |
+| 2 | **C** (1) | B: 1+2=3 < 4 ✓, D: 1+5=6 ✓ | A:0, B:3, C:1, D:6, E:∞ |
+| 3 | **B** (3) | D: 3+1=4 < 6 ✓, E: 3+6=9 ✓ | A:0, B:3, C:1, D:4, E:9 |
+| 4 | **D** (4) | E: 4+3=7 < 9 ✓ | A:0, B:3, C:1, D:4, E:7 |
+| 5 | **E** (7) | (no outgoing) | A:0, B:3, C:1, D:4, E:7 |
 
-final dist: [0, 2, 5, 3]
-```
+Final: A:0, C:1 (A→C), B:3 (A→C→B), D:4 (A→C→B→D), E:7 (A→C→B→D→E).
+
+The instructive moment is **step 2**: popping C (dist 1) *lowers* B from 4 → 3 and enqueues a second `B:3` entry. The heap pops `B:3` before the stale `B:4`, so B is finalized at 3 and the leftover `B:4` is discarded by the `if (d > dist[u]) continue` guard when it surfaces. B is enqueued twice but never *popped* at the wrong value — that's the min-heap doing its job.
 
 Because every edge cost is ≥ 0, the moment a node is *popped* (it was the cheapest in the heap), its distance can never be beaten — so it's final. That guarantee is the whole reason Dijkstra works.
 

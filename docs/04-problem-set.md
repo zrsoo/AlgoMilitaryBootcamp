@@ -150,10 +150,10 @@
 | 74 | [LC 133 Clone Graph](https://leetcode.com/problems/clone-graph/) | M | C ↻ |
 | 75 | [LC 207 Course Schedule](https://leetcode.com/problems/course-schedule/) | M | C ★ ↻ |
 | 76 | [LC 210 Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) | M | C ✓ |
-| 77 | [LC 994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | M | C ⚑ |
+| 77 | [LC 994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | M | C ⚑ ✓ |
 | 78 | [LC 261 Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/) | M | C ↻ |
 | 79 | [LC 547 Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | M | C ✓ |
-| 80 | [LC 743 Network Delay Time](https://leetcode.com/problems/network-delay-time/) | M | C ★ |
+| 80 | [LC 743 Network Delay Time](https://leetcode.com/problems/network-delay-time/) | M | C ★ ↻ |
 | 81 | [LC 1631 Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/) | M | C |
 | 82 | [LC 815 Bus Routes](https://leetcode.com/problems/bus-routes/) | H | C ★ ⚑ |
 | 83 | [LC 269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) | H | C ★ ⚑ |
