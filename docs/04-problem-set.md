@@ -155,12 +155,12 @@
 | 79 | [LC 547 Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | M | C ✓ |
 | 80 | [LC 743 Network Delay Time](https://leetcode.com/problems/network-delay-time/) | M | C ★ ↻ |
 | 81 | [LC 1631 Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/) | M | C ↻ |
-| 82 | [LC 815 Bus Routes](https://leetcode.com/problems/bus-routes/) | H | C ★ ⚑ |
+| 82 | [LC 815 Bus Routes](https://leetcode.com/problems/bus-routes/) | H | C ★ ⚑ ↻ |
 | 83 | [LC 269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) | H | C ★ ⚑ |
 | 84 | [LC 332 Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/) | H | C ⚑ |
 | 85 | [LC 847 Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) | H | C ★ ⚑ |
 | 86 | [LC 305 Number of Islands II](https://leetcode.com/problems/number-of-islands-ii/) | H | R |
-| 87 | [LC 787 Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) | M | R |
+| 87 | [LC 787 Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) | M | R ↻ |
 
 ## Topic 12 — Backtracking (7)
 
