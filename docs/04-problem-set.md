@@ -24,13 +24,13 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 1 | [LC 49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) | M | C ↻ |
+| 1 | [LC 49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) | M | C ✓ |
 | 2 | [LC 238 Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | M | C ★ ✓ |
 | 3 | [LC 560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | M | C ★ ↻ |
-| 4 | [LC 128 Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | M | C ↻ |
-| 5 | [LC 974 Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/) | M | R ↻ |
-| 6 | [LC 41 First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | H | R ↻ |
-| 7 | [LC 525 Contiguous Array](https://leetcode.com/problems/contiguous-array/) | M | R ↻ |
+| 4 | [LC 128 Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | M | C ✓ |
+| 5 | [LC 974 Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/) | M | R ✓ |
+| 6 | [LC 41 First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | H | R ✓ |
+| 7 | [LC 525 Contiguous Array](https://leetcode.com/problems/contiguous-array/) | M | R ✓ |
 
 ## Topic 2 — Two pointers (5)
 
@@ -38,9 +38,9 @@
 |---|---|---|---|
 | 8 | [LC 15 3Sum](https://leetcode.com/problems/3sum/) | M | C ★ ↻ |
 | 9 | [LC 11 Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | M | C ✓ |
-| 10 | [LC 75 Sort Colors](https://leetcode.com/problems/sort-colors/) | M | C ↻ |
+| 10 | [LC 75 Sort Colors](https://leetcode.com/problems/sort-colors/) | M | C ✓ |
 | 11 | [LC 42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | H | C ★ ↻ |
-| 12 | [LC 287 Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | M | R ↻ |
+| 12 | [LC 287 Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | M | R ✓ |
 
 ## Topic 3 — Sliding window (7)
 
@@ -48,9 +48,9 @@
 |---|---|---|---|
 | 13 | [LC 3 Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | M | C ✓ |
 | 14 | [LC 76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | H | C ★ ↻ |
-| 15 | [LC 424 Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | M | C ↻ |
+| 15 | [LC 424 Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | M | C ✓ |
 | 16 | [LC 239 Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | H | C ★ ↻ |
-| 17 | [LC 567 Permutation in String](https://leetcode.com/problems/permutation-in-string/) | M | C ↻ |
+| 17 | [LC 567 Permutation in String](https://leetcode.com/problems/permutation-in-string/) | M | C ✓ |
 | 18 | [LC 992 Subarrays with K Different Integers](https://leetcode.com/problems/subarrays-with-k-different-integers/) | H | R |
 | 19 | [LC 480 Sliding Window Median](https://leetcode.com/problems/sliding-window-median/) | H | R |
 
@@ -61,8 +61,8 @@
 | 20 | [LC 20 Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | E | C ✓ |
 | 21 | [LC 739 Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | M | C ★ ✓ |
 | 22 | [LC 84 Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | H | C ★ ↻ |
-| 23 | [LC 85 Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/) | H | C ↻ |
-| 24 | [LC 394 Decode String](https://leetcode.com/problems/decode-string/) | M | C ↻ |
+| 23 | [LC 85 Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/) | H | C ✓ |
+| 24 | [LC 394 Decode String](https://leetcode.com/problems/decode-string/) | M | C ✓ |
 | 25 | [LC 71 Simplify Path](https://leetcode.com/problems/simplify-path/) | M | R ✓ |
 | 26 | [LC 32 Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | H | R |
 
@@ -70,7 +70,7 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 27 | [LC 33 Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | M | C ↻ |
+| 27 | [LC 33 Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | M | C ✓ |
 | 28 | [LC 153 Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) | M | C ✓ |
 | 29 | [LC 875 Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) | M | C ★ ✓ |
 | 30 | [LC 410 Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) | H | C ★ ↻ |
@@ -86,7 +86,7 @@
 | 35 | [LC 56 Merge Intervals](https://leetcode.com/problems/merge-intervals/) | M | C ⚑ ✓ |
 | 36 | [LC 57 Insert Interval](https://leetcode.com/problems/insert-interval/) | M | C ✓ |
 | 37 | [LC 253 Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) | M | C ★ ⚑ ✓ |
-| 38 | [LC 435 Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | M | C ↻ |
+| 38 | [LC 435 Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | M | C ✓ |
 | 39 | [LC 759 Employee Free Time](https://leetcode.com/problems/employee-free-time/) | H | C ★ ⚑ ✓ |
 | 40 | [LC 218 The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | H | C ★ ⚑ ↻ |
 | 41 | [LC 731 My Calendar II](https://leetcode.com/problems/my-calendar-ii/) | M | C ⚑ |
@@ -112,9 +112,9 @@
 |---|---|---|---|
 | 52 | [LC 206 Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | E | C ✓ |
 | 53 | [LC 21 Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | E | C ✓ |
-| 54 | [LC 143 Reorder List](https://leetcode.com/problems/reorder-list/) | M | C ↻ |
+| 54 | [LC 143 Reorder List](https://leetcode.com/problems/reorder-list/) | M | C ✓ |
 | 55 | [LC 25 Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) | H | C ★ ↻ |
-| 56 | [LC 138 Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/) | M | C ↻ |
+| 56 | [LC 138 Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/) | M | C ✓ |
 | 57 | [LC 142 Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | M | R |
 
 ## Topic 9 — Trees & BSTs (10)
@@ -147,14 +147,14 @@
 | # | Problem | Diff | Label |
 |---|---|---|---|
 | 73 | [LC 200 Number of Islands](https://leetcode.com/problems/number-of-islands/) | M | C ★ ✓ |
-| 74 | [LC 133 Clone Graph](https://leetcode.com/problems/clone-graph/) | M | C ↻ |
+| 74 | [LC 133 Clone Graph](https://leetcode.com/problems/clone-graph/) | M | C ✓ |
 | 75 | [LC 207 Course Schedule](https://leetcode.com/problems/course-schedule/) | M | C ★ ↻ |
 | 76 | [LC 210 Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) | M | C ✓ |
 | 77 | [LC 994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | M | C ⚑ ✓ |
-| 78 | [LC 261 Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/) | M | C ↻ |
+| 78 | [LC 261 Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/) | M | C ✓ |
 | 79 | [LC 547 Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | M | C ✓ |
 | 80 | [LC 743 Network Delay Time](https://leetcode.com/problems/network-delay-time/) | M | C ★ ↻ |
-| 81 | [LC 1631 Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/) | M | C ↻ |
+| 81 | [LC 1631 Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/) | M | C ✓ |
 | 82 | [LC 815 Bus Routes](https://leetcode.com/problems/bus-routes/) | H | C ★ ⚑ ↻ |
 | 83 | [LC 269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) | H | C ★ ⚑ |
 | 84 | [LC 332 Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/) | H | C ⚑ |

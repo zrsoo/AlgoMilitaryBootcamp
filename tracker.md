@@ -12,6 +12,12 @@ Date format: `YYYY-MM-DD` (sorts lexically — grep today's date to find what's 
 
 ## Active queue
 
+> **Rotation control — re-planned 2026-06-21.** Daily blind reps are drawn ONLY from the **In-rotation** set below. The rest are **graduated** (consolidated; out of rotation, marked ✓ in calendar + problem set). The detailed rows are kept below for reference, but graduated rows no longer feed the daily rep.
+>
+> **In rotation (22 — ★ / ⚑ / failed-reset):** 560, 15, 42, 76, 239, 84, 410, 218, 25, 98, 236, 428, 4, 23, 295, 124, 212, 297, 207, 743, 815, 787
+>
+> **Graduated 2026-06-21 (19 — out of rotation, consolidated):** 49, 128, 974, 75, 287, 525, 424, 567, 20, 41, 394, 85, 33, 435, 143, 138, 133, 261, 1631
+
 | LC  | Title          | Pattern         | First solve | D+3        | D+7        | D+14       | Status    | Notes |
 |-----|----------------|-----------------|-------------|------------|------------|------------|-----------|-------|
 | 49  | Group Anagrams              | Arrays/Hashing  | 2026-05-23  | 2026-05-26 ✓ | 2026-05-30 ✓ | 2026-06-06 | D+7 ✓ | D+7: solved cleanly with count-array key (`new string(char[26])`) — where `char[26]` is a frequency array of the strings. faster than sort, O(N·K) vs O(N·K log K). |

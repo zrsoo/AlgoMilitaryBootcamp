@@ -12,21 +12,27 @@
 | 2. Structured patterns | 8–14 | May 30 – Jun 5 | Linked list, trees, heap, intervals | Comfortable with Medium in these areas |
 | 3. Graphs & tries | 15–21 | Jun 6 – Jun 12 | Graphs (the biggest single block), tries | Can handle BFS/Dijkstra/UF + alien-dict / bus-routes / shortest-visit-all |
 | 4. DP + backtracking + greedy | 22–28 | Jun 13 – Jun 19 | DP (1D/2D/interval/string), backtracking, greedy | Comfortable with Medium DP and 1 Hard DP |
-| 5. Databricks-special + design + parsing + concurrency | 29–35 | Jun 20 – Jun 26 | Calculators, CIDR, snapshot, file system, LFU, autocomplete, concurrency | Inoculated against Databricks-flavor Hards |
-| 6. Sharpening | 36–44 | Jun 27 – Jul 5 | Mocks, redo of ★ set, full timed simulations | Interview-day readiness |
+| 5. Reset & graph/backtracking/DP core | 29–37 | Jun 20 – Jun 28 | Graph Hards (alien-dict / itinerary / visit-all), backtracking, DP | Distilled core after the Jun-21 re-plan |
+| 6. Parsing / design / sharpening | 38–44 | Jun 29 – Jul 5 | atoi, calculators, LRU/LFU/snapshot/FS, exam cold-solves | Databricks-flavor Hards + interview readiness |
 
 ---
 
-## Daily structure (every day, unless noted)
+## Daily structure (every day, unless noted) — revised 2026-06-21
+
+**Window: 08:00–11:00, hard stop at 11:00.** Sustainable pace after the Jun-21 re-plan: fewer new problems, scoped class first, one spaced rep.
 
 | Block | Time | Activity |
 |---|---|---|
-| 1 | 15–20 min | **Review.** Re-read yesterday's mistake log + one template. |
-| 2 | 90–120 min | **New solving.** 1 Medium + 1 Hard, or 2 Mediums + 1 design problem. Timed. |
-| 3 | 30–45 min | **Write-up.** For each problem solved today: 5-line summary — pattern, brute force, optimized, key insight, edge cases. Save to `notes/<topic>/<problem-id>.md`. |
-| 4 | 20–30 min | **Spaced repetition.** Redo a problem from 3, 7, or 14 days ago **without looking at solution**. If you fail, re-add to the queue. |
+| 1 | 15–25 min | **Scoped class.** Teach/refresh ONLY the 1–2 templates today's problems use (just-in-time, not the whole topic). Append to the topic's canonical `class/<topic>/<topic>.md`. |
+| 2 | 90–120 min | **New solving (capped).** **2 new** problems on a medium day, **1 new** on a hard day. Timed, narrate aloud, use the hint ladder. |
+| 3 | 20–30 min | **One spaced rep.** Redo a single tracker problem **blind**. If you fail, reset it. (Dig out more reps only on days with spare time.) |
+| 4 | buffer → 11:00 | **Write-up.** 5-line summary per solved problem → `notes/<topic>/<problem-id>.md`, plus the hint level you needed. |
 
-If a problem destroys block 2, **stop at 60 min**, read editorial, type up the solution from memory immediately after. Do not let one problem eat the whole day. See progression rules in [06](06-workflow-rubric-rescue.md).
+**Hard-stop rule:** if a problem blows past its budget, it was the *only* new problem that day and the spaced rep slides. Do not extend past 11:00.
+
+**Exam days (Jun 27, Jul 3, Jul 4):** full solve day PLUS one extra **cold re-solve of a high-value ★/⚑ Hard** — no class, timed, narrate. This is the cold-transfer test; it also counts as that problem's spaced rep.
+
+See the hint ladder in [class/00-class-protocol.md](../class/00-class-protocol.md) and progression rules in [06](06-workflow-rubric-rescue.md).
 
 ---
 
@@ -54,13 +60,13 @@ If you cannot find a partner: do **self-mock** — set a 45-min timer, narrate a
 
 | Day | Date | Topic | Problems (refs are #s in [04-problem-set.md](04-problem-set.md)) |
 |---|---|---|---|
-| 1 | Sat May 23 | Arrays/hashing | #1 ↻, #2 ✓, #3 (★) ↻ |
-| 2 | Sun May 24 | Arrays/hashing + analysis | #4 ↻, #5 ↻; redo #2 |
-| 3 | Mon May 25 | Two pointers | #8 (★) ↻, #9 ✓, #10 ↻ |
-| 4 | Tue May 26 | Two pointers + Hard | #11 (★) ↻, #12 ↻ |
-| 5 | Wed May 27 | Sliding window | #13 ✓, #15 ↻, #17 ↻ |
+| 1 | Sat May 23 | Arrays/hashing | #1 ✓, #2 ✓, #3 (★) ↻ |
+| 2 | Sun May 24 | Arrays/hashing + analysis | #4 ✓, #5 ✓; redo #2 |
+| 3 | Mon May 25 | Two pointers | #8 (★) ↻, #9 ✓, #10 ✓ |
+| 4 | Tue May 26 | Two pointers + Hard | #11 (★) ↻, #12 ✓ |
+| 5 | Wed May 27 | Sliding window | #13 ✓, #15 ✓, #17 ✓ |
 | 6 | Thu May 28 | Sliding window Hard | #14 (★) ↻, #16 (★) ↻ |
-| 7 | Fri May 29 | Stack basics | #20 ✓, #21 (★) ✓, #24 ↻ |
+| 7 | Fri May 29 | Stack basics | #20 ✓, #21 (★) ✓, #24 ✓ |
 | (Mock) | Sat May 30 | **Phase-1 mock** | Hard from arrays/sliding window |
 
 Cumulative: ~16 problems. You should be done with templates for: hashmap counting, prefix sum, two-pointer triplet, sliding window, monotonic stack.
@@ -70,12 +76,12 @@ Cumulative: ~16 problems. You should be done with templates for: hashmap countin
 | Day | Date | Topic | Problems |
 |---|---|---|---|
 | 8 | Sat May 30 | **Mock + analysis** | Mock (above) + #22 (★) ↻ histogram |
-| 9 | Sun May 31 | Stack Hard + binary search | #23 ↻, #25 ✓; redo #16 |
-| 10 | Mon Jun 1 | Binary search | #27 ↻, #28 ✓, #29 (★) ✓ |
+| 9 | Sun May 31 | Stack Hard + binary search | #23 ✓, #25 ✓; redo #16 |
+| 10 | Mon Jun 1 | Binary search | #27 ✓, #28 ✓, #29 (★) ✓ |
 | 11 | Tue Jun 2 | Binary search on answer | #30 (★) ↻, #31 ✓ |
 | 12 | Wed Jun 3 | Binary search Hard | #32 (★) ↻; redo #14 |
 | 13 | Thu Jun 4 | Intervals | #35 (⚑) ✓, #36 ✓, #37 (★ ⚑) ✓ |
-| 14 | Fri Jun 5 | Intervals + sweep | #38 ↻, #39 (★ ⚑) ✓ |
+| 14 | Fri Jun 5 | Intervals + sweep | #38 ✓, #39 (★ ⚑) ✓ |
 | (Mock) | Sat Jun 6 | **Phase-2 mock** | Hard from binary search OR intervals |
 
 Cumulative: ~32 problems.
@@ -87,7 +93,7 @@ Cumulative: ~32 problems.
 | 15 | Sat Jun 6 | **Mock** + skyline | Mock + #40 (★ ⚑) ↻ |
 | 16 | Sun Jun 7 | Heap | #44 (★) ✓, #45 ✓, #46 (★ ⚑) ↻ |
 | 17 | Mon Jun 8 | Heap streaming + linked list | #47 (★ ⚑) ↻, #52 ✓, #53 ✓ |
-| 18 | Tue Jun 9 | Linked list mid + Hard | #54 ↻, #55 (★) ↻, #56 ↻ |
+| 18 | Tue Jun 9 | Linked list mid + Hard | #54 ✓, #55 (★) ↻, #56 ✓ |
 | 19 | Wed Jun 10 | Trees core | #58 ✓, #59 ✓, #60 (★) ↻, #61 (★) ↻ |
 | 20 | Thu Jun 11 | Trees Hard | #62 (★) ↻, #63 (★ ⚑) ↻, #65 |
 | 21 | Fri Jun 12 | N-ary tree + tries | #64 (★ ⚑) ↻, #68 ✓, #69 ✓ |
@@ -102,9 +108,9 @@ Note: graphs slot in here on weekdays because graphs are the heaviest topic; do 
 | Day | Date | Topic | Problems |
 |---|---|---|---|
 | 22 | Sat Jun 13 | **Mock** + trie Hard | Mock + #70 (★) Word Search II ↻ |
-| 23 | Sun Jun 14 | Graphs grid + UF | #73 (★) ✓, #74 ↻, #79 ✓ |
-| 24 | Mon Jun 15 | Topo sort + valid tree | #75 (★) ↻, #76 ✓, #78 ↻ |
-| 25 | Tue Jun 16 | Graph BFS + Dijkstra | #77 (⚑) ✓, #80 (★) ↻, #81 ↻ |
+| 23 | Sun Jun 14 | Graphs grid + UF | #73 (★) ✓, #74 ✓, #79 ✓ |
+| 24 | Mon Jun 15 | Topo sort + valid tree | #75 (★) ↻, #76 ✓, #78 ✓ |
+| 25 | Tue Jun 16 | Graph BFS + Dijkstra | #77 (⚑) ✓, #80 (★) ↻, #81 ✓ |
 | 26 | Wed Jun 17 | Graph Hard #1 | #82 (★ ⚑) Bus Routes ↻, #87 ↻ |
 | 27 | Thu Jun 18 | Graph Hard #2 | #83 (★ ⚑) Alien Dict, #84 (⚑) Itinerary |
 | 28 | Fri Jun 19 | Graph Hard #3 | #85 (★ ⚑) Shortest-visit-all (BFS+bitmask) |
@@ -114,38 +120,41 @@ Cumulative: ~62 problems.
 
 > NB: This phase is heavier on graphs than its title suggests. DP is intentionally slotted into Phase 5 to keep graphs concentrated.
 
-## Phase 5 — DP / parsing / design / concurrency (Days 29–35, Jun 20–26)
+## Phase 5 — Reset & graph/backtracking/DP core (Days 29–37, Jun 20–28)
 
-| Day | Date | Topic | Problems |
-|---|---|---|---|
-| 29 | Sat Jun 20 | **Mock** + backtracking | Mock + #88, #89, #91 |
-| 30 | Sun Jun 21 | Backtracking Hard + DP 1D | #92, #95, #97 (★) |
-| 31 | Mon Jun 22 | DP knapsack + LIS | #99, #98 (★) |
-| 32 | Tue Jun 23 | DP string | #100, #101 (★), #102 |
-| 33 | Wed Jun 24 | DP Hard | #104 (★) Regex, #103 |
-| 34 | Thu Jun 25 | Greedy + design intro | #107, #109, #110, #118 (★ ⚑) LRU |
-| 35 | Fri Jun 26 | Design block #1 | #119 (★ ⚑) LFU, #120 (★ ⚑) Snapshot |
-| (Mock) | Sat Jun 27 | **Phase-5 mock** | Hard design or DP |
+> **Re-planned 2026-06-21.** Pace cut to a sustainable level (see Daily structure). Distilled to the ⚑/★ core; redundant reps dropped. Day 30 is a deliberate reset day.
 
-Cumulative: ~80 problems.
+| Day | Date | Class (scoped) | New solves | Exam — cold ★/⚑ Hard |
+|---|---|---|---|---|
+| 29 | Sat Jun 20 | (past) | Phase-4 mock | — |
+| 30 | Sun Jun 21 | — | **REST / RE-PLAN — no solving** | — |
+| 31 | Mon Jun 22 | Topo-sort / Kahn + alien-dict | #83 (★ ⚑ H) Alien Dictionary | — |
+| 32 | Tue Jun 23 | Hierholzer / Euler path | #84 (⚑ H) Reconstruct Itinerary | — |
+| 33 | Wed Jun 24 | BFS + bitmask state | #85 (★ ⚑ H) Shortest Path Visiting All Nodes | — |
+| 34 | Thu Jun 25 | Backtracking template | #88 Subsets, #91 Word Search | — |
+| 35 | Fri Jun 26 | Constraint backtracking | #92 (H) N-Queens | — |
+| 36 | Sat Jun 27 | DP 1-D + unbounded knapsack | #95 House Robber, #97 (★) Coin Change | **#82 (★ ⚑ H) Bus Routes** |
+| 37 | Sun Jun 28 | 2-D string DP | #104 (★ H) Regex Matching | — |
 
-## Phase 6 — Sharpening (Days 36–44, Jun 27–Jul 5) — 9 days
+Every solve day also ends with **1 blind tracker rep** (block 3).
 
-This is where you stop "learning new patterns" and start "operating like an interview candidate". 50% of these hours are mocks and redo, not new problems.
+## Phase 6 — Parsing / design / sharpening (Days 38–44, Jun 29–Jul 5)
 
-| Day | Date | Topic | Problems / Activity |
-|---|---|---|---|
-| 36 | Sat Jun 27 | **Mock #1** | Mock + parsing #113 (★ ⚑) atoi, #114 (★ ⚑) calc II |
-| 37 | Sun Jun 28 | Parsing Hard | #115 (★ ⚑) calc I, #116 (⚑) calc III |
-| 38 | Mon Jun 29 | Databricks-special design | #122 (★ ⚑) In-Mem FS, #123 (⚑) Design FS |
-| 39 | Tue Jun 30 | Databricks-special design | #124 (⚑) Time KV, #125 Rate Limiter, #126 |
-| 40 | Wed Jul 1 | Design + autocomplete + CIDR | #71 (⚑) Autocomplete, #117 (⚑) Validate IP, #121 (⚑) RandGetRand |
-| 41 | Thu Jul 2 | Concurrency thin | #130, #131, #132 + redo 2 ★ |
-| 42 | Fri Jul 3 | **Full 3-problem timed simulation** | 90-min block: 1 E (10m) + 1 M (25m) + 1 H (45m), cold-pick from set |
-| 43 | Sat Jul 4 | **Final mock** + post-mortem | 60-min Hard mock + write-up |
-| 44 | Sun Jul 5 | **Light recap** | Re-read all template files; pick 3 ★ problems and *talk through them aloud* without coding; sleep early. **Do not solve a new problem today.** |
+| Day | Date | Class (scoped) | New solves | Exam — cold ★/⚑ Hard |
+|---|---|---|---|---|
+| 38 | Mon Jun 29 | Greedy + atoi parsing | #107 Jump Game, #109 Gas Station, #113 (★ ⚑) atoi | — |
+| 39 | Tue Jun 30 | Stack parsing + KV design | #114 (★ ⚑) Basic Calculator II, #124 (⚑) Time-Based KV | — |
+| 40 | Wed Jul 1 | Parens-recursion calculator | #115 (★ ⚑ H) Basic Calculator I | — |
+| 41 | Thu Jul 2 | Design (hashmap + DLL) | #118 (★ ⚑) LRU, #120 (★ ⚑) Snapshot, #101 (★) Edit Distance | — |
+| 42 | Fri Jul 3 | LFU buckets | #119 (★ ⚑ H) LFU Cache | **#83 (★ ⚑ H) Alien Dictionary** |
+| 43 | Sat Jul 4 | Trie / file-system design | #122 (★ ⚑ H) In-Memory File System | **#85 (★ ⚑ H) Shortest Path Visiting All Nodes** |
+| 44 | Sun Jul 5 | — | **RECAP — no new.** Re-read templates; talk through 3 ★ problems aloud; sleep early. | — |
 
-Cumulative: ~95 fresh problems + ~20 redo + spaced repetition coverage = ~115 unique touched, with the ★ set hit at least 2×.
+**Optionals (slot only if ahead):** #98 (★) LIS, #116 (⚑) Basic Calculator III, #117 (⚑) Validate IP, #121 (⚑) Insert-Delete-GetRandom.
+
+**Dropped from the original plan** (covered by representatives or low signal): redundant backtracking (#89, #90), redundant DP (#96, #99, #100, #102, #103, #105, #106), #65 Right Side View, #71 Autocomplete, design extras (#123, #125, #126, #127), CIDR #129, and **all concurrency (#130–132)**.
+
+Cumulative target: the full ⚑ Databricks core + ★ pattern-defining set, each ★/⚑ Hard hit at least 2× (once fresh, once cold on an exam day).
 
 ---
 
