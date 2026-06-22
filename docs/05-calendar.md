@@ -17,20 +17,20 @@
 
 ---
 
-## Daily structure (every day, unless noted) — revised 2026-06-21
+## Daily structure (every day, unless noted) — revised 2026-06-22
 
-**Window: 08:00–11:00, hard stop at 11:00.** Sustainable pace after the Jun-21 re-plan: fewer new problems, scoped class first, one spaced rep.
+**Window: 08:00–11:00, hard stop at 11:00.** Cold-attempt-first (see [class/00-class-protocol.md](../class/00-class-protocol.md)): tools are acquired *ahead of time* in batched sessions, so solving days open with a recognition warm-up and run **cold**.
 
 | Block | Time | Activity |
 |---|---|---|
-| 1 | 15–25 min | **Scoped class.** Teach/refresh ONLY the 1–2 templates today's problems use (just-in-time, not the whole topic). Append to the topic's canonical `class/<topic>/<topic>.md`. |
-| 2 | 90–120 min | **New solving (capped).** **2 new** problems on a medium day, **1 new** on a hard day. Timed, narrate aloud, use the hint ladder. |
+| 1 | 5–10 min | **Recognition warm-up.** Assistant gives 3–5 one-line problem statements (mixed topics, **not** today's). You name the tool + why. Trains recognition; no solving. |
+| 2 | time-boxed | **Cold solve. 25 min/medium, 35 min/hard.** **2 new** problems on a medium day, **1 new** on a hard day. Straight in (tool already studied); narrate aloud. At the cap, surface what you have → hint ladder L1→L2→L3. Only a brand-new un-batched tool earns minimal neutral-example teaching first. |
 | 3 | 20–30 min | **One spaced rep.** Redo a single tracker problem **blind**. If you fail, reset it. (Dig out more reps only on days with spare time.) |
-| 4 | buffer → 11:00 | **Write-up.** 5-line summary per solved problem → `notes/<topic>/<problem-id>.md`, plus the hint level you needed. |
+| 4 | buffer → 11:00 | **Note write-up** (the debrief). 5-line summary per solved problem → `notes/<topic>/<problem-id>.md`, plus the hint level you needed. |
 
-**Hard-stop rule:** if a problem blows past its budget, it was the *only* new problem that day and the spaced rep slides. Do not extend past 11:00.
+**Hard-stop rule:** if a problem blows past its time box, it was the *only* new problem that day and the spaced rep slides. Do not extend past 11:00.
 
-**Exam days (Jun 27, Jul 3, Jul 4):** full solve day PLUS one extra **cold re-solve of a high-value ★/⚑ Hard** — no class, timed, narrate. This is the cold-transfer test; it also counts as that problem's spaced rep.
+**Exam days (Jun 27, Jul 3, Jul 4):** full solve day PLUS one extra **cold re-solve of a high-value ★/⚑ Hard** — no warm-up help, timed, narrate. This is the cold-transfer test; it also counts as that problem's spaced rep.
 
 See the hint ladder in [class/00-class-protocol.md](../class/00-class-protocol.md) and progression rules in [06](06-workflow-rubric-rescue.md).
 
@@ -50,7 +50,7 @@ If you cannot find a partner: do **self-mock** — set a 45-min timer, narrate a
 - Block 1: re-read all write-ups from the week.
 - Block 2: redo 1 Hard from the week, from scratch.
 - Block 3: update mistake log; pick 2–3 patterns that are weakest; load those into next week's queue.
-- Block 4: light — read one editorial, study one template, no new solve.
+- Block 4: **tool-acquisition session** — teach/refresh the **new tools** the upcoming week's problems will need, on **neutral / already-solved examples** (no mention of which upcoming problem uses them). This is what keeps weekday solves cold. No new solve.
 
 ---
 
@@ -124,11 +124,11 @@ Cumulative: ~62 problems.
 
 > **Re-planned 2026-06-21.** Pace cut to a sustainable level (see Daily structure). Distilled to the ⚑/★ core; redundant reps dropped. Day 30 is a deliberate reset day.
 
-| Day | Date | Class (scoped) | New solves | Exam — cold ★/⚑ Hard |
+| Day | Date | Tool (pre-taught) | New solves | Exam — cold ★/⚑ Hard |
 |---|---|---|---|---|
 | 29 | Sat Jun 20 | (past) | Phase-4 mock | — |
 | 30 | Sun Jun 21 | — | **REST / RE-PLAN — no solving** | — |
-| 31 | Mon Jun 22 | Topo-sort / Kahn + alien-dict | #83 (★ ⚑ H) Alien Dictionary | — |
+| 31 | Mon Jun 22 | Topo-sort / Kahn + alien-dict | #83 (★ ⚑ H) Alien Dictionary ✓ | — |
 | 32 | Tue Jun 23 | Hierholzer / Euler path | #84 (⚑ H) Reconstruct Itinerary | — |
 | 33 | Wed Jun 24 | BFS + bitmask state | #85 (★ ⚑ H) Shortest Path Visiting All Nodes | — |
 | 34 | Thu Jun 25 | Backtracking template | #88 Subsets, #91 Word Search | — |
@@ -140,7 +140,7 @@ Every solve day also ends with **1 blind tracker rep** (block 3).
 
 ## Phase 6 — Parsing / design / sharpening (Days 38–44, Jun 29–Jul 5)
 
-| Day | Date | Class (scoped) | New solves | Exam — cold ★/⚑ Hard |
+| Day | Date | Tool (pre-taught) | New solves | Exam — cold ★/⚑ Hard |
 |---|---|---|---|---|
 | 38 | Mon Jun 29 | Greedy + atoi parsing | #107 Jump Game, #109 Gas Station, #113 (★ ⚑) atoi | — |
 | 39 | Tue Jun 30 | Stack parsing + KV design | #114 (★ ⚑) Basic Calculator II, #124 (⚑) Time-Based KV | — |

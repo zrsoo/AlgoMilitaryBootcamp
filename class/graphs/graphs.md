@@ -288,6 +288,67 @@ If there were a cycle (say `2->3` and `3->2`), those nodes would *never* reach i
 
 **What it does:** linearizes a directed graph so every edge points forward (prerequisites before dependents). A node is ready to emit only when its in-degree hits 0. We start with all already-ready nodes, and each time we emit one we "satisfy" its outgoing edges by decrementing neighbors' in-degrees, queuing any that reach 0. The cycle test is the elegant part: in a cycle no node ever reaches in-degree 0, so if `order.Count != n`, a cycle exists and **no valid ordering is possible** (LC 207 returns false; LC 210 returns empty).
 
+### Topo sort — building the graph from a sorted word list (LC 269 Alien Dictionary)
+
+Kahn's above assumes you already have edges. The Alien-Dictionary twist is that **the edges are hidden inside a sorted list of words** — recovering them is the whole problem; the topo sort is the easy back half.
+
+> **The only ordering info lives in the first differing character between two *adjacent* words.** `"wrt"` before `"wrf"` ⇒ scanning together `w=w, r=r, t≠f` ⇒ one edge `t → f`. Everything *after* the first difference tells you nothing.
+
+```csharp
+public string AlienOrder(string[] words) {
+    var adj = new Dictionary<char, HashSet<char>>();
+    var indeg = new Dictionary<char, int>();
+
+    // 1. Seed EVERY distinct char as a node (in-degree 0). Isolated letters
+    //    that never appear in a comparison still must be emitted.
+    foreach (var w in words)
+        foreach (var c in w) {
+            if (!adj.ContainsKey(c)) adj[c] = new HashSet<char>();
+            indeg.TryAdd(c, 0);
+        }
+
+    // 2. Derive edges from each ADJACENT pair: first differing char only.
+    for (int i = 0; i + 1 < words.Length; i++) {
+        string a = words[i], b = words[i + 1];
+        int min = Math.Min(a.Length, b.Length), j = 0;
+        while (j < min && a[j] == b[j]) j++;
+        if (j == min) {                            // shared prefix matched
+            if (a.Length > b.Length) return "";    // PREFIX TRAP: "abc" before "ab" is invalid
+            continue;                              // ok, just no new edge
+        }
+        char u = a[j], v = b[j];
+        if (adj[u].Add(v)) indeg[v]++;             // dedup: count each edge once
+    }
+
+    // 3. Kahn's over the letters; cycle (contradiction) -> "".
+    var q = new Queue<char>();
+    foreach (var kv in indeg) if (kv.Value == 0) q.Enqueue(kv.Key);
+    var sb = new StringBuilder();
+    while (q.Count > 0) {
+        char c = q.Dequeue(); sb.Append(c);
+        foreach (char nxt in adj[c]) if (--indeg[nxt] == 0) q.Enqueue(nxt);
+    }
+    return sb.Length == indeg.Count ? sb.ToString() : "";
+}
+```
+
+**Picture it.**
+
+```
+words = ["wrt", "wrf", "er", "ett", "rftt"]
+
+adjacent comparisons (first diff only):
+   wrt vs wrf :  w=w r=r t≠f   ->  edge  t -> f
+   wrf vs er  :  w≠e            ->  edge  w -> e
+   er  vs ett :  e=e r≠t        ->  edge  r -> t
+   ett vs rftt:  e≠r            ->  edge  e -> r
+
+graph:  w -> e -> r -> t -> f      in-degrees: w:0 e:1 r:1 t:1 f:1
+Kahn's: w -> e -> r -> t -> f      result: "wertf"
+```
+
+**What it does:** turns "sorted words → alphabet order" into a standard topo sort. Three phases: (1) **seed all letters** as nodes — a letter in zero comparisons still must appear in the output; (2) **build edges** from each adjacent word pair at the first differing char, then stop scanning that pair; (3) run **Kahn's**, returning `""` on a cycle (the constraints contradict). Three things to narrate cold, because they're the easy-to-miss points: **dedup edges** with the `HashSet.Add` guard (the same edge derived twice would double-count in-degree → phantom cycle); the **prefix trap** (`["abc","ab"]` is invalid — a word can't sort before its own prefix → return `""`); and the cycle test `sb.Length == indeg.Count`. O(C) where C = total characters across all words (alphabet ≤ 26 ⇒ the sort is effectively constant).
+
 ### Dijkstra (weighted, non-negative)
 ```csharp
 var dist = new int[n]; Array.Fill(dist, int.MaxValue);
@@ -408,6 +469,98 @@ The `tmp = dist.Clone()` is the trick: by reading only last round's numbers, a s
 
 **What it does:** finds the cheapest path using **at most K stops** (K+1 edges). Each round of the outer loop relaxes *every* edge once, extending every shortest path by one more edge — so after round `i`, `dist` holds the cheapest cost reachable in `i` edges. The must-not-skip detail is `tmp = dist.Clone()`: we read from **last round's** distances and write into a fresh copy, so one round can't chain multiple edges and exceed the K-edge budget. Unlike Dijkstra this tolerates negative edge weights (it just can't have negative *cycles*). We loop `K+1` times because "K stops" allows K+1 flights.
 
+### Hierholzer's algorithm (Euler path / circuit — use every EDGE once)
+
+**When to reach for it:** you must build a trail that **uses every edge exactly once** (an *Euler path* if it ends somewhere different, an *Euler circuit* if it returns to start). Signals: "reconstruct the sequence that consumes all the tickets/edges", "a single trail covering every connection." Contrast Hamiltonian (every *node* once — that's the bitmask/backtracking world); Euler is every *edge* once and is polynomial.
+
+**Existence (directed):** an Euler path exists iff the graph is connected (on the edge-bearing vertices) and either every vertex has `outdeg == indeg` (circuit, start anywhere), or exactly one vertex has `outdeg − indeg = +1` (the **start**) and exactly one has `indeg − outdeg = +1` (the **end**), all others balanced.
+
+**Mental model:** greedily walk unused edges until you get **stuck** — for a valid Euler graph you can only get stuck at the end vertex. Whatever sub-loops you skipped get spliced in automatically if you emit nodes in **post-order** (only when a vertex has no unused edges left) and **reverse** at the end.
+
+```csharp
+// adj[v] = the unused out-edges of v, in a structure you can pop from
+//          (use a sorted structure / index pointer if you need lexical order).
+var result = new List<T>();
+var stack = new Stack<T>();
+stack.Push(start);
+while (stack.Count > 0) {
+    T v = stack.Peek();
+    if (adj[v].Count > 0) {
+        T u = adj[v].RemoveFirst();   // CONSUME one unused edge v -> u
+        stack.Push(u);
+    } else {
+        result.Add(stack.Pop());      // dead end -> commit to output (post-order)
+    }
+}
+result.Reverse();                     // post-order reversed = the Euler trail
+```
+
+**Picture it.** Neutral example — directed edges `A→B, B→C, C→A, A→D`. Degrees make `A` the start (`out 2, in 1`) and `D` the end (`in 1, out 0`); the Euler path is `A→B→C→A→D`.
+
+```
+        +--> B --> C
+        |         |
+   D <--A <-------+        edges: A->B, B->C, C->A, A->D
+
+stack walk (always take an unused edge; pop when stuck):
+  push A; A->B  -> [A,B]
+  B->C          -> [A,B,C]
+  C->A          -> [A,B,C,A]
+  A->D (B used) -> [A,B,C,A,D]
+  D stuck  -> pop D   result=[D]
+  A stuck  -> pop A   result=[D,A]
+  C stuck  -> pop C   result=[D,A,C]
+  B stuck  -> pop B   result=[D,A,C,B]
+  A stuck  -> pop A   result=[D,A,C,B,A]
+  reverse  -> A,B,C,A,D     <- every edge used exactly once
+```
+
+**What it does:** produces a trail using every edge once. The key idea is **post-order emission**: a vertex is only added to `result` once *all* its out-edges are spent, so a detour you took early (the `C→A` loop back through `A`) ends up correctly nested. We **consume** each edge as we traverse it (removing it from `adj`), so no edge is reused; getting "stuck" means the current vertex has no unused edges, which for a valid Euler graph can only first happen at the end vertex. Reversing the post-order gives the forward trail. Use a recursive form at your peril — deep graphs overflow the call stack; the explicit `Stack` is safe. O(E) (or O(E log E) if you keep neighbors sorted for lexical output).
+
+### BFS over (node, visited-bitmask) state — shortest path visiting a SET
+
+**When to reach for it:** "fewest steps / shortest path" where the goal isn't a single destination but **covering a set** (visit all nodes, collect all keys, hit every target), and the set is **small** (`N ≤ ~12–20`, so `2^N` fits in an `int`). Signals: "visit all …", "collect every …", "shortest path that covers …". This is the unweighted-shortest-path tool (BFS) with the state widened to remember *which subset of things you've done*.
+
+**Mental model:** an ordinary BFS, but a "node" is a **pair** `(position, mask)` where `mask`'s bit `i` = "i is done." The goal is any state with `mask == all-ones`. Because BFS explores in rings, the first time you reach a full-mask state is the fewest steps. Crucially you may **revisit a graph node** — what must be unique is the *(node, mask)* pair, because arriving at the same node with *more* progress is a genuinely different (and useful) state.
+
+```csharp
+int n = graph.Length, full = (1 << n) - 1;
+var q = new Queue<(int node, int mask)>();
+var seen = new HashSet<(int, int)>();
+for (int i = 0; i < n; i++) {                 // multi-source: may start anywhere
+    q.Enqueue((i, 1 << i)); seen.Add((i, 1 << i));
+}
+int steps = 0;
+while (q.Count > 0) {
+    for (int s = q.Count; s > 0; s--) {       // one ring = one step
+        var (node, mask) = q.Dequeue();
+        if (mask == full) return steps;       // covered the whole set
+        foreach (int nb in graph[node]) {
+            int nmask = mask | (1 << nb);
+            if (seen.Add((nb, nmask)))         // unique on (node, mask), not node
+                q.Enqueue((nb, nmask));
+        }
+    }
+    steps++;
+}
+```
+
+**Picture it.** Neutral example — a 3-node line `0—1—2` (`graph[0]={1}, graph[1]={0,2}, graph[2]={1}`), `full = 111`. You may start anywhere, so seed all three.
+
+```
+state = (node, mask)         goal mask = 111
+
+step 0 ring:  (0,001) (1,010) (2,100)        <- one per start node
+   from (0,001): ->(1, 001|010=011)
+step 1 ring:  (1,011) ...
+   from (1,011): ->(2, 011|100=111)  *** full ***
+step 2: dequeue (2,111) -> mask==full -> return 2
+```
+
+Walking `0 → 1 → 2` touches all three nodes in 2 moves — and the search finds it because `(2,111)` first appears at ring 2.
+
+**What it does:** finds the fewest moves to cover every node of the set. The bitmask turns "which have I visited" into a cheap integer you OR into as you go; the goal test is one comparison (`mask == full`). The make-or-break detail is the `seen` set keyed on the **pair** `(node, mask)` — keying on `node` alone would wrongly block the legitimate case of re-entering a node with new progress, and the algorithm would fail to ever complete the set. Seeding all nodes (multi-source) handles "you may start anywhere for free." Complexity is `O(2^N · N)` states times the per-node edges — fine because `N` is small by construction; if `N` were large this tool doesn't apply.
+
 ---
 
 ## 5. Common pitfalls
@@ -421,7 +574,9 @@ The `tmp = dist.Clone()` is the trick: by reading only last round's numbers, a s
 - **Building adjacency wrong for implicit graphs** — LC 815: connect *stops to routes* (bipartite) or precompute route-to-route adjacency; naive stop→stop is O(stops²) and TLEs.
 - **Counting components: forgetting to start only from unvisited nodes** → over-counts.
 - **Topo sort: not detecting the cycle** — if `order.Count != n`, there's no valid ordering; many problems hinge on returning that.
-
+- **Alien Dictionary edge-building (LC 269)** — (1) **dedup edges** (HashSet) or a repeated `c1→c2` double-counts in-degree → phantom cycle; (2) the **prefix trap**: equal shared prefix with the *first* word longer (`["abc","ab"]`) is invalid → return `""`; (3) **seed all letters** as nodes or isolated letters get dropped from the output.
+- **Hierholzer: building forward instead of post-order** — you must emit a vertex only when its edges are spent and **reverse** at the end; building the path forward as you walk mis-nests the skipped sub-loops. Also: *consume* edges as you use them, and prefer the iterative stack (recursion overflows on long trails).
+- **BFS+bitmask: keying `seen` on the node alone** — the unique state is the pair `(node, mask)`; deduping on `node` blocks the legitimate re-visit with more progress and breaks the search. Only applies when `N` is small enough that `2^N` fits an int.
 ---
 
 ## 6. Complexity cheat sheet
