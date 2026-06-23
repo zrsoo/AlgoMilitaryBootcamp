@@ -128,13 +128,13 @@ Cumulative: ~62 problems.
 |---|---|---|---|---|
 | 29 | Sat Jun 20 | (past) | Phase-4 mock | — |
 | 30 | Sun Jun 21 | — | **REST / RE-PLAN — no solving** | — |
-| 31 | Mon Jun 22 | Topo-sort / Kahn + alien-dict | #83 (★ ⚑ H) Alien Dictionary ✓ | — |
-| 32 | Tue Jun 23 | Hierholzer / Euler path | #84 (⚑ H) Reconstruct Itinerary | — |
-| 33 | Wed Jun 24 | BFS + bitmask state | #85 (★ ⚑ H) Shortest Path Visiting All Nodes | — |
-| 34 | Thu Jun 25 | Backtracking template | #88 Subsets, #91 Word Search | — |
-| 35 | Fri Jun 26 | Constraint backtracking | #92 (H) N-Queens | — |
-| 36 | Sat Jun 27 | DP 1-D + unbounded knapsack | #95 House Robber, #97 (★) Coin Change | **#82 (★ ⚑ H) Bus Routes** |
-| 37 | Sun Jun 28 | 2-D string DP | #104 (★ H) Regex Matching | — |
+| 31 | Mon Jun 22 | <details><summary>Reveal tool</summary>Topo-sort / Kahn + alien-dict</details> | #83 (★ ⚑ H) Alien Dictionary ✓ | — |
+| 32 | Tue Jun 23 | <details><summary>Reveal tool</summary>Hierholzer / Euler path</details> | #84 (⚑ H) Reconstruct Itinerary ✓ | — |
+| 33 | Wed Jun 24 | <details><summary>Reveal tool</summary>BFS + bitmask state</details> | #85 (★ ⚑ H) Shortest Path Visiting All Nodes | — |
+| 34 | Thu Jun 25 | <details><summary>Reveal tool</summary>Backtracking template</details> | #88 Subsets, #91 Word Search | — |
+| 35 | Fri Jun 26 | <details><summary>Reveal tool</summary>Constraint backtracking</details> | #92 (H) N-Queens | — |
+| 36 | Sat Jun 27 | <details><summary>Reveal tool</summary>DP 1-D + unbounded knapsack</details> | #95 House Robber, #97 (★) Coin Change | **#82 (★ ⚑ H) Bus Routes** |
+| 37 | Sun Jun 28 | <details><summary>Reveal tool</summary>2-D string DP</details> | #104 (★ H) Regex Matching | — |
 
 Every solve day also ends with **1 blind tracker rep** (block 3).
 
@@ -142,12 +142,12 @@ Every solve day also ends with **1 blind tracker rep** (block 3).
 
 | Day | Date | Tool (pre-taught) | New solves | Exam — cold ★/⚑ Hard |
 |---|---|---|---|---|
-| 38 | Mon Jun 29 | Greedy + atoi parsing | #107 Jump Game, #109 Gas Station, #113 (★ ⚑) atoi | — |
-| 39 | Tue Jun 30 | Stack parsing + KV design | #114 (★ ⚑) Basic Calculator II, #124 (⚑) Time-Based KV | — |
-| 40 | Wed Jul 1 | Parens-recursion calculator | #115 (★ ⚑ H) Basic Calculator I | — |
-| 41 | Thu Jul 2 | Design (hashmap + DLL) | #118 (★ ⚑) LRU, #120 (★ ⚑) Snapshot, #101 (★) Edit Distance | — |
-| 42 | Fri Jul 3 | LFU buckets | #119 (★ ⚑ H) LFU Cache | **#83 (★ ⚑ H) Alien Dictionary** |
-| 43 | Sat Jul 4 | Trie / file-system design | #122 (★ ⚑ H) In-Memory File System | **#85 (★ ⚑ H) Shortest Path Visiting All Nodes** |
+| 38 | Mon Jun 29 | <details><summary>Reveal tool</summary>Greedy + atoi parsing</details> | #107 Jump Game, #109 Gas Station, #113 (★ ⚑) atoi | — |
+| 39 | Tue Jun 30 | <details><summary>Reveal tool</summary>Stack parsing + KV design</details> | #114 (★ ⚑) Basic Calculator II, #124 (⚑) Time-Based KV | — |
+| 40 | Wed Jul 1 | <details><summary>Reveal tool</summary>Parens-recursion calculator</details> | #115 (★ ⚑ H) Basic Calculator I | — |
+| 41 | Thu Jul 2 | <details><summary>Reveal tool</summary>Design (hashmap + DLL)</details> | #118 (★ ⚑) LRU, #120 (★ ⚑) Snapshot, #101 (★) Edit Distance | — |
+| 42 | Fri Jul 3 | <details><summary>Reveal tool</summary>LFU buckets</details> | #119 (★ ⚑ H) LFU Cache | **#83 (★ ⚑ H) Alien Dictionary** |
+| 43 | Sat Jul 4 | <details><summary>Reveal tool</summary>Trie / file-system design</details> | #122 (★ ⚑ H) In-Memory File System | **#85 (★ ⚑ H) Shortest Path Visiting All Nodes** |
 | 44 | Sun Jul 5 | — | **RECAP — no new.** Re-read templates; talk through 3 ★ problems aloud; sleep early. | — |
 
 **Optionals (slot only if ahead):** #98 (★) LIS, #116 (⚑) Basic Calculator III, #117 (⚑) Validate IP, #121 (⚑) Insert-Delete-GetRandom.
