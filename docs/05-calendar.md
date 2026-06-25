@@ -130,8 +130,8 @@ Cumulative: ~62 problems.
 | 30 | Sun Jun 21 | — | **REST / RE-PLAN — no solving** | — |
 | 31 | Mon Jun 22 | <details><summary>Reveal tool</summary>Topo-sort / Kahn + alien-dict</details> | #83 (★ ⚑ H) Alien Dictionary ✓ | — |
 | 32 | Tue Jun 23 | <details><summary>Reveal tool</summary>Hierholzer / Euler path</details> | #84 (⚑ H) Reconstruct Itinerary ✓ | — |
-| 33 | Wed Jun 24 | <details><summary>Reveal tool</summary>BFS + bitmask state</details> | #85 (★ ⚑ H) Shortest Path Visiting All Nodes | — |
-| 34 | Thu Jun 25 | <details><summary>Reveal tool</summary>Backtracking template</details> | #88 Subsets, #91 Word Search | — |
+| 33 | Wed Jun 24 | <details><summary>Reveal tool</summary>BFS + bitmask state</details> | #85 (★ ⚑ H) Shortest Path Visiting All Nodes ✓ | — |
+| 34 | Thu Jun 25 | <details><summary>Reveal tool</summary>Backtracking template</details> | #88 Subsets ↻, #91 Word Search ↻ | — |
 | 35 | Fri Jun 26 | <details><summary>Reveal tool</summary>Constraint backtracking</details> | #92 (H) N-Queens | — |
 | 36 | Sat Jun 27 | <details><summary>Reveal tool</summary>DP 1-D + unbounded knapsack</details> | #95 House Robber, #97 (★) Coin Change | **#82 (★ ⚑ H) Bus Routes** |
 | 37 | Sun Jun 28 | <details><summary>Reveal tool</summary>2-D string DP</details> | #104 (★ H) Regex Matching | — |

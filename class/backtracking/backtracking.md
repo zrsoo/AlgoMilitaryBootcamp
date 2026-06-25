@@ -1,6 +1,7 @@
 # Class: Backtracking
 
-> Canonical class for the `backtracking` topic. Living document — fold new templates/pitfalls back in as problems reveal them.
+> Canonical class for the `backtracking` topic — the **tool library**. Living document; fold new templates/pitfalls back in as problems reveal them.
+> Tools here are taught on **neutral examples** (binary strings, target-sum combinations, orderings of distinct items, spelling a target in a grid, graph m-coloring). The mapping to specific problem-set #s is at the bottom — **don't read that mapping for a problem you haven't yet attempted; it's the reduction.**
 
 ---
 
@@ -14,7 +15,7 @@ It is the right tool when the answer is a **combination of choices** and you mus
 - "Find **all** …" — all subsets, all permutations, all combinations, all valid placements/partitions.
 - "Generate every …" / "how many ways …" where you must construct each candidate.
 - Constraint satisfaction: place N queens, color a graph, fill a Sudoku, partition a string so every piece is a palindrome.
-- A search over a grid/board where a path must spell something or satisfy a rule (LC 79, LC 212).
+- A search over a grid/board where a path must spell something or satisfy a rule.
 - The candidate is built **one element at a time** and a partial candidate can be **rejected early**.
 
 > Rule of thumb: if the output is "all/every valid configuration" and each configuration is assembled from a sequence of choices, it's backtracking. If you only need a count or an optimum *and* subproblems overlap, it's probably **DP** instead (backtracking explores the whole tree; DP memoizes it).
@@ -36,32 +37,32 @@ Three knobs define any backtracking problem:
 2. **Constraints / pruning** — which choices are illegal or hopeless? skip them early.
 3. **Goal / base case** — when is `path` a complete answer? record it (usually a **copy**).
 
-The art is almost entirely in (2): *the earlier and cheaper you prune, the smaller the tree.* A trie (LC 212) and N-Queens' column/diagonal sets are both pruning machines.
+The art is almost entirely in (2): *the earlier and cheaper you prune, the smaller the tree.* A prefix trie, or maintained occupancy sets, are both pruning machines.
 
 ---
 
 ## 3. Core patterns
 
-### A. Subsets (include/exclude per element) — LC 78
-Each element is a binary choice: in or out. Every node of the tree is a valid subset, so you record at **every** node, not just leaves. `start` index prevents revisiting earlier elements.
+### A. Include / exclude per element
+Each element is a binary choice: in or out. Depending on where you record, every node of the tree is a valid partial answer (record at **every** node) or only the depth-`n` leaves count. A `start` index prevents revisiting earlier elements. (Archetype: enumerating fixed-length sequences or a power set.)
 
-### B. Combinations / combination sum — LC 39, LC 77
-Pick elements with a `start` cursor so combinations aren't re-emitted in different orders (`{2,3}` not also `{3,2}`). LC 39 allows reuse → recurse with the **same** index; no reuse → `i+1`. Prune when the running sum exceeds target (sort first to break early).
+### B. Combinations with a cursor (and sum-pruned variants)
+Pick elements with a `start` cursor so combinations aren't re-emitted in different orders (`{2,3}` not also `{3,2}`). Reuse allowed → recurse with the **same** index; no reuse → `i+1`. When chasing a target sum, prune the instant the running total overshoots (sort first to `break` early).
 
-### C. Permutations (order matters, use-each-once) — LC 46
+### C. Permutations (order matters, use-each-once)
 No `start` cursor — every unused element is a candidate at every position. Track used elements (a `used[]` bool array or swap-in-place). Record only at **leaves** (length == n).
 
-### D. Grid / path backtracking — LC 79, LC 212
-DFS from cells across the 4 neighbors; mark a cell visited before recursing, unmark after. The candidate is the path through the grid. **LC 212** drives this DFS by a **trie** of target words so dead prefixes are pruned instantly (see the tries class, pattern C) — this is the payoff that fuses both topics.
+### D. Grid / path backtracking
+DFS from cells across the 4 neighbors; mark a cell visited before recursing, unmark after. The candidate is the path through the grid. A **trie**-driven variant prunes dead prefixes instantly when matching *many* target words in one scan (see the tries class, pattern C) — the payoff that fuses both topics.
 
-### E. Constraint placement — LC 51 N-Queens, Sudoku
-Place one unit per "row" (queen per row), maintain sets of occupied columns/diagonals for **O(1) legality checks**, recurse to the next row, undo on return. Pure pruning-driven search.
+### E. Constraint placement
+Assign one unit per "slot", maintain just enough committed state (sets/maps of what's already used) for **fast legality checks**, recurse to the next slot, undo on return. Pure pruning-driven search. (Neutral archetype: graph m-coloring.)
 
-### F. Partitioning — LC 131 Palindrome Partitioning
-Choose where to cut next; each prefix piece must satisfy a predicate (palindrome). `start` marks the cut position; recurse on the remainder.
+### F. Partitioning
+Choose where to cut next; each prefix piece must satisfy a predicate. `start` marks the cut position; recurse on the remainder.
 
-### G. Mapping enumeration — LC 17 Letter Combinations
-A multi-way choice per position (the letters for each digit). Depth = number of digits; branch = letters at this digit.
+### G. Mapping enumeration
+A multi-way choice per position (e.g. the letters mapped to each phone digit). Depth = number of positions; branch = options at this position.
 
 ---
 
@@ -100,17 +101,18 @@ the four code lines map onto one edge of this tree:
 
 **What it does:** this is the shape *every* template below specializes. `IsComplete` checks if `path` is a finished answer (record a **copy** — see pitfalls). The `foreach` enumerates the legal next moves; `IsLegal`/`continue` prunes hopeless ones early. The trio **choose → explore → un-choose** is the heartbeat: because we reuse one shared `path` buffer, the `Undo` after recursion is what stops a choice from leaking into the sibling branches. Master this rhythm and the specific problems are just different fillings for `Choices`, `IsLegal`, and `IsComplete`.
 
-### A. Subsets (LC 78)
+### A. Include / exclude per element — *neutral example: all binary strings of length n*
+At each position decide 0 or 1; the tree has depth `n` and `2ⁿ` leaves.
 ```csharp
-IList<IList<int>> Subsets(int[] nums) {
-    var res = new List<IList<int>>();
-    var path = new List<int>();
-    void Dfs(int start) {
-        res.Add(new List<int>(path));            // record EVERY node
-        for (int i = start; i < nums.Length; i++) {
-            path.Add(nums[i]);                   // choose
-            Dfs(i + 1);                          // explore (no reuse)
-            path.RemoveAt(path.Count - 1);       // un-choose
+IList<string> BinaryStrings(int n) {
+    var res = new List<string>();
+    var sb = new StringBuilder();
+    void Dfs(int i) {
+        if (i == n) { res.Add(sb.ToString()); return; }   // leaf = one full string
+        foreach (char bit in "01") {
+            sb.Append(bit);            // choose
+            Dfs(i + 1);                // explore
+            sb.Length--;               // un-choose
         }
     }
     Dfs(0);
@@ -118,27 +120,21 @@ IList<IList<int>> Subsets(int[] nums) {
 }
 ```
 
-**Picture it.** For subsets, each element is a simple yes/no: include it or skip it. The `start` cursor means "only consider elements from here onward," which stops us from re-emitting `{1,2}` and `{2,1}` as different answers. **Every node** of the tree is a valid subset, so we record on entry, not just at leaves:
+**Picture it.** Every position is an independent yes/no; the two branches at each level are "append 0" vs "append 1." A complete string is a leaf at depth `n`:
 
 ```
-nums = [1,2,3]      record path at EVERY node (shown in [])
-
-                         [ ]
-            +1 /      +2 |        +3 \
-           [1]        [2]          [3]
-        +2 / +3 \      | +3
-     [1,2]    [1,3]   [2,3]
-      | +3
-   [1,2,3]
-
-all recorded: [], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]   = 2^3 = 8 subsets
+n = 3                       ( )
+              0 /                      \ 1
+             (0)                       (1)
+        0 /      \ 1               0 /      \ 1
+      (00)       (01)           (10)        (11)
+     0/  \1     0/  \1         0/  \1       0/  \1
+   000  001   010  011       100  101     110  111   <- 2^3 = 8 leaves
 ```
 
-After visiting `[1,2,3]` we `RemoveAt` to undo back to `[1,2]`, then up to `[1]`, etc. — each removal is the "un-choose."
+**What it does:** enumerates all `2ⁿ` binary strings — the canonical include/exclude tree. `sb.Append` / `sb.Length--` is the choose/un-choose around one shared buffer. **Record placement is the knob that retargets this template:** record only at the **leaf** (here) and you enumerate fixed-length sequences; move the `res.Add` to the *top* of `Dfs` and add a `start` cursor advancing `i+1` (so earlier items aren't revisited) and the same tree enumerates a **power set** — every partial path is itself a valid answer. Permutations (pattern C) flip a different knob: drop the cursor, add a `used[]` guard.
 
-**What it does:** generates all 2ⁿ subsets. We `res.Add` a copy at the **top of every call** because every partial path is itself a complete subset (unlike permutations, which only count at the leaves). The loop starts at `start` and recurses with `i + 1` so each element is considered once and in order, which is what prevents duplicate subsets. The `path.Add` / `path.RemoveAt` pair is the choose/un-choose that lets the single `path` list serve the whole tree.
-
-### B. Combination Sum (LC 39 — reuse allowed)
+### B. Combinations with a cursor — *neutral example: target-sum combinations, reuse allowed*
 ```csharp
 IList<IList<int>> CombinationSum(int[] cand, int target) {
     Array.Sort(cand);
@@ -177,7 +173,7 @@ results: [2,2,3], [7]
 
 **What it does:** finds every combination (reuse allowed) that sums to `target`. `remain` tracks how much is left; reaching exactly 0 records the path. Recursing with the **same** `i` is what permits picking a number multiple times (`[2,2,3]`); use `i + 1` instead and you get the no-reuse variant. Because `cand` is sorted, `if (cand[i] > remain) break` abandons the rest of the loop at once — every later candidate is even bigger, so they'd all overshoot too. The `start` cursor keeps combinations canonical (ascending), so `{2,3}` is never re-emitted as `{3,2}`.
 
-### C. Permutations (LC 46)
+### C. Permutations — *neutral example: all orderings of n distinct items*
 ```csharp
 IList<IList<int>> Permute(int[] nums) {
     var res = new List<IList<int>>();
@@ -215,18 +211,19 @@ at (1,2): used=[T,T,F] -> only 3 is free -> go to (1,2,3), record, undo
 
 **What it does:** generates all n! orderings. The `if (used[i]) continue` skips numbers already placed on the current path, so each appears exactly once per permutation; the loop scans *all* indices every level (not from a cursor) because order matters — `[1,2]` and `[2,1]` are both wanted. We record only when `path.Count == nums.Length` (a leaf = a complete ordering). The undo step restores **both** `path` and `used[i]` so the next sibling sees a clean slate. (An alternative avoids `used[]` by swapping elements in place.)
 
-### D. Grid backtracking (LC 79 — single word)
+### D. Grid / path backtracking — *neutral example: does a grid contain a path spelling a target?*
+Walk neighbor-to-neighbor; a cell may be used once per path. Mark it, recurse the 4 directions, restore it.
 ```csharp
-bool Exist(char[][] board, string word) {
-    int R = board.Length, C = board[0].Length;
+bool PathSpells(char[][] grid, string target) {
+    int R = grid.Length, C = grid[0].Length;
     bool Dfs(int r, int c, int k) {
-        if (k == word.Length) return true;
-        if (r < 0 || r >= R || c < 0 || c >= C || board[r][c] != word[k]) return false;
-        char tmp = board[r][c];
-        board[r][c] = '#';                       // mark visited (in place)
+        if (k == target.Length) return true;
+        if (r < 0 || r >= R || c < 0 || c >= C || grid[r][c] != target[k]) return false;
+        char tmp = grid[r][c];
+        grid[r][c] = '#';                        // mark visited (in place)
         bool found = Dfs(r+1,c,k+1) || Dfs(r-1,c,k+1)
                   || Dfs(r,c+1,k+1) || Dfs(r,c-1,k+1);
-        board[r][c] = tmp;                       // un-mark (backtrack)
+        grid[r][c] = tmp;                        // un-mark (backtrack)
         return found;
     }
     for (int r = 0; r < R; r++)
@@ -236,25 +233,25 @@ bool Exist(char[][] board, string word) {
 }
 ```
 
-**Picture it.** We try to spell the word by walking neighbor-to-neighbor across the grid. At each step we either match the next letter and fan out to the 4 neighbors, or fail. Marking the current cell `'#'` stops the path from reusing it; restoring it on the way back frees it for *other* paths:
+**Picture it.** Trace the target by stepping between neighbours. Match the next char and fan out to the 4 neighbours, or fail. Marking the current cell `'#'` stops the path reusing it; restoring it on the way back frees it for *other* paths:
 
 ```
-board:  A B C        word = "ABCC"
-        S F C
-        A D E
+grid:  C O D X        target = "CODE"
+       X X E X
+       X X X X
 
-start (0,0)='A' matches word[0]='A'  -> mark '#', try neighbors for 'B'
-   (0,1)='B' matches word[1]        -> mark '#', try neighbors for 'C'
-      (0,2)='C' matches word[2]     -> mark '#', try neighbors for 'C'
-         (1,2)='C' matches word[3]  -> k==len -> TRUE
+start (0,0)='C' = target[0]   -> mark '#', look for 'O'
+   (0,1)='O' = target[1]      -> mark '#', look for 'D'
+      (0,2)='D' = target[2]   -> mark '#', look for 'E'
+         (1,2)='E' = target[3] -> k==len -> TRUE
 
-the '#' trail prevents stepping back onto A or B mid-path;
-when a branch fails, each cell is restored to its letter (un-choose).
+the '#' trail prevents stepping back onto C/O/D mid-path;
+a failed branch restores each cell to its letter (un-choose).
 ```
 
-**What it does:** decides whether `word` can be traced through adjacent cells (no cell reused). The base cases come **first and in order**: `k == word.Length` means we matched every letter (success); the bounds/mismatch check rejects off-grid cells, the `'#'` sentinel (already on this path), and wrong letters — this ordering matters so we never index `board[r][c]` out of range. On a match we temporarily blank the cell to `'#'`, recurse into all four directions (the `||` short-circuits on the first success), then **restore the original letter** so a different path can legitimately use that cell. The mark/restore *is* the choose/un-choose, done in-place on the board instead of a separate visited set.
+**What it does:** decides whether `target` can be traced through adjacent cells with no cell reused. The base cases come **first and in order**: `k == target.Length` means every char matched (success); the bounds/visited/mismatch check then rejects off-grid cells, the `'#'` sentinel (already on this path), and wrong letters — this order matters so we never index `grid[r][c]` out of range. On a match we blank the cell to `'#'`, recurse all four directions (the `||` short-circuits on the first success), then **restore** the original char so a different path may legitimately use that cell. The mark/restore *is* the choose/un-choose, done in place on the grid instead of a separate visited set.
 
-### D′. Trie-pruned grid backtracking (LC 212 — many words, the payoff)
+### D′. Trie-pruned grid backtracking — *neutral example: matching many dictionary words in one grid scan*
 ```csharp
 public class Node {
     public Node[] kids = new Node[26];
@@ -293,35 +290,37 @@ public IList<string> FindWords(char[][] board, string[] words) {
 }
 ```
 
-### E. N-Queens (LC 51) — O(1) legality via sets
+### E. Constraint placement — *neutral example: graph m-coloring*
+Assign one of `m` colors to each node so adjacent nodes differ. One "slot" per node; legality checked against already-colored neighbors; undo on return.
 ```csharp
-// cols, diag (r-c), anti (r+c) as HashSet<int>; place one queen per row.
-void Dfs(int r) {
-    if (r == n) { res.Add(Render()); return; }
-    for (int c = 0; c < n; c++) {
-        if (cols.Contains(c) || diag.Contains(r-c) || anti.Contains(r+c)) continue; // prune
-        cols.Add(c); diag.Add(r-c); anti.Add(r+c); place[r] = c;   // choose
-        Dfs(r + 1);
-        cols.Remove(c); diag.Remove(r-c); anti.Remove(r+c);        // un-choose
+bool Color(List<int>[] adj, int m, int[] colorOf, int node) {
+    if (node == adj.Length) return true;             // all nodes colored
+    for (int col = 1; col <= m; col++) {
+        bool ok = true;
+        foreach (int nb in adj[node])                // legality: no neighbor shares col
+            if (colorOf[nb] == col) { ok = false; break; }
+        if (!ok) continue;                           // prune
+        colorOf[node] = col;                         // choose
+        if (Color(adj, m, colorOf, node + 1)) return true;
+        colorOf[node] = 0;                           // un-choose
     }
+    return false;
 }
 ```
 
-**Picture it.** Place exactly **one queen per row**, top to bottom. A new queen is legal only if its column and both diagonals are still free. The trick: cells on the same `↖↘` diagonal share `r - c`; cells on the same `↗↙` diagonal share `r + c` — so three `HashSet`s give O(1) "is this square attacked?" checks:
+**Picture it.** Walk the nodes in order; at each one try every color, keep only those that clash with no already-colored neighbor, recurse, and on a dead end undo and try the next color:
 
 ```
-4x4 board, r-c and r+c label the diagonals:
+nodes 0-1-2 in a path, m = 2 colors (A,B)
 
-      c=0  c=1  c=2  c=3
- r=0   .    Q    .    .      Q at (0,1): cols={1}, diag(r-c)={-1}, anti(r+c)={1}
- r=1   .    .    .    Q      row 1: c=0? anti 1+0=1 taken. c=2? diag 1-2=-1 taken.
- r=2  ...                         c=3 ok -> place (1,3)
- r=3  ...                    recurse row by row; when r==n, a full board is recorded.
+ node0: try A           -> ok            colorOf=[A,_,_]
+   node1: try A -> clashes node0; try B  colorOf=[A,B,_]
+     node2: try A -> ok (only adj to 1)  colorOf=[A,B,A]  -> all colored -> TRUE
 
-blocked squares from (0,1):  same col 1 | same ↖↘ (r-c=-1) | same ↗↙ (r+c=1)
+if a node exhausts all m colors with no legal pick, return up and recolor the previous node.
 ```
 
-**What it does:** finds all ways to place `n` non-attacking queens. By committing to one queen per row we only ever choose a *column* for the current row, shrinking the tree enormously. The three sets encode the columns and the two diagonal families already under attack; `r - c` is constant along one diagonal direction and `r + c` along the other, which is why membership tests are O(1). The choose step adds to all three sets and records the column; the un-choose removes them — standard backtracking, but the pruning via constraint sets is what makes N-Queens tractable. Reaching `r == n` means every row got a safe queen, so we render and store the board.
+**What it does:** decides whether the graph is `m`-colorable (and yields one coloring). Each node is a slot; the inner loop is the choices; the neighbor scan is the legality check that prunes illegal colors *before* recursing. `colorOf[node] = col` / `= 0` is the choose/un-choose. The general lesson this archetype teaches: **maintain just enough committed state to test legality cheaply, and undo it on the way up.** Heavier constraint problems push the idea further — encode the "already used" sets so each legality test is O(1) instead of a neighbor scan; *which* sets to maintain is the per-problem insight you derive cold.
 
 ---
 
@@ -330,40 +329,41 @@ blocked squares from (0,1):  same col 1 | same ↖↘ (r-c=-1) | same ↗↙ (r+
 - **Forgetting to undo** — the single most common bug. Every `Make` needs a matching `Undo` on the path back up, or choices leak into sibling branches. (For grid: mark `'#'` then restore the original char.)
 - **Recording a reference instead of a copy** — `res.Add(path)` stores the *same* mutable list; it'll be empty/garbage by the end. Always `res.Add(new List<>(path))`.
 - **Wrong cursor for the pattern** — `start` cursor for subsets/combinations (order doesn't matter), **no** cursor + `used[]` for permutations (order matters). Mixing them gives duplicates or missing answers.
-- **Pruning too late or not at all** → exponential blowup / TLE. Sort then `break` (combination sum), use O(1) constraint sets (N-Queens), drive the DFS by a trie (LC 212).
-- **Duplicates from duplicate inputs** — LC 90/40/47: sort, then `if (i > start && nums[i] == nums[i-1]) continue;` to skip duplicate siblings at the same level.
-- **LC 212 specifics**: array-backed trie node (a–z), store the **full word** on the terminal node (don't rebuild from a path string), and **null the word after collecting** to dedup and shrink the trie. Mark/restore the grid cell, not a separate visited set, for speed.
-- **Recording at the wrong place** — subsets record at *every* node; permutations/combination-sum record only at the goal/leaf. Putting the `res.Add` in the wrong spot changes the answer.
-- **Base case ordering in grid DFS** — bounds check and visited/mismatch check must come **before** indexing `board[r][c]`, or you index out of range.
+- **Pruning too late or not at all** → exponential blowup / TLE. Sort then `break` (target-sum combinations), maintain occupancy sets for O(1) legality (the constraint-placement archetype), drive the DFS by a trie (trie-pruned grid).
+- **Duplicates from duplicate inputs** — when the input has repeats: sort, then `if (i > start && nums[i] == nums[i-1]) continue;` to skip duplicate siblings at the same level.
+- **Trie-pruned grid specifics**: array-backed trie node (a–z), store the **full word** on the terminal node (don't rebuild from a path string), and **null the word after collecting** to dedup and shrink the trie. Mark/restore the grid cell, not a separate visited set, for speed.
+- **Recording at the wrong place** — power-set style records at *every* node; permutations/target-sum record only at the goal/leaf. Putting the `res.Add` in the wrong spot changes the answer.
+- **Base case ordering in grid DFS** — bounds check and visited/mismatch check must come **before** indexing `grid[r][c]`, or you index out of range.
 
 ---
 
 ## 6. Complexity cheat sheet
 
-| Problem | Time | Space (stack/aux) |
-|---|---|---|
-| Subsets (LC 78) | O(n · 2ⁿ) | O(n) |
-| Permutations (LC 46) | O(n · n!) | O(n) |
-| Combination Sum (LC 39) | O(2^target) bounded, pruned | O(target) |
-| Word Search (LC 79) | O(R·C · 4^L) | O(L) |
-| Word Search II (LC 212) | O(R·C · 4^Lmax) bounded by trie | O(total chars) trie |
-| N-Queens (LC 51) | O(n!) | O(n) |
-| Letter Combinations (LC 17) | O(4ⁿ · n) | O(n) |
+| Pattern | Time | Space (stack/aux) | Neutral example |
+|---|---|---|---|
+| A — include/exclude | O(n · 2ⁿ) | O(n) | binary strings / power set |
+| C — permutations | O(n · n!) | O(n) | orderings of n items |
+| B — combinations / target sum | O(2^target) bounded, pruned | O(target) | target-sum combos |
+| D — grid path | O(R·C · 4^L) | O(L) | spell a target in a grid |
+| D′ — trie-pruned grid | O(R·C · 4^Lmax) bounded by trie | O(total chars) trie | many words, one scan |
+| E — constraint placement | O(branch^slots) pruned | O(slots) | graph m-coloring |
+| G — mapping enumeration | O(k^d · d) | O(d) | digit → letters |
 
 General shape: **time ≈ (#nodes in the decision tree) × (work per node)**; `L` = word/path length. Pruning is what keeps the constant exponent (the `4^L`, `2ⁿ`, `n!`) from actually materializing in the average case.
 
 ---
 
-## 7. Map to the problem set (Topic 12 — Backtracking)
+## 7. Map to the problem set
 
-| # | LC | Pattern from above |
-|---|---|---|
-| 88 | 78 Subsets | A — include/exclude, record every node |
-| 89 | 46 Permutations | C — `used[]`, record at leaves |
-| 90 | 39 Combination Sum | B — `start` cursor, reuse same index, prune by sum |
-| 91 | 79 Word Search | D — grid DFS, mark/unmark cell |
-| 92 | 51 N-Queens | E — one queen per row, O(1) constraint sets |
-| 93 | 131 Palindrome Partitioning | F — cut positions, palindrome predicate (R) |
-| 94 | 17 Letter Combinations | G — multi-way choice per digit (R) |
+> **Recognition guard:** this maps tools → problems. Reading the row for a problem you haven't attempted hands you the reduction — the exact thing you're meant to derive cold. Use it only during review / spaced reps.
 
-Cross-topic: **LC 212 Word Search II** (Topic 10 Tries, #70) is grid backtracking (pattern D′) pruned by a trie — the fusion of this class and the tries class. The grid/path DFS muscle here is the same one reused there.
+| Pattern from above | Problem-set # (LC) |
+|---|---|
+| A — include/exclude | #88 (LC 78 Subsets) |
+| C — permutations | #89 (LC 46 Permutations) |
+| B — combinations with a cursor | #90 (LC 39 Combination Sum) |
+| D — grid / path backtracking | #91 (LC 79 Word Search) |
+| E — constraint placement | #92 (LC 51 N-Queens) |
+| F — partitioning | #93 (LC 131 Palindrome Partitioning) |
+| G — mapping enumeration | #94 (LC 17 Letter Combinations) |
+| D′ — trie-pruned grid | #70 (LC 212 Word Search II) |

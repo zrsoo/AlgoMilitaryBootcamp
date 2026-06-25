@@ -158,7 +158,7 @@
 | 82 | [LC 815 Bus Routes](https://leetcode.com/problems/bus-routes/) | H | C ★ ⚑ ↻ |
 | 83 | [LC 269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) | H | C ★ ⚑ ✓ |
 | 84 | [LC 332 Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/) | H | C ⚑ ✓ |
-| 85 | [LC 847 Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) | H | C ★ ⚑ |
+| 85 | [LC 847 Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) | H | C ★ ⚑ ✓ |
 | 86 | [LC 305 Number of Islands II](https://leetcode.com/problems/number-of-islands-ii/) | H | R |
 | 87 | [LC 787 Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) | M | R ↻ |
 
@@ -166,10 +166,10 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 88 | [LC 78 Subsets](https://leetcode.com/problems/subsets/) | M | C |
+| 88 | [LC 78 Subsets](https://leetcode.com/problems/subsets/) | M | C ↻ |
 | 89 | [LC 46 Permutations](https://leetcode.com/problems/permutations/) | M | C |
 | 90 | [LC 39 Combination Sum](https://leetcode.com/problems/combination-sum/) | M | C |
-| 91 | [LC 79 Word Search](https://leetcode.com/problems/word-search/) | M | C |
+| 91 | [LC 79 Word Search](https://leetcode.com/problems/word-search/) | M | C ↻ |
 | 92 | [LC 51 N-Queens](https://leetcode.com/problems/n-queens/) | H | C |
 | 93 | [LC 131 Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/) | M | R |
 | 94 | [LC 17 Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | M | R |
