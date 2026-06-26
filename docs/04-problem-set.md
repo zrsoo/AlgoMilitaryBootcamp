@@ -170,7 +170,7 @@
 | 89 | [LC 46 Permutations](https://leetcode.com/problems/permutations/) | M | C |
 | 90 | [LC 39 Combination Sum](https://leetcode.com/problems/combination-sum/) | M | C |
 | 91 | [LC 79 Word Search](https://leetcode.com/problems/word-search/) | M | C ↻ |
-| 92 | [LC 51 N-Queens](https://leetcode.com/problems/n-queens/) | H | C |
+| 92 | [LC 51 N-Queens](https://leetcode.com/problems/n-queens/) | H | C ✓ |
 | 93 | [LC 131 Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/) | M | R |
 | 94 | [LC 17 Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | M | R |
 
