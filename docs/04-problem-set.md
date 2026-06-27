@@ -178,7 +178,7 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 95 | [LC 198 House Robber](https://leetcode.com/problems/house-robber/) | M | C |
+| 95 | [LC 198 House Robber](https://leetcode.com/problems/house-robber/) | M | C ✓ |
 | 96 | [LC 213 House Robber II](https://leetcode.com/problems/house-robber-ii/) | M | R |
 | 97 | [LC 322 Coin Change](https://leetcode.com/problems/coin-change/) | M | C ★ |
 | 98 | [LC 300 Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | M | C ★ |
