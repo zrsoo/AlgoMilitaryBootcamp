@@ -1,54 +1,62 @@
 public class Solution {
     public int NumBusesToDestination(int[][] routes, int source, int target) {
-        if(source == target)
-            return 0;
+        if(source == target) return 0;
 
-        int n = routes.Length;
-
-        var visitedStops = new HashSet<int>();
-        var visitedRoutes = new HashSet<int>();
-        var stopRoutes = new Dictionary<int, List<int>>();
-
-        // Build station list
-        // Build stopRoutes; for each stop -> routes passing through
-        for(int i = 0; i < n; ++i)
-            for(int j = 0; j < routes[i].Length; ++j)
-            {
-                if(!stopRoutes.TryGetValue(routes[i][j], out var list))
-                {
-                    list = new List<int>();
-                    stopRoutes[routes[i][j]] = list;
-                }
-                list.Add(i);
-            }
-
+        var dict = new Dictionary<int, List<int>>();
         var q = new Queue<int>();
 
-        q.Enqueue(source);
-        visitedStops.Add(source);
-        int buses = 0;
+        var visitedRings = new bool[routes.Length];
+        var visitedStops = new HashSet<int>();
+
+        for(int i = 0; i < routes.Length; ++i)
+        {
+            foreach(var stop in routes[i])
+            {
+                if(!dict.TryGetValue(stop, out var lst))
+                {
+                    lst = new List<int>();
+                    dict[stop] = lst;
+                }
+                dict[stop].Add(i);
+
+                if(stop == source)
+                {
+                    q.Enqueue(i);
+                    visitedRings[i] = true;
+                }
+            }
+        }
+
+        var steps = 0;
 
         while(q.Count > 0)
         {
-            buses++;
-            int levelSize = q.Count;
+            var lSize = q.Count;
+            steps++;
 
-            for(int i = 0; i < levelSize; ++i)
+            for(int i = 0; i < lSize; ++i)
             {
-                int stop = q.Dequeue();
+                var ring = q.Dequeue();
 
-                if(!stopRoutes.TryGetValue(stop, out var routeIds)) continue;
-
-                foreach(var r in routeIds)
+                foreach(var stop in routes[ring])
                 {
-                    if(!visitedRoutes.Add(r)) continue;
+                    if(stop == target)
+                        return steps;
 
-                    foreach(var next in routes[r])
+                    if(!visitedStops.Add(stop)) continue; 
+
+                    if(dict.TryGetValue(stop, out var adjRings))
                     {
-                        if(next == target) return buses;
+                        adjRings.Remove(ring);
 
-                        if(visitedStops.Add(next))
-                            q.Enqueue(next);
+                        foreach(var r in adjRings)
+                        {
+                            if(!visitedRings[r])
+                            {
+                                q.Enqueue(r);
+                                visitedRings[r] = true;
+                            }
+                        }
                     }
                 }
             }
