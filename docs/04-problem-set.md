@@ -187,7 +187,7 @@
 | 101 | [LC 72 Edit Distance](https://leetcode.com/problems/edit-distance/) | M | C ★ |
 | 102 | [LC 5 Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | M | C |
 | 103 | [LC 64 Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/) | M | C |
-| 104 | [LC 10 Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/) | H | C ★ |
+| 104 | [LC 10 Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/) | H | C ★ ↻ |
 | 105 | [LC 312 Burst Balloons](https://leetcode.com/problems/burst-balloons/) | H | R |
 | 106 | [LC 91 Decode Ways](https://leetcode.com/problems/decode-ways/) | M | R |
 
