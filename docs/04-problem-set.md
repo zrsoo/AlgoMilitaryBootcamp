@@ -195,9 +195,9 @@
 
 | # | Problem | Diff | Label |
 |---|---|---|---|
-| 107 | [LC 55 Jump Game](https://leetcode.com/problems/jump-game/) | M | C |
+| 107 | [LC 55 Jump Game](https://leetcode.com/problems/jump-game/) | M | C ✓ |
 | 108 | [LC 45 Jump Game II](https://leetcode.com/problems/jump-game-ii/) | M | C |
-| 109 | [LC 134 Gas Station](https://leetcode.com/problems/gas-station/) | M | C |
+| 109 | [LC 134 Gas Station](https://leetcode.com/problems/gas-station/) | M | C ↻ |
 | 110 | [LC 763 Partition Labels](https://leetcode.com/problems/partition-labels/) | M | C |
 
 ## Topic 15 — Bit / math / parsing (7) — Databricks parsing emphasis
