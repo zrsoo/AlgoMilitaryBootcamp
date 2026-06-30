@@ -206,7 +206,7 @@
 |---|---|---|---|
 | 111 | [LC 136 Single Number](https://leetcode.com/problems/single-number/) | E | C |
 | 112 | [LC 191 Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/) | E | C |
-| 113 | [LC 8 String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) | M | C ★ ⚑ |
+| 113 | [LC 8 String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) | M | C ★ ⚑ ✓ |
 | 114 | [LC 227 Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/) | M | C ★ ⚑ |
 | 115 | [LC 224 Basic Calculator](https://leetcode.com/problems/basic-calculator/) | H | C ★ ⚑ |
 | 116 | [LC 772 Basic Calculator III](https://leetcode.com/problems/basic-calculator-iii/) | H | C ⚑ |
