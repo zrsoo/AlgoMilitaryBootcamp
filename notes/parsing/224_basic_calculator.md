@@ -1,0 +1,19 @@
+# LC 224 — Basic Calculator
+
+- **Pattern:** Parsing — parentheses via a **scope-sign stack**. Scan left-to-right; carry the effective sign of the current parenthetical scope. On `(` push the sign of the enclosing scope; on `)` pop back. Every number is committed to a running `acc` under `localSign × scopeSign`, so no recursion and no intermediate token list.
+- **Brute force:** Recursive descent — when you hit `(`, recursively evaluate the sub-expression up to its matching `)`, return `(value, indexAfterParen)`, and treat that value as a single operand of the outer scope. Correct, O(n), but needs index threading / a `ref` cursor and a call per nesting level.
+- **Optimized (this solution):** Single pass, O(n) time, O(depth) stack. State:
+  - `acc` — running total (answer at end).
+  - `nr` — current number being accumulated (`nr = nr*10 + c-'0'`).
+  - `sgn` — the last `+`/`-` seen at the current level (the number's **local** sign), seeded `+`.
+  - `rsgn` — stack of **scope signs** (`+`/`-`), one entry per currently-open paren.
+  - Flush rule (fired on any non-digit and at end of string): the number's effective sign = `sgn` XOR the top scope sign. Concretely: `+`&top`+`→`acc+=nr`; `+`&top`-`→`acc-=nr`; `-`&top`+`→`acc-=nr`; `-`&top`-`→`acc+=nr`. Empty stack = positive scope.
+  - On `(`: push the **product** of the local sign and the enclosing scope sign (`if top=='-' push the inverse of sgn, else push sgn`), then reset the local `sgn` to `+` so the first number inside starts clean.
+  - On `)`: pop, returning to the enclosing scope.
+- **Key insight:** A single global "flipped" boolean is **not enough** — it only knows *flipped or not*, not *what the parent scope was*, so it can't compose across nesting. The fix is to push the **product** `localSign × parentScopeSign` on every `(`. Because the parent context is folded in before it goes on the stack, a `+(` sitting inside a `-(...)` correctly stays negative — a lone `+` can only turn you positive if the scope *containing* it is already positive.
+- **Where I got stuck and for how long:** First attempt used a single global `flipped` toggle plus a special case for `-(`. Two structural bugs, both surfaced by hints (L2):
+  1. **Push/pop weren't paired to the same paren.** I only pushed a sign when `(` was immediately preceded by `+`/`-`, but popped on *every* `)`. A bare `(` (e.g. the outer one in `((2))` or a leading `(`) pushed nothing yet still triggered a pop, so the pop stole a sign belonging to a different, outer paren and `flipped` desynced from the actual nesting depth.
+  2. **A boolean can't remember the parent scope.** Needed to carry a per-scope sign and push the *product*, not the raw local sign, restoring it on `)`. My worry "if I push `-` then `+` the `+` messes up" was resolved by exactly this: you never push the raw `+`; you push `+ × parentScope`, which stays `-` inside a negative scope.
+- **Template fragments I reused:** Digit accumulation `nr = nr*10 + (c-'0')` and the "flush the pending number on the next operator / at end of loop" structure from #227 Basic Calculator II / #113 atoi. The parens handling is the new piece the calculator family adds on top of #227 (which had no parens).
+- **Follow-up / cleaner variants (retry ideas):** (1) Canonical single-stack form — on `(` push `(result, sign)` and reset; on `)` do `result = result*poppedSign + poppedResult`; keeps one `Stack<int>`. (2) Recursion per paren. Both are the same asymptotics; the scope-sign-stack version here avoids storing partial `acc`s by committing every number directly. Minor cleanup: the `flipped` field is now dead and can be dropped.
+- **Would I solve this in 25 min cold next week? Y/N** — Maybe. The scope-sign-product idea is the sticky part; needed L2 hints this time to get the pairing + product right. **Per user: in tracker for honesty, kept OUT of active rotation.**
