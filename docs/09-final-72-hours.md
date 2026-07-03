@@ -41,7 +41,7 @@ Morning is fresh-brain: spend it on the hardest new material (LFU, In-Mem FS). A
 | Block | Time | Activity |
 |---|---|---|
 | Warm-up | 10 min | Recognition drill (mixed). |
-| Solve 1 | ~50 min | **LFU Cache #460** (Hard). <details><summary>Tool</summary>`Dictionary<key,(val,freq)>` + `Dictionary<freq, LinkedList<key>>` (insertion-ordered per bucket) + `minFreq`. On access: bump freq, move key from bucket `f` to `f+1`, if bucket `f` empties and `f==minFreq` then `minFreq++`. On insert at capacity: evict the tail of `buckets[minFreq]`, then set `minFreq=1`. It's LRU-within-each-frequency-bucket.</details> |
+| Solve 1 | ~50 min | **LFU Cache #460** (Hard). ✓ solved first try (2026-07-04). <details><summary>Tool</summary>`Dictionary<key,(val,freq)>` + `Dictionary<freq, LinkedList<key>>` (insertion-ordered per bucket) + `minFreq`. On access: bump freq, move key from bucket `f` to `f+1`, if bucket `f` empties and `f==minFreq` then `minFreq++`. On insert at capacity: evict the tail of `buckets[minFreq]`, then set `minFreq=1`. It's LRU-within-each-frequency-bucket.</details> |
 | Solve 2 | ~50 min | **In-Memory File System #588** (Hard). <details><summary>Tool</summary>One node type: `Dictionary<string,Node> children` + optional file content (`StringBuilder`/`isFile`). Split path on `/`, walk/create nodes. `ls` → if file return its name, else sorted child names; `mkdir` → create missing dirs; `addContentToFile` → append; `readContentFromFile` → return content. Small helper `Node Traverse(path)`.</details> |
 | Write-ups | 30 min | Debriefs + solution files for both. |
 | **Break** | 30 min | Real break — protect the mock. |

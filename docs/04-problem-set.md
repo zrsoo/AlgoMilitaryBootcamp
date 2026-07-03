@@ -217,7 +217,7 @@
 | # | Problem | Diff | Label |
 |---|---|---|---|
 | 118 | [LC 146 LRU Cache](https://leetcode.com/problems/lru-cache/) | M | C ★ ⚑ ✓ |
-| 119 | [LC 460 LFU Cache](https://leetcode.com/problems/lfu-cache/) | H | C ★ ⚑ |
+| 119 | [LC 460 LFU Cache](https://leetcode.com/problems/lfu-cache/) | H | C ★ ⚑ ✓ |
 | 120 | [LC 1146 Snapshot Array](https://leetcode.com/problems/snapshot-array/) | M | C ★ ⚑ ✓ |
 | 121 | [LC 380 Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/) | M | C ⚑ |
 | 122 | [LC 588 Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/) | H | C ★ ⚑ |
