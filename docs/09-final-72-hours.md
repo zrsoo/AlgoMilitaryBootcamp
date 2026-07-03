@@ -27,7 +27,7 @@ Goal: two of the four design problems in the bank before the big days. Pick the 
 |---|---|---|
 | Warm-up | 10 min | Recognition drill — I give 4 one-line statements (mixed, not design); you name the tool + why. |
 | Solve 1 | ~55 min | **LRU Cache #146.** ✓ solved first try (2026-07-03). <details><summary>Tool</summary>`Dictionary<key, LinkedListNode>` + a doubly-linked list of `(key,val)`. `get`/`put` → move node to front; on overflow evict the tail; store the key in the node so eviction can delete from the dict. Narrate brute force (ordered list, O(n) move) → why O(1) needs the hashmap+DLL combo.</details> |
-| Solve 2 | ~45 min | **Snapshot Array #1146.** <details><summary>Tool</summary>Per index keep a list of `(snapId, val)` appended in increasing snapId; `snap()` returns then increments a global counter; `get(i, snapId)` = upper-bound-floor binary search on index `i`'s list (same shape as #981's `Get`). Only write a new pair when the value actually changes.</details> |
+| Solve 2 | ~45 min | **Snapshot Array #1146.** ✓ solved first try (2026-07-03). <details><summary>Tool</summary>Per index keep a list of `(snapId, val)` appended in increasing snapId; `snap()` returns then increments a global counter; `get(i, snapId)` = upper-bound-floor binary search on index `i`'s list (same shape as #981's `Get`). Only write a new pair when the value actually changes.</details> |
 | Write-up | 20–30 min | 5-line debrief each → `notes/design/146_*.md`, `notes/design/1146_*.md`; solution files under `solutions/design/`. Log the hint level. |
 
 Stop at 3h. If LRU overruns, drop Snapshot to Saturday — LRU is the one that matters most.

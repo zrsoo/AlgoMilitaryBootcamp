@@ -145,7 +145,7 @@ Every solve day also ends with **1 blind tracker rep** (block 3).
 | 38 | Mon Jun 29 | <details><summary>Reveal tool</summary>Greedy + atoi parsing</details> | #107 Jump Game ✓, #109 Gas Station ↻, #113 (★ ⚑) atoi ✓ | — |
 | 39 | Tue Jun 30 | <details><summary>Reveal tool</summary>Stack parsing + KV design</details> | #114 (★ ⚑) Basic Calculator II ✓, #124 (⚑) Time-Based KV ✓ | — |
 | 40 | Wed Jul 1 | <details><summary>Reveal tool</summary>Parens-recursion calculator</details> | #115 (★ ⚑ H) Basic Calculator I ✓ | — |
-| 41 | Thu Jul 2 | <details><summary>Reveal tool</summary>Design (hashmap + DLL)</details> | #118 (★ ⚑) LRU ✓, #120 (★ ⚑) Snapshot, #101 (★) Edit Distance | — |
+| 41 | Thu Jul 2 | <details><summary>Reveal tool</summary>Design (hashmap + DLL)</details> | #118 (★ ⚑) LRU ✓, #120 (★ ⚑) Snapshot ✓, #101 (★) Edit Distance | — |
 | 42 | Fri Jul 3 | <details><summary>Reveal tool</summary>LFU buckets</details> | #119 (★ ⚑ H) LFU Cache | **#83 (★ ⚑ H) Alien Dictionary** |
 | 43 | Sat Jul 4 | <details><summary>Reveal tool</summary>Trie / file-system design</details> | #122 (★ ⚑ H) In-Memory File System | **#85 (★ ⚑ H) Shortest Path Visiting All Nodes** |
 | 44 | Sun Jul 5 | — | **RECAP — no new.** Re-read templates; talk through 3 ★ problems aloud; sleep early. | — |
