@@ -99,12 +99,12 @@ Instead of the fixed hour-by-hour blocks above, run a **recognition-driven triag
 
 **Pitch priority pool (I draw the highest-priority items first, but each pitched set of 4 is a mix of topics — I interleave across these tiers rather than emptying one before the next):**
 
-- **Tier 1 — design ⚑ (the known gap):** LRU #146, Snapshot #1146, LFU #460, In-Mem FS #588. These "miss" by default (never implemented) → they get solved first regardless. Same top priority as the fixed track, reached via the loop.
+- **Tier 1 — design ⚑:** LRU #146, Snapshot #1146, LFU #460, In-Mem FS #588.
 - **Tier 2 — graph BFS ⚑ (final-advice #3):** Bus Routes #815, Alien Dict #269, Reconstruct Itinerary #332, Shortest-Visit-All #847.
 - **Tier 3 — parsing + serialize (#4, #6):** Basic Calculator I #224, Calculator II #227, atoi #8, N-ary serialize #428.
 - **Tier 4 — the Hard backbone:** Max Path Sum #124, Trap Water #42, Largest Rectangle #84, Skyline #218.
-- **Tier 5 — search/heap/window:** Median of Two Sorted #4, Median Stream #295, Min Window #76, Split Array #410.
-- **Tier 6 — remaining pattern reps:** Word Search #79, Subsets #78, Regex DP #10, Course Schedule #207, Network Delay #743, Cheapest Flights #787, k-Group Reverse #25, Validate BST #98, Serialize Tree #297, LCA #236, Word Search II #212.
+- **Tier 5 — search/heap/window:** Median of Two Sorted #4, Median Stream #295, Min Window #76 ✓, Sliding Window Max #239, Split Array #410.
+- **Tier 6 — remaining pattern reps:** Word Search #79, Subsets #78, Regex DP #10, Course Schedule #207 ✓, Network Delay #743, Cheapest Flights #787, k-Group Reverse #25, Validate BST #98, Serialize Tree #297, LCA #236, Word Search II #212, Subarray Sum=K #560, 3Sum #15.
 
 A well-formed pitched set therefore looks like *"one design + one graph + one parsing + one Hard-backbone"*, not *"four designs."* Priority controls **how early** an item shows up, not that a whole tier is pitched together.
 

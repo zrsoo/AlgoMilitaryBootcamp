@@ -47,7 +47,7 @@
 | # | Problem | Diff | Label |
 |---|---|---|---|
 | 13 | [LC 3 Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | M | C ✓ |
-| 14 | [LC 76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | H | C ★ ↻ |
+| 14 | [LC 76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | H | C ★ ✓ |
 | 15 | [LC 424 Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | M | C ✓ |
 | 16 | [LC 239 Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | H | C ★ ↻ |
 | 17 | [LC 567 Permutation in String](https://leetcode.com/problems/permutation-in-string/) | M | C ✓ |

@@ -31,40 +31,37 @@ public class Codec {
 
         var sb = new StringBuilder();
 
-        Encode(root, sb);
+        sb.Append(root.val).Append(',');
 
-        Console.WriteLine(sb.ToString());
+        sb.Append(root.children.Count).Append(',');
+
+        for(int i = 0; i < root.children.Count; ++i)
+            sb.Append(serialize(root.children[i]));
 
         return sb.ToString();
     }
 
-    private void Encode(Node node, StringBuilder sb)
-    {
-        sb.Append(node.val).Append(',');
-        sb.Append(node.children.Count).Append(',');
-
-        foreach(var c in node.children)
-            Encode(c, sb);
-    }
-
     // Decodes your encoded data to tree.
     public Node deserialize(string data) {
-        if(string.IsNullOrWhiteSpace(data)) return null;
+        if(data == "") return null;
 
-        string[] nodes = data.Split(',');
-        int i = 0;
+        var tokens = data.Split(',');
+        int n = tokens.Length - 1;
 
-        return Decode(nodes, ref i);
+        int idx = 0;
+        return des(tokens, ref idx);
     }
 
-    private Node Decode(string[] nodes, ref int i)
+    private Node des(string[] tokens, ref int i)
     {
-        Node node = new Node(int.Parse(nodes[i++]));
-        int childrenCount = int.Parse(nodes[i++]);
+        var n = new Node(int.Parse(tokens[i++]), new List<Node>());
+        int childCount = int.Parse(tokens[i++]);
 
-        for(int j = 0; j < childrenCount; ++j)
-            node.children.Add(Decode(nodes, ref i));
+        for(int j = 0; j < childCount; ++j)
+        {
+            n.children.Add(des(tokens, ref i));
+        }
 
-        return node;
+        return n;
     }
 }
