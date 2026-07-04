@@ -220,7 +220,7 @@
 | 119 | [LC 460 LFU Cache](https://leetcode.com/problems/lfu-cache/) | H | C ★ ⚑ ✓ |
 | 120 | [LC 1146 Snapshot Array](https://leetcode.com/problems/snapshot-array/) | M | C ★ ⚑ ✓ |
 | 121 | [LC 380 Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/) | M | C ⚑ |
-| 122 | [LC 588 Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/) | H | C ★ ⚑ |
+| 122 | [LC 588 Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/) | H | C ★ ⚑ ✓ |
 | 123 | [LC 1166 Design File System](https://leetcode.com/problems/design-file-system/) | M | C ⚑ |
 | 124 | [LC 981 Time Based Key-Value Store](https://leetcode.com/problems/time-based-key-value-store/) | M | C ⚑ ✓ |
 | 125 | [LC 359 Logger Rate Limiter](https://leetcode.com/problems/logger-rate-limiter/) | E | C |
