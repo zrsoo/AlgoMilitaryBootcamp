@@ -1,9 +1,9 @@
 # LC 4 — Median of Two Sorted Arrays
 - **Pattern:** Binary Search (partition / cut)
 - **Brute force:** <->
-- **Optimized:** <->
+- **Optimized:** <Purpose is to look for cuts in both arrays such that: the left half of both cuts becomes the first half part of the merged sorted array, while the right half of both cuts becomes the second half part of the merged sorted array. To do this, we look for cuts in the shorter array at position i. Cut at position i means we have i elements to the left of it. That forces a consequential cut in the longer array at position `(n + m + 1) / 2 - i`, as we need to have n + m elements in total in the merged array. The +1 shifts the cut to the median in case of odd count of elements in final array. Once we picked a cut, we need to check its bounds. Imagine aLeft, aRight = the two bounds of the cut in the shorter array, and bLeft, bRight = the two bounds of the cut in the longer array. The arrays are sorted. As such, in a valid cut, we'd have: aLeft <= bRight (all elements in the first cut of the shorter array are less than or equal to all elements in the second cut of the longer array) and bLeft <= aRight (all elements in the first cut of the longer array are less than or equal to all elements in the second cut of the shorter array). So the cuts merge as such: first cuts in both arrays -> the first half of the merged array + second cuts in both arrays -> the second half of the merged array. If aLeft > bRight, that means we cut too far to the right, shift hi to cut - 1. Otherwise, if bLeft > aRight, that means we cut too far to the left, so lo = cut + 1. If we cut at position i, the elements of the cut are: aL = arr[i - 1], aR = arr[i]; bL = arr[j - 1], bR = arr[j]. To cover out of bounds cases, treat lefts as -inf and rights as +inf. In the end, if we found a valid cut, if we have an even total element count, the result is (max(aL, bL) + min(aR, bR)) / 2.0, otherwise, max(aL, bL)>
 - **Key insight:** <->
-- **Edge cases I had to handle:** <->
+- **Edge cases I had to handle:** <When binary searching, make sure to allow cuts at 0 and at n and m, so lo = 0 and hi = n>
 - **Where I got stuck and for how long:** <->
 - **Template fragments I reused:** <->
 - **Would I solve this in 25 min cold next week? Y/N** <->

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 using System.Text;
+using Microsoft.VisualBasic;
 
 // LC 428 — Serialize and Deserialize N-ary Tree
 // Definition the judge provides:
@@ -30,10 +32,7 @@ public class Codec {
         if(root == null) return "";
 
         var sb = new StringBuilder();
-
-        sb.Append(root.val).Append(',');
-
-        sb.Append(root.children.Count).Append(',');
+        sb.Append(root.val).Append(',').Append(root.children.Count).Append(',');
 
         for(int i = 0; i < root.children.Count; ++i)
             sb.Append(serialize(root.children[i]));
@@ -46,22 +45,21 @@ public class Codec {
         if(data == "") return null;
 
         var tokens = data.Split(',');
-        int n = tokens.Length - 1;
 
-        int idx = 0;
-        return des(tokens, ref idx);
+        int i = 0;
+        return des(tokens, ref i);
     }
 
     private Node des(string[] tokens, ref int i)
     {
-        var n = new Node(int.Parse(tokens[i++]), new List<Node>());
-        int childCount = int.Parse(tokens[i++]);
+        var val = int.Parse(tokens[i++]);
+        var count = int.Parse(tokens[i++]);
 
-        for(int j = 0; j < childCount; ++j)
-        {
-            n.children.Add(des(tokens, ref i));
-        }
+        var node = new Node(val, new List<Node>());
 
-        return n;
+        for(int j = 0; j < count; ++j)
+            node.children.Add(des(tokens, ref i));
+
+        return node;
     }
 }

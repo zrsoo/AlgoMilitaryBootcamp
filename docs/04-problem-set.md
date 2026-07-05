@@ -26,7 +26,7 @@
 |---|---|---|---|
 | 1 | [LC 49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) | M | C ✓ |
 | 2 | [LC 238 Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | M | C ★ ✓ |
-| 3 | [LC 560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | M | C ★ ↻ |
+| 3 | [LC 560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | M | C ★ ✓ |
 | 4 | [LC 128 Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | M | C ✓ |
 | 5 | [LC 974 Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/) | M | R ✓ |
 | 6 | [LC 41 First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | H | R ✓ |
@@ -127,7 +127,7 @@
 | 61 | [LC 236 LCA of Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) | M | C ★ ↻ |
 | 62 | [LC 124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | H | C ★ ↻ |
 | 63 | [LC 297 Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | H | C ★ ⚑ ↻ |
-| 64 | [LC 428 Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/) | H | C ★ ⚑ ↻ |
+| 64 | [LC 428 Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/) | H | C ★ ⚑ ✓ |
 | 65 | [LC 199 Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) | M | C |
 | 66 | [LC 173 BST Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | M | C |
 | 67 | [LC 230 Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) | M | R |
@@ -153,7 +153,7 @@
 | 77 | [LC 994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | M | C ⚑ ✓ |
 | 78 | [LC 261 Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/) | M | C ✓ |
 | 79 | [LC 547 Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | M | C ✓ |
-| 80 | [LC 743 Network Delay Time](https://leetcode.com/problems/network-delay-time/) | M | C ★ ↻ |
+| 80 | [LC 743 Network Delay Time](https://leetcode.com/problems/network-delay-time/) | M | C ★ ✓ |
 | 81 | [LC 1631 Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/) | M | C ✓ |
 | 82 | [LC 815 Bus Routes](https://leetcode.com/problems/bus-routes/) | H | C ★ ⚑ ✓ |
 | 83 | [LC 269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) | H | C ★ ⚑ ✓ |

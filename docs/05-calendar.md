@@ -60,7 +60,7 @@ If you cannot find a partner: do **self-mock** — set a 45-min timer, narrate a
 
 | Day | Date | Topic | Problems (refs are #s in [04-problem-set.md](04-problem-set.md)) |
 |---|---|---|---|
-| 1 | Sat May 23 | Arrays/hashing | #1 ✓, #2 ✓, #3 (★) ↻ |
+| 1 | Sat May 23 | Arrays/hashing | #1 ✓, #2 ✓, #3 (★) ✓ |
 | 2 | Sun May 24 | Arrays/hashing + analysis | #4 ✓, #5 ✓; redo #2 |
 | 3 | Mon May 25 | Two pointers | #8 (★) ↻, #9 ✓, #10 ✓ |
 | 4 | Tue May 26 | Two pointers + Hard | #11 (★) ↻, #12 ✓ |
@@ -96,7 +96,7 @@ Cumulative: ~32 problems.
 | 18 | Tue Jun 9 | Linked list mid + Hard | #54 ✓, #55 (★) ↻, #56 ✓ |
 | 19 | Wed Jun 10 | Trees core | #58 ✓, #59 ✓, #60 (★) ↻, #61 (★) ↻ |
 | 20 | Thu Jun 11 | Trees Hard | #62 (★) ↻, #63 (★ ⚑) ↻, #65 |
-| 21 | Fri Jun 12 | N-ary tree + tries | #64 (★ ⚑) ↻, #68 ✓, #69 ✓ |
+| 21 | Fri Jun 12 | N-ary tree + tries | #64 (★ ⚑) ✓, #68 ✓, #69 ✓ |
 | (Mock) | Sat Jun 13 | **Phase-3 mock** | Hard from trees or graphs |
 
 Cumulative: ~52 problems.
@@ -110,7 +110,7 @@ Note: graphs slot in here on weekdays because graphs are the heaviest topic; do 
 | 22 | Sat Jun 13 | **Mock** + trie Hard | Mock + #70 (★) Word Search II ↻ |
 | 23 | Sun Jun 14 | Graphs grid + UF | #73 (★) ✓, #74 ✓, #79 ✓ |
 | 24 | Mon Jun 15 | Topo sort + valid tree | #75 (★) ↻, #76 ✓, #78 ✓ |
-| 25 | Tue Jun 16 | Graph BFS + Dijkstra | #77 (⚑) ✓, #80 (★) ↻, #81 ✓ |
+| 25 | Tue Jun 16 | Graph BFS + Dijkstra | #77 (⚑) ✓, #80 (★) ✓, #81 ✓ |
 | 26 | Wed Jun 17 | Graph Hard #1 | #82 (★ ⚑) Bus Routes ↻, #87 ↻ |
 | 27 | Thu Jun 18 | Graph Hard #2 | #83 (★ ⚑) Alien Dict, #84 (⚑) Itinerary |
 | 28 | Fri Jun 19 | Graph Hard #3 | #85 (★ ⚑) Shortest-visit-all (BFS+bitmask) |
