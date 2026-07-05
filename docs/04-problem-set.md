@@ -60,7 +60,7 @@
 |---|---|---|---|
 | 20 | [LC 20 Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | E | C ✓ |
 | 21 | [LC 739 Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | M | C ★ ✓ |
-| 22 | [LC 84 Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | H | C ★ ↻ |
+| 22 | [LC 84 Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | H | C ★ ✓ |
 | 23 | [LC 85 Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/) | H | C ✓ |
 | 24 | [LC 394 Decode String](https://leetcode.com/problems/decode-string/) | M | C ✓ |
 | 25 | [LC 71 Simplify Path](https://leetcode.com/problems/simplify-path/) | M | R ✓ |
@@ -100,7 +100,7 @@
 | 44 | [LC 215 Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) | M | C ★ ✓ |
 | 45 | [LC 347 Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | M | C ✓ |
 | 46 | [LC 23 Merge K Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | H | C ★ ⚑ ✓ |
-| 47 | [LC 295 Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | H | C ★ ⚑ ↻ |
+| 47 | [LC 295 Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | H | C ★ ⚑ ✓ |
 | 48 | [LC 1167 Minimum Cost to Connect Sticks](https://leetcode.com/problems/minimum-cost-to-connect-sticks/) | M | C |
 | 49 | [LC 621 Task Scheduler](https://leetcode.com/problems/task-scheduler/) | M | R |
 | 50 | [LC 692 Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) | M | R |
@@ -125,7 +125,7 @@
 | 59 | [LC 102 Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | M | C ✓ |
 | 60 | [LC 98 Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) | M | C ★ ↻ |
 | 61 | [LC 236 LCA of Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) | M | C ★ ↻ |
-| 62 | [LC 124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | H | C ★ ↻ |
+| 62 | [LC 124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | H | C ★ ✓ |
 | 63 | [LC 297 Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | H | C ★ ⚑ ✓ |
 | 64 | [LC 428 Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/) | H | C ★ ⚑ ✓ |
 | 65 | [LC 199 Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) | M | C |
