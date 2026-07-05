@@ -39,7 +39,7 @@
 | 8 | [LC 15 3Sum](https://leetcode.com/problems/3sum/) | M | C ★ ↻ |
 | 9 | [LC 11 Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | M | C ✓ |
 | 10 | [LC 75 Sort Colors](https://leetcode.com/problems/sort-colors/) | M | C ✓ |
-| 11 | [LC 42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | H | C ★ ↻ |
+| 11 | [LC 42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | H | C ★ ✓ |
 | 12 | [LC 287 Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | M | R ✓ |
 
 ## Topic 3 — Sliding window (7)
@@ -75,7 +75,7 @@
 | 29 | [LC 875 Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) | M | C ★ ✓ |
 | 30 | [LC 410 Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) | H | C ★ ↻ |
 | 31 | [LC 1011 Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) | M | C ✓ |
-| 32 | [LC 4 Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | H | C ★ ↻ |
+| 32 | [LC 4 Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | H | C ★ ✓ |
 | 33 | [LC 162 Find Peak Element](https://leetcode.com/problems/find-peak-element/) | M | R |
 | 34 | [LC 540 Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/) | M | R |
 
@@ -88,7 +88,7 @@
 | 37 | [LC 253 Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) | M | C ★ ⚑ ✓ |
 | 38 | [LC 435 Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | M | C ✓ |
 | 39 | [LC 759 Employee Free Time](https://leetcode.com/problems/employee-free-time/) | H | C ★ ⚑ ✓ |
-| 40 | [LC 218 The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | H | C ★ ⚑ ↻ |
+| 40 | [LC 218 The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | H | C ★ ⚑ ✓ |
 | 41 | [LC 731 My Calendar II](https://leetcode.com/problems/my-calendar-ii/) | M | C ⚑ |
 | 42 | [LC 732 My Calendar III](https://leetcode.com/problems/my-calendar-iii/) | H | R ⚑ |
 | 43 | [LC 1235 Maximum Profit in Job Scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/) | H | R |
@@ -126,7 +126,7 @@
 | 60 | [LC 98 Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) | M | C ★ ↻ |
 | 61 | [LC 236 LCA of Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/) | M | C ★ ↻ |
 | 62 | [LC 124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | H | C ★ ↻ |
-| 63 | [LC 297 Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | H | C ★ ⚑ ↻ |
+| 63 | [LC 297 Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | H | C ★ ⚑ ✓ |
 | 64 | [LC 428 Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/) | H | C ★ ⚑ ✓ |
 | 65 | [LC 199 Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) | M | C |
 | 66 | [LC 173 BST Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | M | C |

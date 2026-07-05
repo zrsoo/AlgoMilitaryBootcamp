@@ -63,7 +63,7 @@ If you cannot find a partner: do **self-mock** — set a 45-min timer, narrate a
 | 1 | Sat May 23 | Arrays/hashing | #1 ✓, #2 ✓, #3 (★) ✓ |
 | 2 | Sun May 24 | Arrays/hashing + analysis | #4 ✓, #5 ✓; redo #2 |
 | 3 | Mon May 25 | Two pointers | #8 (★) ↻, #9 ✓, #10 ✓ |
-| 4 | Tue May 26 | Two pointers + Hard | #11 (★) ↻, #12 ✓ |
+| 4 | Tue May 26 | Two pointers + Hard | #11 (★) ✓, #12 ✓ |
 | 5 | Wed May 27 | Sliding window | #13 ✓, #15 ✓, #17 ✓ |
 | 6 | Thu May 28 | Sliding window Hard | #14 (★) ↻, #16 (★) ↻ |
 | 7 | Fri May 29 | Stack basics | #20 ✓, #21 (★) ✓, #24 ✓ |
@@ -79,7 +79,7 @@ Cumulative: ~16 problems. You should be done with templates for: hashmap countin
 | 9 | Sun May 31 | Stack Hard + binary search | #23 ✓, #25 ✓; redo #16 |
 | 10 | Mon Jun 1 | Binary search | #27 ✓, #28 ✓, #29 (★) ✓ |
 | 11 | Tue Jun 2 | Binary search on answer | #30 (★) ↻, #31 ✓ |
-| 12 | Wed Jun 3 | Binary search Hard | #32 (★) ↻; redo #14 |
+| 12 | Wed Jun 3 | Binary search Hard | #32 (★) ✓; redo #14 |
 | 13 | Thu Jun 4 | Intervals | #35 (⚑) ✓, #36 ✓, #37 (★ ⚑) ✓ |
 | 14 | Fri Jun 5 | Intervals + sweep | #38 ✓, #39 (★ ⚑) ✓ |
 | (Mock) | Sat Jun 6 | **Phase-2 mock** | Hard from binary search OR intervals |
@@ -90,12 +90,12 @@ Cumulative: ~32 problems.
 
 | Day | Date | Topic | Problems |
 |---|---|---|---|
-| 15 | Sat Jun 6 | **Mock** + skyline | Mock + #40 (★ ⚑) ↻ |
+| 15 | Sat Jun 6 | **Mock** + skyline | Mock + #40 (★ ⚑) ✓ |
 | 16 | Sun Jun 7 | Heap | #44 (★) ✓, #45 ✓, #46 (★ ⚑) ✓ |
 | 17 | Mon Jun 8 | Heap streaming + linked list | #47 (★ ⚑) ↻, #52 ✓, #53 ✓ |
 | 18 | Tue Jun 9 | Linked list mid + Hard | #54 ✓, #55 (★) ↻, #56 ✓ |
 | 19 | Wed Jun 10 | Trees core | #58 ✓, #59 ✓, #60 (★) ↻, #61 (★) ↻ |
-| 20 | Thu Jun 11 | Trees Hard | #62 (★) ↻, #63 (★ ⚑) ↻, #65 |
+| 20 | Thu Jun 11 | Trees Hard | #62 (★) ↻, #63 (★ ⚑) ✓, #65 |
 | 21 | Fri Jun 12 | N-ary tree + tries | #64 (★ ⚑) ✓, #68 ✓, #69 ✓ |
 | (Mock) | Sat Jun 13 | **Phase-3 mock** | Hard from trees or graphs |
 
