@@ -11,45 +11,44 @@
  */
 public class Solution {
     public ListNode ReverseKGroup(ListNode head, int k) {
-        var st = new Stack<ListNode>();
-        var curr = head;
-        ListNode result = null;
-        ListNode r = null;
-        ListNode rest = null;
+        // Dummy node before head so we can uniformly re-link the first group too.
+        var dummy = new ListNode(0, head);
 
-        while(curr != null)
+        // groupPrev = the node just before the group we're about to reverse.
+        var groupPrev = dummy;
+
+        while (true)
         {
-            st.Push(new ListNode(curr.val, null));
+            // Walk k nodes ahead of groupPrev to find the group's boundary (kth node).
+            var kth = groupPrev;
+            for (int i = 0; i < k && kth != null; i++)
+                kth = kth.next;
 
-            if(st.Count == k)
+            // Fewer than k nodes remain -> leave the rest as-is and finish.
+            if (kth == null) break;
+
+            // groupNext = first node of the NEXT group (what the reversed group tail links to).
+            var groupNext = kth.next;
+
+            // --- Reverse the k nodes in place ---
+            // Standard prev/curr reversal, but stop when curr reaches groupNext.
+            var prev = groupNext;                 // reversed tail should point here
+            var curr = groupPrev.next;            // first node of current group
+            while (curr != groupNext)
             {
-                while(st.Count > 0)
-                {
-                    ListNode node = st.Pop();
-
-                    if(result == null)
-                    {
-                        result = node;
-                        r = result;
-                    }
-                    else
-                    {
-                        r.next = node;
-                        r = r.next;
-                    }
-                }
+                var tmp = curr.next;              // save next before we overwrite it
+                curr.next = prev;                 // reverse the pointer
+                prev = curr;                      // advance prev
+                curr = tmp;                       // advance curr
             }
 
-            if(st.Count == 0)
-            {
-                rest = curr.next;
-            }
-
-            curr = curr.next;
+            // After reversal, `kth` is the new head of the group and
+            // groupPrev.next is the old head (now the group's tail).
+            var oldGroupHead = groupPrev.next;    // becomes the tail after reversal
+            groupPrev.next = kth;                 // link previous section to new head
+            groupPrev = oldGroupHead;             // tail is the groupPrev for the next round
         }
 
-        r.next = rest;
-
-        return result;
+        return dummy.next;
     }
 }
