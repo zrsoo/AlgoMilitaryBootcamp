@@ -1,9 +1,9 @@
 # LC <815> — <Bus Routes>
 - **Pattern:** <Graphs — BFS over buses (level = one boarding); stop→routes inverted index + visited-routes set to avoid pairwise route comparison>
-- **Brute force:** < >
-- **Optimized:** < >
-- **Key insight:** < >
-- **Edge cases I had to handle:** < >
+- **Brute force:** <Build a bus-to-bus graph: connect any two routes that share at least one stop (O(N² · route length) to compare every pair of routes). Then BFS from every route containing `source` to any route containing `target`, counting edges. The pairwise route intersection is what kills it.>
+- **Optimized:** <Invert the input into a `stop -> list of routes` index (`dict`). BFS where the frontier is *routes* (buses), and each BFS level = one extra bus boarded. Seed the queue with every route that contains `source` (steps starts at 0, incremented per level). For each route popped, scan its stops: if a stop equals `target`, return `steps`; otherwise mark the stop visited and enqueue every not-yet-visited route that also serves that stop. Level-by-level `lSize` loop gives the number of buses taken.>
+- **Key insight:** <The graph you BFS is over routes, not stops — the answer counts *buses boarded*, so each level of the BFS is exactly one boarding. The `stop -> routes` inverted index replaces the O(N²) "do these two routes share a stop?" comparison with an O(1) lookup, turning the whole thing into a normal BFS. Keep both a `visitedRings` (routes) set and a `visitedStops` set so each route and each stop is expanded once.>
+- **Edge cases I had to handle:** <`source == target` returns 0 up front (no bus needed). Unreachable target returns -1 after the queue drains. A stop can belong to many routes and a route has many stops, so dedup both.>
 - **Where I got stuck and for how long:** < >
-- **Template fragments I reused:** < >
+- **Template fragments I reused:** <Level-order BFS with `lSize = q.Count` per level to count layers; inverted-index dictionary build (`stop -> routes`); dual visited sets.>
 - **Would I solve this in 25 min cold next week? Y/N> 

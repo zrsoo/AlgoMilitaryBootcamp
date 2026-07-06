@@ -1,6 +1,6 @@
 # LC <428> — <Serialize and Deserialize N-ary Tree>
 - **Pattern:** <Tree pre-order serialization with explicit child-count per node (no brackets/sentinels needed)>
-- **Brute force:** < >
+- **Brute force:** <Delimit each child list with explicit brackets/sentinels — more tokens and fiddly matched-bracket parsing vs. a single count.>
 - **Optimized:** <Serialize: write `[val],[childCount],` then recurse on each child (`foreach`). Deserialize: split on `,`, walk with a single `ref int` cursor — read val, read count, recurse exactly count times. Empty tree ↔ empty string.> — O(n) time, O(h) space
 - **Key insight:** <The child *count* tells the decoder exactly where each child list ends, so no bracket/null markers are required. A shared `ref int i` cursor keeps serialize/deserialize reading tokens in the same order.>
 - **Edge cases I had to handle:** <Null tree → `""` and back; leaf = count 0 (foreach runs zero times); negative values (delimiter `,` never collides with `-`); trailing comma harmless because Decode only reads as many tokens as counts dictate.>
