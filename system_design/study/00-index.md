@@ -21,13 +21,25 @@ Target level: **senior (L5)** — understand mechanisms, not just names. When a 
 | 11 | 11-data-platform-lakehouse.md *(planned)* | Ingestion, table formats (Delta/Iceberg/Hudi), medallion, feature store | Layer 12 |
 | 12 | 12-distributed-systems-deepdive.md *(planned)* | Senior 2nd-round depth: query execution, shuffle, multi-tenant compute, exactly-once | senior deep-dive round |
 
+## How these notes are written
+
+- **Zero prior knowledge assumed.** Every term is defined the first time it appears. If a note uses a word like "shard," "node," or "partition," it explains it. Nothing is left as unexplained jargon.
+- **Depth over brevity.** These are deep-dive study notes, not cheat-sheets. Calculations are worked out step by step like a proof — no "three words → three words" chains. Diagrams are used where they help.
+- The [../decision-framework.md](../decision-framework.md) catalog is the *scannable* companion; these notes are the *understand-it-deeply* companion.
+
 ## How to study each note
 
 1. Read it once for the map.
-2. Re-read and, for each option, be able to say the **"use when"** and the **"cost"** without looking.
-3. Cross-check against the framework table for that layer — they should agree.
-4. Only after a note is solid, use it in a mock; log gaps back into the note.
+2. Re-read and, for each concept, be able to **explain it back in your own words** (not just recognize the keyword).
+3. Do the **Self-check** at the end — say the answers out loud as if teaching them.
+4. Cross-check against the framework table for that layer — they should agree.
+5. Only after a note is solid, use it in a mock; log gaps back into the note.
+
+## Cross-day workflow (spaced recall — important)
+
+- Every lesson ends with a **Self-check** section.
+- **When we study lesson N on one day, the next session begins with an open-ended quiz on lesson N** — I (the assistant) ask you to explain the prior lesson conversationally, you teach it back, we discuss gaps — *before* moving to the new lesson. This is deliberate spaced recall, the same principle as the algorithms track.
 
 ## Status
 
-- 01 written (style anchor). Rest planned — will write in order, calibrating depth after 01 feedback.
+- 01 written to full depth (v0.2). Rest planned — will write in order, one lesson at a time, quizzing on the prior lesson first.
