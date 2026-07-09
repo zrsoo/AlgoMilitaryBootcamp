@@ -43,4 +43,4 @@ Target level: **senior (L5)** — understand mechanisms, not just names. When a 
 ## Status
 
 - 01 written to full depth (v0.2). Rest planned — will write in order, one lesson at a time, quizzing on the prior lesson first.
-- **Progress + schedule:** see [tracker.md](tracker.md). Plan: 2 lessons/day, Thu 2026-07-09 → done Tue 2026-07-14, then process-refinement discussions.
+- **Progress + schedule:** see [tracker.md](tracker.md). Plan: 1 lesson/day, Thu 2026-07-09 → done Mon 2026-07-20 (weekends may pull it earlier), then process-refinement discussions.

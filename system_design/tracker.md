@@ -1,6 +1,6 @@
 # System Design — Study Tracker
 
-**Target:** finish all **12** study lessons at **2 lessons/day over 6 days**, starting **Thu 2026-07-09**, done by **Tue 2026-07-14**. After that: discussion-based process refinement (mock designs + gap-logging), and/or a practice platform.
+**Target:** finish all **12** study lessons at **1 lesson/day**, starting **Thu 2026-07-09**, done by **Mon 2026-07-20**. Weekends may pull this earlier if extra lessons get done, but the committed pace is **one per day**. After that: discussion-based process refinement (mock designs + gap-logging), and/or a practice platform.
 
 Curriculum + reading order live in [00-index.md](00-index.md). Each lesson: written to full depth → read → **Self-check** → next session opens with an **open-ended quiz on the prior lesson** (spaced recall, same as the algorithms track).
 
@@ -12,15 +12,23 @@ Date format: `YYYY-MM-DD`.
 
 ## Schedule
 
-| Day | Date | Weekday | Lessons | Status |
-|-----|------|---------|---------|--------|
-| 1 | 2026-07-09 | Thu | 01 Foundations · 02 Databases | — |
-| 2 | 2026-07-10 | Fri | 03 Replication & Partitioning · 04 Caching | — |
-| 3 | 2026-07-11 | Sat | 05 API & Communication · 06 Edge & Load Balancing | — |
-| 4 | 2026-07-12 | Sun | 07 Messaging & Streaming · 08 Search & Analytics | — |
-| 5 | 2026-07-13 | Mon | 09 Reliability · 10 Observability & Security | — |
-| 6 | 2026-07-14 | Tue | 11 Data Platform & Lakehouse · 12 Distributed Systems Deep-Dive | — |
-| — | 2026-07-15+ | — | Process refinement: mock designs, discussion, gap-logging | — |
+| Day | Date | Weekday | Lesson | Status |
+|-----|------|---------|--------|--------|
+| 1 | 2026-07-09 | Thu | 01 Foundations | — |
+| 2 | 2026-07-10 | Fri | 02 Databases | — |
+| 3 | 2026-07-11 | Sat | 03 Replication & Partitioning | — |
+| 4 | 2026-07-12 | Sun | 04 Caching | — |
+| 5 | 2026-07-13 | Mon | 05 API & Communication | — |
+| 6 | 2026-07-14 | Tue | 06 Edge & Load Balancing | — |
+| 7 | 2026-07-15 | Wed | 07 Messaging & Streaming | — |
+| 8 | 2026-07-16 | Thu | 08 Search & Analytics | — |
+| 9 | 2026-07-17 | Fri | 09 Reliability | — |
+| 10 | 2026-07-18 | Sat | 10 Observability & Security | — |
+| 11 | 2026-07-19 | Sun | 11 Data Platform & Lakehouse | — |
+| 12 | 2026-07-20 | Mon | 12 Distributed Systems Deep-Dive | — |
+| — | 2026-07-21+ | — | Process refinement: mock designs, discussion, gap-logging | — |
+
+> **Weekend catch-up:** committed pace is one lesson/day. If extra lessons land on Sat/Sun (07-11, 07-12, 07-18, 07-19), shift later rows up and the finish date moves earlier than 07-20.
 
 ---
 
@@ -46,3 +54,5 @@ Date format: `YYYY-MM-DD`.
 ## Log
 
 - 2026-07-08 — Tracker created. Plan set: 2 lessons/day, Thu 07-09 → Tue 07-14. Lesson 01 already drafted (v0.2).
+- 2026-07-09 — Pace revised to **1 lesson/day** (2/day not sustainable). New finish: **Mon 2026-07-20**; weekends may pull it earlier. Schedule table re-laid to one lesson per row.
+- 2026-07-09 — Lesson 01 quiz session (partial). Covered: CAP/PACELC (strong), linearizable mechanism + quorum (good, minor partition/replica slip), latency cliff/ratios (re-drilled, now solid), consistency ladder (monotonic definition + mix-per-data-type headline need re-drill). **Resume tomorrow** to finish the bounded Lesson-01 quiz, then estimation/sizing drills (user wants practice), then teach Lesson 02.
