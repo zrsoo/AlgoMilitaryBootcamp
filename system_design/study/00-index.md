@@ -9,7 +9,7 @@ Target level: **senior (L5)** — understand mechanisms, not just names. When a 
 | # | Note | Covers | Maps to framework |
 |---|------|--------|-------------------|
 | 01 | [01-foundations.md](01-foundations.md) | Latency numbers, back-of-envelope estimation, CAP/PACELC, consistency models, the core trade-offs | Layer 0, 8 |
-| 02 | 02-databases.md *(planned)* | Relational vs NoSQL families, storage engines (B-tree vs LSM), indexing, when each store wins | Layer 5, 9 |
+| 02 | [02-databases.md](02-databases.md) | Relational vs NoSQL families, storage engines (B-tree vs LSM), indexing, when each store wins | Layer 5, 9 |
 | 03 | 03-replication-partitioning.md *(planned)* | Replication modes, sharding strategies, quorums, consensus (Raft), rebalancing | Layer 8 |
 | 04 | 04-caching.md *(planned)* | Cache patterns, invalidation, stampede/hot keys, where to cache | Layer 6 |
 | 05 | 05-api-communication.md *(planned)* | REST/gRPC/GraphQL/WebSocket/SSE, sync vs async, idempotency, pagination | Layer 3 |
@@ -42,5 +42,5 @@ Target level: **senior (L5)** — understand mechanisms, not just names. When a 
 
 ## Status
 
-- 01 written to full depth (v0.2). Rest planned — will write in order, one lesson at a time, quizzing on the prior lesson first.
+- 01 written to full depth (v0.2). 02 written to full depth (v1.0). Rest planned — will write in order, one lesson at a time, quizzing on the prior lesson first.
 - **Progress + schedule:** see [tracker.md](tracker.md). Plan: 1 lesson/day, Thu 2026-07-09 → done Mon 2026-07-20 (weekends may pull it earlier), then process-refinement discussions.
