@@ -14,9 +14,9 @@ Date format: `YYYY-MM-DD`.
 
 | Day | Date | Weekday | Lesson | Status |
 |-----|------|---------|--------|--------|
-| 1 | 2026-07-09 | Thu | 01 Foundations | — |
-| 2 | 2026-07-10 | Fri | 02 Databases | written + taught (quiz deferred to 07-11) |
-| 3 | 2026-07-11 | Sat | 03 Replication & Partitioning | — |
+| 1 | 2026-07-09 | Thu | 01 Foundations | studied + quizzed ✓ (07-11) — not graded |
+| 2 | 2026-07-10 | Fri | 02 Databases | studied + quizzed ✓ (07-11) — **overall: Strong** |
+| 3 | 2026-07-11 | Sat | 03 Replication & Partitioning | written + taught (quiz next session) |
 | 4 | 2026-07-12 | Sun | 04 Caching | — |
 | 5 | 2026-07-13 | Mon | 05 API & Communication | — |
 | 6 | 2026-07-14 | Tue | 06 Edge & Load Balancing | — |
@@ -36,9 +36,9 @@ Date format: `YYYY-MM-DD`.
 
 | # | Lesson | Written | Studied | Quizzed | Notes |
 |---|--------|---------|---------|---------|-------|
-| 01 | Foundations (latency, back-of-envelope, CAP/PACELC, consistency) | ✅ v0.2 | — | — | Drafted to full depth already. |
-| 02 | Databases (relational vs NoSQL, B-tree vs LSM, indexing) | ✅ v1.0 | ✅ taught 07-10 | — | Quiz deferred to 07-11 per user. |
-| 03 | Replication & Partitioning (replication modes, sharding, quorums, Raft) | — | — | — | planned |
+| 01 | Foundations (latency, back-of-envelope, CAP/PACELC, consistency) | ✅ v0.2 | ✅ | ✅ 07-11 | Quiz complete + estimation drill (photo service) done. Not graded to file. |
+| 02 | Databases (relational vs NoSQL, B-tree vs LSM, indexing) | ✅ v1.0 | ✅ taught 07-10 | ✅ 07-11 | 6-Q teach-back; grades in grades/databases.md. **Overall grade: Strong.** |
+| 03 | Replication & Partitioning (replication modes, sharding, quorums, Raft) | ✅ v1.0 | ✅ taught 07-11 | — | First lesson under sourcing directive: inline-cited [S1]–[S6], Sources appendix. Quiz next session (10 Qs, integrative w/ L01–L02). |
 | 04 | Caching (patterns, invalidation, stampede/hot keys) | — | — | — | planned |
 | 05 | API & Communication (REST/gRPC/GraphQL/WS/SSE, idempotency, pagination) | — | — | — | planned |
 | 06 | Edge & Load Balancing (CDN, L4/L7 LB, routing, gateways, meshes) | — | — | — | planned |
@@ -56,4 +56,6 @@ Date format: `YYYY-MM-DD`.
 - 2026-07-08 — Tracker created. Plan set: 2 lessons/day, Thu 07-09 → Tue 07-14. Lesson 01 already drafted (v0.2).
 - 2026-07-09 — Pace revised to **1 lesson/day** (2/day not sustainable). New finish: **Mon 2026-07-20**; weekends may pull it earlier. Schedule table re-laid to one lesson per row.
 - 2026-07-09 — Lesson 01 quiz session (partial). Covered: CAP/PACELC (strong), linearizable mechanism + quorum (good, minor partition/replica slip), latency cliff/ratios (re-drilled, now solid), consistency ladder (monotonic definition + mix-per-data-type headline need re-drill). **Resume tomorrow** to finish the bounded Lesson-01 quiz, then estimation/sizing drills (user wants practice), then teach Lesson 02.
-- 2026-07-10 — **Lesson 02 (Databases) written to full depth (v1.0) and taught.** Covers: data-model vs storage-engine as two axes; families (relational/KV/document/wide-column + specialists); B-tree vs LSM mechanism deep-dive (memtable/SSTable/compaction/Bloom filters/write-amp); indexing (clustered/secondary/composite/covering + read-vs-write trade); SQL vs NoSQL; ACID vs BASE (+ the ACID-C vs CAP-C trap). Self-check has 7 Qs. **User deferred BOTH the Lesson-01 quiz AND the Lesson-02 quiz to 07-11** ("catch up on questions tomorrow"). So 07-11 opens with: finish bounded Lesson-01 quiz + estimation drills (still owed) + open-ended Lesson-02 quiz, before Lesson 03.
+- 2026-07-10 — **Lesson 02 (Databases) written to full depth (v1.0) and taught.** Covers: data-model vs storage-engine as two axes; families (relational/KV/document/wide-column + specialists); B-tree vs LSM mechanism deep-dive (memtable/SSTable/compaction/Bloom filters/write-amp); indexing (clustered/secondary/composite/covering + read-vs-write trade); SQL vs NoSQL; ACID vs BASE (+ the ACID-C vs CAP-C trap). Self-check has 7 Qs. **User deferred BOTH the Lesson-01 quiz AND the Lesson-02 quiz to 07-11** ("catch up on questions tomorrow").
+- 2026-07-11 — **Big catch-up session. Lesson-01 quiz FINISHED** (consistency-mixing via a Glovo example, scaling ladder, estimation method, a live estimation drill on a photo service, conflict resolution incl. version-vector walkthrough). **Estimation drill done** (user was weak; photo service 500M/day → object-storage split insight was strong). Nailed replica-vs-shard-vs-network-partition confusion. **Created a sizing cheat sheet** at `cheatsheets/sizing.md`. **Lesson-02 quiz FINISHED** (6-Q teach-back: two-axes, LSM vs B-tree writes+reads, indexes, ACID-C vs CAP-C, applied IoT wide-column). **NEW CONVENTION (user directive): grade every quiz answer into `system_design/grades/<lesson>.md`** — created grades/databases.md. Overall L02: strong on mechanism; reinforce the "why it matters" halves + guard the model-vs-engine axis under pressure.
+- 2026-07-11 — **Lesson 03 (Replication & Partitioning) written to full depth (v1.0) and taught.** First lesson under the **sourcing directive** (user: don't rely on memory; back facts with contemporary sources; Sources appendix + minimal inline markers). Verified 6 primary sources 2026-07-11 (Raft, PostgreSQL 18, MongoDB, Cassandra 5.0, Kafka/Confluent, Google Spanner) and cited inline [S1]–[S6]. Covers: why replicate; single/multi/leaderless topologies; sync vs async; consensus + Raft + Kafka ISR; quorum proof (W+R>N); range/hash/consistent-hashing + vnodes; rebalancing; routing; decision guide; 10-Q self-check. **Next session: quiz Lesson 03 (10 Qs, integrative w/ L01–L02 per the quiz-format directive), then Lesson 04 (Caching).**
