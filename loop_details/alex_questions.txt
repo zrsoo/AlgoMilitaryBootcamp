@@ -1,0 +1,55 @@
+1.) How many system design rounds are there, and if there are two, what's the scope difference between them?
+(Decides whether you build and drill a whole internals doc, or skip it.)
+
+3.) Which team is this for, and what level is it mapped to?
+(Level and team set how deep they'll push and which internals matter — the answer colors questions 1 and 2.)
+
+2.) Is the design round more of a general "design a product or web service" style, or a "design a data pipeline / data platform" style — and which way does this team lean?
+Is it possible that we will deep dive, into, for example, the inner-workings of Apache Spark, or just talk about system design in general?
+(Decides whether your lakehouse/Delta/streaming lessons are the main event or just a safety layer.)
+
+4.) Can you walk me through the full onsite — how many coding rounds, and is one of them focused on concurrency or multithreading?
+(Concurrency is a standing round in the standard loop; knowing this reshapes your coding prep, not just design.)
+
+5.) What tool will I design in — a Google Doc, a drawing tool, or is that up to the interviewer?
+(Decides whether you practice text-only design or diagram-based — a real difference in how you rehearse.)
+
+6.) What's the bar? How is a strong candidate separated from a weaker one?
+(Direct, high-signal prep guidance straight from someone who's seen the outcomes.)
+
+
+
+4 interviews
+2 days
+
+1 algo - leetcode based
+
+1 more coding - less algorithm heavy -> more coding
+code quality
+how to ship code
+how to test code
+lighter on algo, still there, but lighter
+
+system programming interview
+mix of coding and system design
+need code but can be pseudo-code, doesn't need to run but should be specific enough to discuss trade-offs, performance and design -> not large-scale -> focus on concurrency / multi-threading on single machine
+can be single machine cache behaviour, memory, synchronization
+what if high load
+what if power goes down
+concurrency primitives -> focus on concurrency
+
+behavioural w/ a manager
+career growth
+learning mingset
+conflict resolution part -> how to handle misunderstanding; technical dispute
+what would you do if the project is going to miss deadline
+tell me a time when you received feedback and how did you use it to improve
+
+
+for L4 - lvl 63 equivalent MSFT
+
+not targeting specific team
+
+need 3 people with whom I worked previously to vouch for me
+
+USE PREP EMAIL TOO

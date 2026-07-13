@@ -1,0 +1,1355 @@
+Delivered-To: zneamtiu@gmail.com
+Received: by 2002:a05:7208:b0c4:b0:107:e39f:33ab with SMTP id d4csp1274513rbb;
+        Mon, 13 Jul 2026 02:44:35 -0700 (PDT)
+X-Received: by 2002:a17:90b:58ce:b0:37f:9ce3:ca96 with SMTP id 98e67ed59e1d1-38dc777c50emr8230330a91.31.1783935875233;
+        Mon, 13 Jul 2026 02:44:35 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1783935875; cv=pass;
+        d=google.com; s=arc-20260327;
+        b=FtpxZzEfRjg6dtPZ9rIVzC6D4VEsu5YShljPQwxHOrPcCa53NeUSEJv1HNd3u8anOg
+         5zi60Sw+qe6lcSgG4HRAICBcZj5YQxVAgJ5OYCUSNk9df7QEyOHtBVyudxcRbo4nGUPE
+         xL88ZmJ16M3RTa/A9nhAo12sL2GAxT89z0nc9FBiB++35HKLZhCjQzfl1NWweFukzIpT
+         G3AisjU1Qp8VA1rc5WYf9VzBDqRpMgce39WrMdLSfb4sPznIV1U31gQ2he0F+d9xOzuO
+         xnXR3xZv6m2oLOoTY3QCpcf/U+I+R3tsMvKOvjlTxn7ep/BIzMveaiV3RiznNsiOyvoZ
+         VH0A==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=KM8jB92buO4JJNH3sioVIIu0Tf7p9eVzvuNkR4T4RFQ=;
+        fh=fGtwbllhYubOU0fcxQWvMum1Kf22C+rRz9HCySX5CLY=;
+        b=QNpdtesMA8denLw2Jfi5nB7IEsS+xWGSH4uD115VXdKH8JuF4BhXaZ7wKREgLJdy2J
+         xBIazXQtdvzgtSGpGgG0v3cdHtm/kycfnqaal/sIqpAScFMdN4aApw0TwDhRRQR9OxgM
+         KgWo2lwXqsBI3TdIXjDgGFhv3h2LNOpYsSKYcsVPNRTfoVU4BekjmdVehfhog0/5q9W8
+         LUmo2bbMzAx+hXlIFc0u3+FzGFS1IC6RFaRjA7tyX/XH1OL0ndz6+v8cISrUGGLmWk2T
+         1Eym1jtLG2xQdtnniTns9pzlLS8VVzqgEaM+cK6EkLCwkRnoAVR2RImqQH/6lpaLvrtC
+         DEHQ==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@databricks.com header.s=google header.b="OjVZRH/d";
+       arc=pass (i=1);
+       spf=pass (google.com: domain of alex.verkunich@databricks.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=alex.verkunich@databricks.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=databricks.com;
+       dara=pass header.i=@gmail.com
+Return-Path: <alex.verkunich@databricks.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 98e67ed59e1d1-3812919d3a1sor33487143a91.0.2026.07.13.02.44.34
+        for <zneamtiu@gmail.com>
+        (Google Transport Security);
+        Mon, 13 Jul 2026 02:44:35 -0700 (PDT)
+Received-SPF: pass (google.com: domain of alex.verkunich@databricks.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@databricks.com header.s=google header.b="OjVZRH/d";
+       arc=pass (i=1);
+       spf=pass (google.com: domain of alex.verkunich@databricks.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=alex.verkunich@databricks.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=databricks.com;
+       dara=pass header.i=@gmail.com
+ARC-Seal: i=1; a=rsa-sha256; t=1783935874; cv=none;
+        d=google.com; s=arc-20260327;
+        b=CEuycPeweGlU+tc8/Mrw4CveZAPW5z1vGETTN8k432Kk7WYzPptQ1iTmzbTJipIsn4
+         vSe6m0AWQYDvJ75hu0V4+eC06zNXqHra9sJinbpIyH4+OCaFeBdyroveeNw3Vfp24waM
+         AfEQ4t+ZItDGJxPNGtye1OOp9SIve8PuTI9xrk16C/YzYhgYPb2Wnf4A4BogQRjqDoP8
+         ItRRpLfFy2hHs12YWT6ja0r1/edI5eWcsXvP1ZCzlNOy/oTK874vs6DqQrW6NAieU176
+         2L0JGjL9pdYSnie4GViPGjVKXTSj1gjySkhoSArAzc/cQyuf2QOpS715hcF9E5KZp7xZ
+         FApA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=KM8jB92buO4JJNH3sioVIIu0Tf7p9eVzvuNkR4T4RFQ=;
+        fh=fGtwbllhYubOU0fcxQWvMum1Kf22C+rRz9HCySX5CLY=;
+        b=ndcebyRBOZtOalOgjAGeLeO+VJWLnAm80UCCubMKDv6ecGtrZtZMocKUW1umQ6UR2i
+         BBmtkkFjC6jnHUDMPN93olF3nSsfddhSaCeyRNv8NQB6xobIqOAIHoL8ExPQvVDcfc6X
+         GLuumiZUQPYMsynQLFGepItqb3IcAh/rgZSzUcgnOztmFMkvvzvlZ7LZ1hVT2W8u33Bp
+         2y0ZUHv57XizPmHu/6PbuL+Hnc8MmNGq2Eb6CdnTY+VKS+A/Tvr44vEP9kspnRf1w2/A
+         HtuQbZWjBKZ9+F9CadHgmnkT64UVgPOqf3YOl21PKmhEsKLYj3Eb7e6rc1IZn1avDS8i
+         BzeA==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=databricks.com; s=google; t=1783935874; x=1784540674; dara=google.com;
+        h=content-type:to:subject:message-id:date:from:mime-version:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=KM8jB92buO4JJNH3sioVIIu0Tf7p9eVzvuNkR4T4RFQ=;
+        b=OjVZRH/dOm3deVb250EhAQv4jCBDyo7M08FA7SAvTfriYdzhN7+Vcrl6dcv4TyeLVz
+         knYRycDDKp3U/cLODH03J6IKfk3sqdkfboFdz7jdlNN2FroFHBSdxcIWZ9Nbj9XM1Srw
+         /WMcmDjR+bCStQz3KrAJTgB3u23bZ0olzaObs6bwznuvbpexPMISG36sT8+ReiTVQtNh
+         uFeWVIs45Vb1FlsqFjAkAGSaFXhbX7GD588um8fe/PjnW7WwWsQRlDTtsWOamvBtgfdl
+         5OL0Fcgtu/L6dTZanbvlRgRBeqAHC1pbzvZNMAENGvBpGsCtOt6uMlT2NufYEWuFUsbe
+         Avww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783935874; x=1784540674;
+        h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=KM8jB92buO4JJNH3sioVIIu0Tf7p9eVzvuNkR4T4RFQ=;
+        b=nqyN7xQ+RqIpMHkoK43Z0dd0+NYdBTLrd9nvw8taxjEVhz2LK6BNTHcvB22J4BNe4m
+         xwfEqNuJvEjyuqR0rpySvNtHdpw97rST0yAbQ0GfJj97FJrlOLoiZY6TqN+Lil6CWj6o
+         YWDKjJVHyj6IQExSWd/C2fFssZNZM+3Uf8m9i8irk09KEW3c5uu9oCYO2jCaZVW4ZgpJ
+         QhHkgRXVJaKz1EuwuXk2Zyi58W0SZIxcCjBN0EVRBzRE0KHuj4DvHF3yW5LbnWyUCOx3
+         q8jMktaFeZXyAwoX01C67tmHxsnQEO8OMpmLJP201GX3CnchZvBNpX2YXXcfLEHpG9ZT
+         kOiA==
+X-Gm-Message-State: AOJu0YyOlwBrRanq/3FuxmOImx4aSwXbFOXpPZdqbPXrJO7hHFMgS32Q
+	Gnh9GlrzxTKQXx5UXtPXUIfYN35xqidwXv+X46dFJGaUIIXLQW97BQhNClUQMTjFIl8PELkZNeG
+	Spz5Mf0EshMtEnf+T+E2v5LPqjq7zNLpZO8Kwwk4rQLrdVE0oIFdvYZApkg==
+X-Gm-Gg: AfdE7cn8rSo2zOkB3Fs6IVsr739KWkw8KPatnKiLx9gr8y0QgbH9EPVSl77ZMWR7soB
+	CnDqJJvUi86CVNLiSxRMPr4Ww0AMBUuhAlLbEoEvqCEtZheh3jWmIVxVttfVP0SqHiwGNSujJX/
+	A5oRwUfLe3mJg1VQHnFmSu+ZVXvDrHlmUpUX1KcBbcX62VP/ee0GUnI/A33ty/UAz2j0ysCYejg
+	HPPv+rD3mGtWYH7Wfl996OzClspGki/WajQR1ydHfFs6mOydKGCTT965rHhjFuUL8AN83pbNc+x
+	Wa5QGQ==
+X-Received: by 2002:a17:90b:530d:b0:387:e0cb:c8da with SMTP id
+ 98e67ed59e1d1-38dc777c380mr8985583a91.35.1783935873826; Mon, 13 Jul 2026
+ 02:44:33 -0700 (PDT)
+MIME-Version: 1.0
+From: Alex Verkunich <alex.verkunich@databricks.com>
+Date: Mon, 13 Jul 2026 10:44:22 +0100
+X-Gm-Features: AUfX_mzhiRJqjdZfMwygBIXk_2lsLB6Uud9p0k9UYgyZspN3ycDvQupNHNtHeCE
+Message-ID: <CAMOHkJvUdC7vtcG0v5mFXKG+U04kZN7zba=rYZKc_O5=F24uCA@mail.gmail.com>
+Subject: Databricks (Full loop interview prep)
+To: zneamtiu@gmail.com
+Content-Type: multipart/alternative; boundary="00000000000010f39006567af00b"
+
+--00000000000010f39006567af00b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Zaris,
+Thank you for taking the time to speak with me today! I have added the
+details of the full interview round below for your review. Please let me
+know if you have any questions on the materials.
+
+You will soon receive another email to submit your availability for the
+interviews.
+
+Systems Programming
+
+In this interview, you will be given a specific question focused on systems
+programming. The question is usually on a single computer/single machine
+(e.g. design and implement a single-machine cache) and you=E2=80=99ll be as=
+ked to
+produce a relevant and performant system. The question is likely to be a
+general question, and not necessarily related to your technical background
+or to Databricks=E2=80=99 core products. We are evaluating your technical
+knowledge/solution as well as your communication around that solution.
+
+
+You will need to ask clarifying questions and fully understand the paramete=
+rs
+of the problem before solving. Requirements to consider while solving are
+including but not limited to performance, concurrency, threading versus
+multi-threading, and order dependent processing. Additional sample design
+requirements are better throughput, reducing latency, and data durability.Y=
+ou
+will also want to consider things like synchronization, network and disk IO=
+.
+
+The desired outcome of this interview is an actual pseudocode
+implementation that is reliable, fast, scalable, and covers any other
+predetermined requirements. You will be asked to implement various parts of
+the system and write pseudocode that effectively conveys your solution. You
+will not be expected to write compiling code, and it doesn=E2=80=99t need t=
+o be in
+a specific language, but you should be ready to write sufficiently specific
+code to have a conversation around tradeoffs, techniques, and solutions
+related to the above. You should be familiar with structuring of classes,
+strong cohesion and weak coupling, separation of concerns, and single
+responsibility
+principle.
+
+
+It is also essential to think about ways things may fail under concurrency
+and environmental conditions, and to provide reasoning on how to handle
+them=E2=80=93 The interviewer may add in additional parameters or requireme=
+nts as
+the interview progresses (e.g. =E2=80=9Chow would you handle losing power o=
+n a
+regular basis=E2=80=9D). These questions typically relate back to real worl=
+d
+circumstances.
+
+
+The expectation is that you are driving the solution and proactively
+explaining/rationalizing your solution and decisions. The interviewer
+should be open to discuss parameters and requirements wit you upfront, and
+answer any questions you may have while solving. There may be circumstances
+in which the interviewer feels the solution is not going in a direction
+they had hoped; they might give you a hint or try to steer you in a new
+direction. It is equally important to listen to their feedback and apply it
+to your solution. Typically, the more you talk through your process,
+describe your thinking and decisions, the better the interviewer can
+evaluate.
+
+
+A sample design question is something like a rate limiter
+<https://www.geeksforgeeks.org/how-to-design-a-rate-limiter-api-learn-syste=
+m-design/>
+. I have heard that concurrency and multi-threading questions on Leetcode
+can be helpful.
+
+
+Tooling: CoderPad
+
+
+
+Algorithms (same format as the technical screen)
+
+In this interview, you will be asked a question focused on typical computer
+science data structures and algorithms, as well as some math concepts. The
+expectation is that you will be able to code a solution that can compile
+and run. You=E2=80=99ll be evaluated on your actual implementation, analysi=
+s around
+the implementation, as well as your communication around the solution. We
+also like to see you produce appropriate test cases and that your solution
+applies to corner/edge cases in a clean and concise way.
+
+Before solving, it is recommended to briefly discuss the problem and define
+your approach. While solving, please explain your decisions and thought
+process=E2=80=93 we want to see that you can justify your solution. We typi=
+cally
+only ask one question in this interview, but the interviewer may ask follow
+up questions or for clarifications around things like time complexity and
+run-time performance. They may also give hints so it is important to listen
+to any feedback. It is highly recommended to factor in and discuss edge
+cases and tradeoffs. We expect you to test and debug your solution. We care
+about clarity (what does each statement do), ordering, data flow (what
+values are passed from where into where), and correct use of concurrency
+primitives.
+
+This interview is language agnostic and you can use whatever language you
+feel most comfortable in or feel best suits the problem at hand.
+
+
+For preparation, you can look at topics like hash maps, strings, binary
+search, graphs, arrays, sorting, etc.
+
+Tooling: CoderPad
+
+Coding
+
+In this interview we will evaluate your coding, implementation, and
+debugging skills, replicating a typical everyday working environment.  We
+want to see you write clean, bug-free, well-tested code. It is recommended
+to briefly discuss the problem and define your approach. While solving, it
+is also recommended to explain the decisions you=E2=80=99re making and the
+correctness of the solution.
+
+
+This interview is focused more on implementation than the Algorithms
+interview, but you will still need some basic algorithms knowledge to solve
+the problem. The first priority for this interview is a complete solution,
+followed by debugging and testing edge cases for the solution. We will look
+at how you implement your components, classes, methods, and functions, your
+coding style, and your test cases.
+
+
+Tooling: CoderPad
+
+
+
+Conversational/Behavioral aka Cross-Functional (1 hour)
+
+This is a conversational interview with an engineering manager here at
+Databricks focused on how you operate in a working environment, your
+interest in Databricks, your career growth/progression, and your technical
+background.
+
+We want to see that you can communicate clearly and concisely, that there's
+a method to your answers and you provide sufficient details. When speaking
+about technical details, please be conscious of your audience and ensure
+you clarify any jargon/internal terminology.
+
+Read about *the STAR method *and use it during your answers!
+
+Generally, the topics tend to cover the below areas:
+
+
+
+   -
+
+   Collaboration: These questions will focus on things like conflict
+   resolution, mentorship of junior engineers, managing up, and working
+   cross-functionally.
+   -
+
+      I.e. Tell me about a time you had a disagreement with a teammate and
+      how you solved it
+      -
+
+      I.e. Tell me about  time to have to execute on a project with varying
+      stakeholder priorities
+      -
+
+   Ownership & Impact: We want to see that you can identify and solve
+   problems. Similarly, we want to understand your decision making process.
+   These questions may also focus on your motivation around your work and h=
+ow
+   you see projects end to end.
+   -
+
+      I.e. Describe a project end to end, who was involved, how did you
+      measure success
+      -
+
+      I.e. A project you are leading is getting off track/set to miss a
+      deadline, how do you course correct
+      -
+
+   Growth/Reflection: These questions will see if you understand how you
+   can improve/have improved from the past, how you give/receive both posit=
+ive
+   and negative feedback, if you seek out mentors and learning opportunitie=
+s,
+   and your learning preferences (i.e. learning many skills or being a deep
+   technical master).
+   -
+
+      Tell me about a time something went wrong/didn=E2=80=99t go as planne=
+d. What
+      did you learn/what would you do differently
+      -
+
+      Provide an example of a time you took some feedback and applied it to
+      your day to day
+      -
+
+   Technical Background: Please be prepared to explain your background from
+   a technical perspective and how it may fit with Databricks. You will lik=
+ely
+   be asked to multiple recent or impactful projects. (Remember, this
+   interview is focused on softer skills)
+   -
+
+   Career: We'll also want to understand your overall career
+   growth/history, such as why you left a company for a new opportunity.
+   -
+
+   Interest in Databricks: Please be prepared to answer why you're
+   interested in Databricks.
+
+You can also review our culture principles
+<https://www.databricks.com/company/careers/culture>! While the questions
+don't always directly relate, it can be good to work these themes into your
+answers.
+
+
+General Tips
+
+
+
+   1.
+
+   ASK ASK ASK clarifying questions before diving into the problem
+   2.
+
+   Walk the engineer through your thought process (thinking out loud)
+   3.
+
+   Be mindful of bugs and test-driven development
+   4.
+
+   Think about the implementability, maintainability and operability of
+   your design
+   5.
+
+   Also think about trade-offs to your design and be prepared to explain
+   why you picked the technologies
+   6.
+
+   If you are given hints, make sure to pay attention to them and implement
+   them where you can
+   7.
+
+   Be prepared to discuss what motivations you have in your career, your
+   passions, and relevant research as this all resonates with our teams.
+   8.
+
+   Subscribe and watch our Databricks Youtube Channel
+   <https://www.youtube.com/channel/UC3q8O3Bh2Le8Rj1-Q-_UUbA> to glean more
+   about our organization and team.
+   9.
+
+   Research the Panel Members: you will be meeting with, try to look into
+   their Github repository as it will give you more information about that
+   engineer, and the more you know about an individual, the better
+   interactions will be experienced.
+   10.
+
+   Try our Product: Take advantage of being able to use our product for
+   FREE: https://databricks.com/try-databricks
+   11.
+
+   Analyze Code Base: Spend time to look into the code of our projects:
+   DeltaLake, Koala, & DataFlow Reflect and try to draw similar patterns as
+   this reveals the coding culture of Databricks. Share these findings with
+   your interviewers.
+   12.
+
+   Check out CTCI as it is a classic CS recommended book for interviewing.
+   No one is going to ask you a question you will see in that book, but if =
+you
+   are comfortable solving these questions and writing the code on the
+   whiteboard (or notebook) you are good to go. Time yourself and resist th=
+e
+   urge to type the code=E2=80=94 challenge yourself to use a whiteboard. I=
+t is a
+   totally different experience which feels weird at first, but it makes yo=
+u a
+   stronger programmer.
+   13.
+
+   "Programming Pearls" written by Jon Bentley. An awesome read that is
+   written much along the lines of Strunk and White's Elements of Style abo=
+ut
+   writing, if you have read it. It is from the perspective of breaking dow=
+n
+   the coding process into smaller consumable parts and slowing down the
+   teaching process many notches down. Awesome read if you have been a
+   programmer all your life and want to whack in the gut with simple stuff
+   that you should have known the first time you used a compiler.
+   14.
+
+   Communication and Collaboration: Here at Databricks the work is largely
+   collaborative, our environment is open and transparent; as such, it=E2=
+=80=99s
+   important that we understand how effectively you communicate and how you
+   partner with those around you. Throughout the day, we expect that you wi=
+ll
+   be able to verbalize your thought process clearly and actively communica=
+te
+   your approach.
+   15.
+
+   Clarify and Gather Requirements: Some of the problems you will face are
+   deliberately open-ended. You will be required to identify the relevant
+   requirements and define what problem solving technique is necessary. Avo=
+id
+   making assumptions and further exhibit your communication skills by taki=
+ng
+   a step back to assess the problem and its parameters before diving in to
+   solve it.
+   16.
+
+   Seek to Improve and Iterate: Like most problems within software
+   engineering the technical questions are iterative, try your best to be
+   mindful of and strive to improve your solutions. We want to see that you
+   can continue to refine your solution and assess tradeoffs to get to a
+   reasonable end state.
+
+
+
+Hopefully you found this information helpful in better preparing you for
+what=E2=80=99s ahead. Engineering Interviews are complex and challenging so=
+ ideally
+this has served useful in your preparation! Don=E2=80=99t forget that this =
+will
+also be a great opportunity for you to learn more about us and how you
+could make an impact on Databricks Engineering. Come with questions and
+feel free to pick our brains! Ultimately we hope you end the day feeling
+challenged and even more excited about the potential of becoming a
+Brickster.
+
+------------------------------
+
+Preparation and Insight Links:
+
+   -
+
+   Pramp: How to Succeed in a System Design Interview
+   <https://blog.pramp.com/how-to-succeed-in-a-system-design-interview-27b3=
+5de0df26>
+   -
+
+   Hackernoon: Anatomy of a System Design Interview
+   <https://hackernoon.com/anatomy-of-a-system-design-interview-4cb57d75a53=
+>
+   -
+
+   Hackernoon: How Not to Design
+   <https://hackernoon.com/how-not-to-design-netflix-in-your-45-minute-syst=
+em-design-interview-64953391a054>
+   -
+
+   Educative: Grokking the System Design Interview
+   <https://www.educative.io/courses/grokking-the-system-design-interview>
+   -
+
+   Leetcode <https://leetcode.com/>
+   -
+
+   Geeks for Geeks <https://www.geeksforgeeks.org/>
+   -
+
+   Infoworld: Best open source software
+   <https://www.infoworld.com/article/3444198/the-best-open-source-software=
+-of-2019.html#slide27>
+   -
+
+   Databricks Home Page <https://www.databricks.com/>
+
+
+   -
+
+   Databricks Careers Site <https://www.databricks.com/company/careers>
+   -
+
+   Databricks Blog Site <https://www.databricks.com/blog>
+   -
+
+   Databricks Demo Site
+   <https://www.databricks.com/resources/demos?itm_data=3Dnavbar_watchdemos=
+>
+
+
+--=20
+<http://www.databricks.com>
+*Alex Verkunich*
+Sr. Technical Recruiter
+
+alex.verkunich@databricks.com
+
+--00000000000010f39006567af00b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div><br>Hi Zaris,=C2=A0=
+=C2=A0<div><div style=3D"margin:0px;min-width:0px;padding:0px 0px 20px;widt=
+h:auto;font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Ari=
+al,sans-serif;font-size:medium"><div id=3D"m_6317603241175039758m_-24432625=
+14800090129m_-7390017476481580093m_-9212196267211409922m_-78874686082955025=
+49m_5754261590463692802m_-7515408696913874540m_9150509356543062750m_8505516=
+666115293719gmail-:7oc" style=3D"direction:ltr;margin:8px 0px 0px;padding:0=
+px;font-size:0.875rem;overflow-x:hidden"><div id=3D"m_6317603241175039758m_=
+-2443262514800090129m_-7390017476481580093m_-9212196267211409922m_-78874686=
+08295502549m_5754261590463692802m_-7515408696913874540m_9150509356543062750=
+m_8505516666115293719gmail-:7ob" style=3D"direction:ltr;font-variant-numeri=
+c:normal;font-variant-east-asian:normal;font-variant-alternates:normal;font=
+-size-adjust:none;font-kerning:auto;font-feature-settings:normal;font-stret=
+ch:normal;font-size:small;line-height:1.5;font-family:Arial,Helvetica,sans-=
+serif;overflow:auto hidden"><div id=3D"m_6317603241175039758m_-244326251480=
+0090129m_-7390017476481580093m_-9212196267211409922m_-7887468608295502549m_=
+5754261590463692802m_-7515408696913874540m_9150509356543062750m_85055166661=
+15293719gmail-avWBGd-1902"><div dir=3D"ltr"><div><font face=3D"arial, sans-=
+serif">Thank you for taking the time to speak with me today! I have added t=
+he details of the full interview round=C2=A0below for your review. Please l=
+et me know if you have any questions on the materials.=C2=A0</font></div><d=
+iv><font face=3D"arial, sans-serif"><br></font></div><div><font face=3D"ari=
+al, sans-serif">You will soon receive another email to submit your availabi=
+lity for the interviews.=C2=A0</font></div><div dir=3D"ltr"><div><font face=
+=3D"arial, sans-serif"><br></font></div><div><p dir=3D"ltr" style=3D"line-h=
+eight:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0=
+);background-color:transparent;font-weight:700;font-variant-numeric:normal;=
+font-variant-east-asian:normal;font-variant-alternates:normal;vertical-alig=
+n:baseline"><font face=3D"arial, sans-serif">Systems Programming</font></sp=
+an></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-botto=
+m:0pt"><span style=3D"color:rgb(0,0,0);background-color:transparent;font-va=
+riant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates=
+:normal;vertical-align:baseline"><font face=3D"arial, sans-serif">In this i=
+nterview, you will be given a specific question focused on systems programm=
+ing. The question is usually on a single computer/single machine (e.g. desi=
+gn and implement a single-machine cache) and you=E2=80=99ll be asked to pro=
+duce a relevant and performant system. The question is likely to be=C2=A0<s=
+pan style=3D"outline:none;border-bottom:2px rgb(146,84,234);border-top-styl=
+e:none;border-right-style:none;border-left-style:none;background:none">a ge=
+neral question,=C2=A0</span><span style=3D"border-style:none;background:non=
+e"><span style=3D"outline:none;border-bottom:2px rgb(146,84,234);border-top=
+-style:none;border-right-style:none;border-left-style:none;background:none"=
+>and not necessarily related to your technical background or to</span></spa=
+n>=C2=A0Databricks=E2=80=99 core products. We are evaluating your technical=
+ knowledge/solution as well as your communication=C2=A0<span style=3D"outli=
+ne:none;border-bottom:2px rgb(146,84,234);border-top-style:none;border-righ=
+t-style:none;border-left-style:none;background:none"><span style=3D"border-=
+style:none;background:none"><span style=3D"outline:none;border-bottom:2px r=
+gb(146,84,234);border-top-style:none;border-right-style:none;border-left-st=
+yle:none;background:none">around</span></span></span>=C2=A0that solution.</=
+font></span></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;mar=
+gin-bottom:0pt"><span id=3D"m_6317603241175039758m_-2443262514800090129m_-7=
+390017476481580093m_-9212196267211409922m_-7887468608295502549m_57542615904=
+63692802m_-7515408696913874540m_9150509356543062750m_8505516666115293719m_6=
+62283034490774119m_2533002900904815905m_431352196717572898m_-75006644265420=
+98988m_-425170928357492053m_-8515432773894346877m_-3064355039609074518m_-74=
+3072016150327349m_-29359816481214754m_6490413049203116626m_-716149510285144=
+5036m_526045762734136065m_6446180762926855102m_-3697474977373417860m_-36177=
+05425713578248m_6507440823992682618m_-7370752383226814751m_4869631409711555=
+339m_1821135888622809912m_311987506946869625m_-289422531501087234m_63372685=
+06393564327m_459617839263042893m_8758162401434995517m_-8657250127007121002g=
+mail-docs-internal-guid-656c8836-7fff-685c-2e54-f27f9b79f8f7"><font face=3D=
+"arial, sans-serif"><br></font></span></p><p dir=3D"ltr" style=3D"line-heig=
+ht:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);b=
+ackground-color:transparent;font-variant-numeric:normal;font-variant-east-a=
+sian:normal;font-variant-alternates:normal;vertical-align:baseline"><font f=
+ace=3D"arial, sans-serif">You will need to ask clarifying questions and ful=
+ly understand the=C2=A0<span style=3D"outline:none;border-bottom:2px rgb(14=
+6,84,234);border-top-style:none;border-right-style:none;border-left-style:n=
+one;background:none"><span style=3D"border-style:none;background:none"><spa=
+n style=3D"outline:none;border-bottom:2px rgb(146,84,234);border-top-style:=
+none;border-right-style:none;border-left-style:none;background:none">parame=
+ters of the problem</span></span></span>=C2=A0before solving. Requirements =
+to consider while solving=C2=A0<span style=3D"outline:none;border-bottom:2p=
+x rgb(50,113,234);border-top-style:none;border-right-style:none;border-left=
+-style:none;background:none"><span style=3D"border-style:none;background:no=
+ne"><span style=3D"outline:none;border-bottom:2px rgb(50,113,234);border-to=
+p-style:none;border-right-style:none;border-left-style:none;background:none=
+">are including but not limited to performance, concurrency, threading vers=
+us multi-threading, and order=C2=A0</span></span></span>dependent processin=
+g. Additional sample design requirements are better throughput, reducing la=
+tency, and data=C2=A0<span style=3D"outline:none;border-bottom:2px rgb(50,1=
+13,234);border-top-style:none;border-right-style:none;border-left-style:non=
+e;background:none"><span style=3D"border-style:none;background:none"><span =
+style=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:no=
+ne;border-right-style:none;border-left-style:none;background:none">durabili=
+ty.You will also want to consider things like synchronization, network and =
+disk IO.</span></span></span></font></span></p><p dir=3D"ltr" style=3D"line=
+-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0=
+,0);background-color:transparent;font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;font-variant-alternates:normal;vertical-align:baseline"><f=
+ont face=3D"arial, sans-serif">The desired outcome of this interview is an =
+actual pseudocode implementation that is reliable, fast, scalable, and cove=
+rs any other predetermined requirements. You will be asked to implement var=
+ious parts of the system and write pseudocode that effectively conveys your=
+ solution. You will not be expected to write compiling code, and it doesn=
+=E2=80=99t need to be in a specific language, but you should be ready to wr=
+ite sufficiently specific code to have a conversation around tradeoffs, tec=
+hniques, and solutions related to the above. You should be familiar with=C2=
+=A0<span style=3D"outline:none;border-bottom:2px rgb(146,84,234);border-top=
+-style:none;border-right-style:none;border-left-style:none;background:none"=
+><span style=3D"border-style:none;background:none"><span style=3D"outline:n=
+one;border-bottom:2px rgb(146,84,234);border-top-style:none;border-right-st=
+yle:none;border-left-style:none;background:none">structuring of classes, st=
+rong cohesion and weak coupling, separation of concerns, and single</span><=
+/span></span>=C2=A0responsibility principle.</font></span></p><p dir=3D"ltr=
+" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><font face=3D=
+"arial, sans-serif"><br></font></p><p dir=3D"ltr" style=3D"line-height:1.38=
+;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);backgrou=
+nd-color:transparent;font-variant-numeric:normal;font-variant-east-asian:no=
+rmal;font-variant-alternates:normal;vertical-align:baseline"><font face=3D"=
+arial, sans-serif">It is also essential to think about ways things may fail=
+ under concurrency and environmental=C2=A0<span style=3D"outline:none;borde=
+r-bottom:2px rgb(146,84,234);border-top-style:none;border-right-style:none;=
+border-left-style:none;background:none">conditions, and to provide reasonin=
+g on how to handle=C2=A0<span style=3D"border-style:none;background:none">t=
+hem=E2=80=93</span>=C2=A0The interviewer may add in</span>=C2=A0additional =
+parameters or requirements as the interview progresses (e.g. =E2=80=9Chow w=
+ould you handle losing power on a regular basis=E2=80=9D). These questions =
+typically relate back to real world circumstances.=C2=A0</font></span></p><=
+p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><=
+font face=3D"arial, sans-serif"><br></font></p><p dir=3D"ltr" style=3D"line=
+-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0=
+,0);background-color:transparent;font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;font-variant-alternates:normal;vertical-align:baseline"><f=
+ont face=3D"arial, sans-serif">The expectation is that you are driving the =
+solution and proactively explaining/rationalizing your solution and decisio=
+ns. The interviewer should be open to=C2=A0<span style=3D"outline:none;bord=
+er-bottom:2px rgb(50,113,234);border-top-style:none;border-right-style:none=
+;border-left-style:none;background:none"><span style=3D"border-style:none;b=
+ackground:none">discuss parameters and requirements wit you upfront, and an=
+swer</span></span>=C2=A0any questions you may have while solving. There may=
+ be circumstances in which the interviewer feels the solution is not going =
+in a direction they had hoped; they might give you a hint or try to steer y=
+ou in a new direction. It is equally important to listen to their feedback =
+and apply it to your solution. Typically, the more you talk through your=C2=
+=A0<span style=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top=
+-style:none;border-right-style:none;border-left-style:none;background:none"=
+>process,</span>=C2=A0<span style=3D"border-style:none;background:none">des=
+cribe</span>=C2=A0your thinking and decisions, the better the interviewer c=
+an evaluate.</font></span></p><p dir=3D"ltr" style=3D"line-height:1.38;marg=
+in-top:0pt;margin-bottom:0pt"><font face=3D"arial, sans-serif"><br></font><=
+/p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0p=
+t"><font face=3D"arial, sans-serif"><span style=3D"color:rgb(0,0,0);backgro=
+und-color:transparent;font-variant-numeric:normal;font-variant-east-asian:n=
+ormal;font-variant-alternates:normal;vertical-align:baseline">A sample desi=
+gn question is something like a</span><a href=3D"https://www.geeksforgeeks.=
+org/how-to-design-a-rate-limiter-api-learn-system-design/" style=3D"text-de=
+coration-line:none" target=3D"_blank"><span style=3D"color:rgb(0,0,0);backg=
+round-color:transparent;font-variant-numeric:normal;font-variant-east-asian=
+:normal;font-variant-alternates:normal;vertical-align:baseline">=C2=A0</spa=
+n><span style=3D"color:rgb(0,0,255);background-color:transparent;font-varia=
+nt-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:no=
+rmal;text-decoration-line:underline;vertical-align:baseline">rate limiter</=
+span></a><span style=3D"color:rgb(0,0,255);background-color:transparent;fon=
+t-variant-numeric:normal;font-variant-east-asian:normal;font-variant-altern=
+ates:normal;vertical-align:baseline">.=C2=A0</span><span style=3D"backgroun=
+d-color:transparent;font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;font-variant-alternates:normal;vertical-align:baseline"><font color=3D"=
+#000000">I have heard that concurrency and multi-threading questions on Lee=
+tcode can be helpful.</font></span></font></p><p dir=3D"ltr" style=3D"line-=
+height:1.38;margin-top:0pt;margin-bottom:0pt"><font face=3D"arial, sans-ser=
+if"><br></font></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;=
+margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);background-color:transpa=
+rent;font-variant-numeric:normal;font-variant-east-asian:normal;font-varian=
+t-alternates:normal;vertical-align:baseline"><font face=3D"arial, sans-seri=
+f">Tooling: CoderPad</font></span></p><p dir=3D"ltr" style=3D"line-height:1=
+.38;margin-top:0pt;margin-bottom:0pt"><font face=3D"arial, sans-serif"><br>=
+</font></p><font face=3D"arial, sans-serif"><br></font><p dir=3D"ltr" style=
+=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color=
+:rgb(0,0,0);background-color:transparent;font-weight:700;font-variant-numer=
+ic:normal;font-variant-east-asian:normal;font-variant-alternates:normal;ver=
+tical-align:baseline"><font face=3D"arial, sans-serif">Algorithms (same for=
+mat as the technical screen)</font></span></p><span style=3D"color:rgb(80,0=
+,80)"><font face=3D"arial, sans-serif"><p dir=3D"ltr" style=3D"line-height:=
+1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);back=
+ground-color:transparent;font-variant-numeric:normal;font-variant-east-asia=
+n:normal;font-variant-alternates:normal;vertical-align:baseline">In this in=
+terview, you will be asked a question focused on typical computer science d=
+ata structures and algorithms, as well as some math concepts. The expectati=
+on is that you will be able to code a solution that can compile and run. Yo=
+u=E2=80=99ll be evaluated on your actual implementation, analysis around th=
+e implementation, as well as your=C2=A0<span style=3D"border-style:none;bac=
+kground:none"><span style=3D"outline:none;border-bottom:2px rgb(146,84,234)=
+;border-top-style:none;border-right-style:none;border-left-style:none;backg=
+round:none">communication around</span></span>=C2=A0the solution. We also l=
+ike to see you produce appropriate test cases and that your solution applie=
+s to corner/edge cases in a clean and concise way.=C2=A0</span></p><br><p d=
+ir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><spa=
+n style=3D"color:rgb(0,0,0);background-color:transparent;font-variant-numer=
+ic:normal;font-variant-east-asian:normal;font-variant-alternates:normal;ver=
+tical-align:baseline">Before solving, it is recommended to briefly discuss =
+the problem and define your approach. While solving, please explain your de=
+cisions and thought process<span style=3D"outline:none;border-bottom:2px rg=
+b(50,113,234);border-top-style:none;border-right-style:none;border-left-sty=
+le:none;background:none"><span style=3D"border-style:none;background:none">=
+=E2=80=93=C2=A0</span></span>we want to see that you can justify your solut=
+ion. We typically only ask one question in this interview, but the intervie=
+wer may ask=C2=A0<span style=3D"outline:none;border-bottom:2px rgb(146,84,2=
+34);border-top-style:none;border-right-style:none;border-left-style:none;ba=
+ckground:none">follow up questions or for=C2=A0</span>clarifications around=
+ things like time complexity and run-time performance. They may also give h=
+ints so it is important to listen to any feedback. It is highly recommended=
+ to factor in and discuss edge cases and tradeoffs. We expect you to test a=
+nd debug your solution.=C2=A0</span><span style=3D"font-family:Arial,Helvet=
+ica,sans-serif;background-color:transparent;color:rgb(0,0,0);font-variant-n=
+umeric:normal;font-variant-east-asian:normal;font-variant-alternates:normal=
+;vertical-align:baseline"><font face=3D"arial, sans-serif">W</font></span><=
+span style=3D"background-color:transparent;white-space:pre-wrap;color:rgb(0=
+,0,0);font-family:Arial,sans-serif">e care about clarity (what <span style=
+=3D"outline:none;border-bottom:2px rgb(146,84,234);border-top-style:none;bo=
+rder-right-style:none;border-left-style:none;background:none">does each sta=
+tement do), ordering,</span> data flow (what values are passed from where i=
+nto where), <span style=3D"outline:none;border-bottom:2px rgb(146,84,234);b=
+order-top-style:none;border-right-style:none;border-left-style:none;backgro=
+und:none">and</span> correct use of concurrency primitives. </span></p></fo=
+nt></span><span style=3D"color:rgb(80,0,80)"><font face=3D"arial, sans-seri=
+f"><br><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-botto=
+m:0pt"><span style=3D"color:rgb(0,0,0);background-color:transparent;font-va=
+riant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates=
+:normal;vertical-align:baseline">This interview is language agnostic and yo=
+u can use whatever language you feel most comfortable in=C2=A0<span style=
+=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:none;bo=
+rder-right-style:none;border-left-style:none;background:none"><span style=
+=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:none;bo=
+rder-right-style:none;border-left-style:none;background:none">or feel</span=
+></span>=C2=A0best suits the problem at hand.=C2=A0</span></p><p dir=3D"ltr=
+" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=
+=3D"color:rgb(0,0,0);background-color:transparent;font-variant-numeric:norm=
+al;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-a=
+lign:baseline"><br></span></p><p style=3D"line-height:1.38;margin-top:0pt;m=
+argin-bottom:0pt"><span style=3D"color:rgb(0,0,0);background-color:transpar=
+ent;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">For preparation, you can look a=
+t topics like hash maps, strings, binary search, graphs, arrays, sorting, e=
+tc.=C2=A0</span></p><br><p dir=3D"ltr" style=3D"line-height:1.38;margin-top=
+:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);background-color:tr=
+ansparent;font-variant-numeric:normal;font-variant-east-asian:normal;font-v=
+ariant-alternates:normal;vertical-align:baseline">Tooling: CoderPad=C2=A0<b=
+r><br></span></p><p dir=3D"ltr" style=3D"color:rgb(34,34,34);font-family:Ar=
+ial,Helvetica,sans-serif;line-height:1.38;margin-top:0pt;margin-bottom:0pt"=
+><span style=3D"color:rgb(0,0,0);background-color:transparent;font-weight:7=
+00;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-=
+alternates:normal;vertical-align:baseline"><font face=3D"arial, sans-serif"=
+>Coding</font></span></p><p dir=3D"ltr" style=3D"color:rgb(34,34,34);font-f=
+amily:Arial,Helvetica,sans-serif;line-height:1.38;margin-top:0pt;margin-bot=
+tom:0pt"><span style=3D"background-color:transparent;font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;vertica=
+l-align:baseline"><font face=3D"arial, sans-serif" color=3D"#000000">In thi=
+s interview we will evaluate your coding, implementation, and debugging ski=
+lls, replicating a typical everyday working environment.=C2=A0 We want to s=
+ee you write clean, bug-free, well-tested code. It is recommended to briefl=
+y discuss the problem and define your approach. While solving, it is also r=
+ecommended to explain the decisions you=E2=80=99re making and the correctne=
+ss of the solution.=C2=A0</font></span></p><p dir=3D"ltr" style=3D"color:rg=
+b(34,34,34);font-family:Arial,Helvetica,sans-serif;line-height:1.38;margin-=
+top:0pt;margin-bottom:0pt"><span style=3D"background-color:transparent;font=
+-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alterna=
+tes:normal;vertical-align:baseline"><font face=3D"arial, sans-serif" color=
+=3D"#000000"><br></font></span></p><p dir=3D"ltr" style=3D"color:rgb(34,34,=
+34);font-family:Arial,Helvetica,sans-serif;line-height:1.38;margin-top:0pt;=
+margin-bottom:0pt"><span style=3D"background-color:transparent;font-variant=
+-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norm=
+al;vertical-align:baseline"><font face=3D"arial, sans-serif" color=3D"#0000=
+00">This interview is focused more on implementation than the Algorithms in=
+terview, but you will still need some basic algorithms knowledge to solve t=
+he problem. The first priority for this interview is a complete solution, f=
+ollowed by debugging and testing edge cases for the solution. We will look =
+at how you implement your components, classes, methods, and functions, your=
+ coding style, and your test cases.</font></span></p><p dir=3D"ltr" style=
+=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color=
+:rgb(0,0,0);background-color:transparent;font-variant-numeric:normal;font-v=
+ariant-east-asian:normal;font-variant-alternates:normal;vertical-align:base=
+line"><font face=3D"arial, sans-serif" style=3D"color:rgb(34,34,34)"><br></=
+font></span></p><p dir=3D"ltr" style=3D"color:rgb(34,34,34);font-family:Ari=
+al,Helvetica,sans-serif;line-height:1.38;margin-top:0pt;margin-bottom:0pt">=
+<span style=3D"color:rgb(0,0,0);background-color:transparent;font-variant-n=
+umeric:normal;font-variant-east-asian:normal;font-variant-alternates:normal=
+;vertical-align:baseline"><font face=3D"arial, sans-serif">Tooling: CoderPa=
+d=C2=A0</font></span></p><br></font></span><p dir=3D"ltr" style=3D"line-hei=
+ght:1.38;margin-top:0pt;margin-bottom:0pt"><br></p><p dir=3D"ltr" style=3D"=
+line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb=
+(0,0,0);background-color:transparent;font-variant-numeric:normal;font-varia=
+nt-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline=
+"><font face=3D"arial, sans-serif"><br></font></span></p><p dir=3D"ltr" sty=
+le=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"col=
+or:rgb(0,0,0);background-color:transparent;font-weight:700;font-variant-num=
+eric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;v=
+ertical-align:baseline"><font face=3D"arial, sans-serif">Conversational/Beh=
+avioral aka Cross-Functional (1 hour)</font></span></p><p dir=3D"ltr" style=
+=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><font face=3D"arial,=
+ sans-serif"><span style=3D"color:rgb(0,0,0);background-color:transparent;f=
+ont-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alte=
+rnates:normal;vertical-align:baseline">This is a conversational interview w=
+ith an engineering manager here at Databricks=C2=A0</span><span style=3D"co=
+lor:rgb(0,0,0);font-variant-numeric:normal;font-variant-east-asian:normal;f=
+ont-variant-alternates:normal;vertical-align:baseline">focused on how you o=
+perate in a working environment, your interest in Databricks, your career g=
+rowth/progression, and your technical background.=C2=A0</span></font></p><p=
+ dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt;pad=
+ding:10pt 0pt"><span style=3D"color:rgb(0,0,0);font-variant-numeric:normal;=
+font-variant-east-asian:normal;font-variant-alternates:normal;vertical-alig=
+n:baseline"><font face=3D"arial, sans-serif">We want to see that you can co=
+mmunicate clearly and concisely, that there&#39;s a method to your answers =
+and you provide sufficient details. When speaking about technical details, =
+please be conscious of your audience and ensure you clarify any jargon/inte=
+rnal terminology.=C2=A0=C2=A0<br><br>Read about=C2=A0<b>the STAR method=C2=
+=A0</b>and use it during your answers!</font></span></p><p dir=3D"ltr" styl=
+e=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"colo=
+r:rgb(0,0,0);font-variant-numeric:normal;font-variant-east-asian:normal;fon=
+t-variant-alternates:normal;vertical-align:baseline"><font face=3D"arial, s=
+ans-serif">Generally, the topics tend to cover the below areas:=C2=A0</font=
+></span></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-=
+bottom:0pt"><span style=3D"color:rgb(0,0,0);background-color:transparent;fo=
+nt-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alter=
+nates:normal;vertical-align:baseline"><font face=3D"arial, sans-serif" styl=
+e=3D"color:rgb(34,34,34)"><br></font></span></p><ul style=3D"margin-top:0px=
+;margin-bottom:0px"><li style=3D"margin-left:11pt;list-style-type:disc;colo=
+r:rgb(0,0,0);background-color:transparent;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-variant-alternates:normal;vertical-align:bas=
+eline"><p role=3D"presentation" style=3D"line-height:1.38;margin-top:10pt;m=
+argin-bottom:0pt"><font face=3D"arial, sans-serif"><span style=3D"font-weig=
+ht:700;font-variant-numeric:normal;font-variant-east-asian:normal;font-vari=
+ant-alternates:normal;vertical-align:baseline">Collaboration:</span><span s=
+tyle=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-var=
+iant-alternates:normal;vertical-align:baseline">=C2=A0These questions will =
+focus on things like conflict resolution, mentorship of junior engineers, m=
+anaging up, and working cross-functionally.=C2=A0</span></font></p></li><ul=
+ style=3D"margin-top:0px;margin-bottom:0px"><li style=3D"margin-left:15px;l=
+ist-style-type:circle;color:rgb(0,0,0);background-color:transparent;font-va=
+riant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates=
+:normal;vertical-align:baseline"><p role=3D"presentation" style=3D"line-hei=
+ght:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-variant-nume=
+ric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;ve=
+rtical-align:baseline"><font face=3D"arial, sans-serif">I.e. Tell me about =
+a time you had a disagreement with a teammate and how you solved it</font><=
+/span></p></li><li style=3D"margin-left:15px;list-style-type:circle;color:r=
+gb(0,0,0);background-color:transparent;font-variant-numeric:normal;font-var=
+iant-east-asian:normal;font-variant-alternates:normal;vertical-align:baseli=
+ne"><p role=3D"presentation" style=3D"line-height:1.38;margin-top:0pt;margi=
+n-bottom:0pt"><span style=3D"font-variant-numeric:normal;font-variant-east-=
+asian:normal;font-variant-alternates:normal;vertical-align:baseline"><font =
+face=3D"arial, sans-serif">I.e. Tell me about=C2=A0 time to have to execute=
+ on a project with varying stakeholder priorities</font></span></p></li></u=
+l><li style=3D"margin-left:11pt;list-style-type:disc;color:rgb(0,0,0);backg=
+round-color:transparent;font-variant-numeric:normal;font-variant-east-asian=
+:normal;font-variant-alternates:normal;vertical-align:baseline"><p role=3D"=
+presentation" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><=
+font face=3D"arial, sans-serif"><span style=3D"font-weight:700;font-variant=
+-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norm=
+al;vertical-align:baseline">Ownership &amp; Impact:=C2=A0</span><span style=
+=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">We want to see that you can ide=
+ntify and solve problems. Similarly, we want to understand your decision ma=
+king process. These questions may also focus on your motivation around your=
+ work and how you see projects end to end.=C2=A0=C2=A0</span></font></p></l=
+i><ul style=3D"margin-top:0px;margin-bottom:0px"><li style=3D"margin-left:1=
+5px;list-style-type:circle;color:rgb(0,0,0);background-color:transparent;fo=
+nt-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alter=
+nates:normal;vertical-align:baseline"><p role=3D"presentation" style=3D"lin=
+e-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-variant=
+-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norm=
+al;vertical-align:baseline"><font face=3D"arial, sans-serif">I.e. Describe =
+a project end to end, who was involved, how did you measure success=C2=A0</=
+font></span></p></li><li style=3D"margin-left:15px;list-style-type:circle;c=
+olor:rgb(0,0,0);background-color:transparent;font-variant-numeric:normal;fo=
+nt-variant-east-asian:normal;font-variant-alternates:normal;vertical-align:=
+baseline"><p role=3D"presentation" style=3D"line-height:1.38;margin-top:0pt=
+;margin-bottom:0pt"><span style=3D"font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+<font face=3D"arial, sans-serif">I.e. A project you are leading is getting =
+off track/set to miss a deadline, how do you course correct</font></span></=
+p></li></ul><li style=3D"margin-left:11pt;list-style-type:disc;color:rgb(0,=
+0,0);background-color:transparent;font-variant-numeric:normal;font-variant-=
+east-asian:normal;font-variant-alternates:normal;vertical-align:baseline"><=
+p role=3D"presentation" style=3D"line-height:1.38;margin-top:0pt;margin-bot=
+tom:0pt"><font face=3D"arial, sans-serif"><span style=3D"font-weight:700;fo=
+nt-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alter=
+nates:normal;vertical-align:baseline">Growth/Reflection:</span><span style=
+=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">=C2=A0These questions will see =
+if you understand how you can improve/have improved from the past, how you =
+give/receive both positive and negative feedback, if you seek out mentors a=
+nd learning opportunities, and your learning preferences (i.e. learning man=
+y skills or being a deep technical master).=C2=A0=C2=A0</span></font></p></=
+li><ul style=3D"margin-top:0px;margin-bottom:0px"><li style=3D"margin-left:=
+15px;list-style-type:circle;color:rgb(0,0,0);background-color:transparent;f=
+ont-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alte=
+rnates:normal;vertical-align:baseline"><p role=3D"presentation" style=3D"li=
+ne-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:nor=
+mal;vertical-align:baseline"><font face=3D"arial, sans-serif">Tell me about=
+ a time something went wrong/didn=E2=80=99t go as planned. What did you lea=
+rn/what would you do differently</font></span></p></li><li style=3D"margin-=
+left:15px;list-style-type:circle;color:rgb(0,0,0);background-color:transpar=
+ent;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline"><p role=3D"presentation" style=
+=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-=
+variant-numeric:normal;font-variant-east-asian:normal;font-variant-alternat=
+es:normal;vertical-align:baseline"><font face=3D"arial, sans-serif">Provide=
+ an example of a time you took some feedback and applied it to your day to =
+day</font></span></p></li></ul><li style=3D"margin-left:11pt;list-style-typ=
+e:disc;color:rgb(0,0,0);background-color:transparent;font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;vertica=
+l-align:baseline"><p role=3D"presentation" style=3D"line-height:1.38;margin=
+-top:0pt;margin-bottom:0pt"><font face=3D"arial, sans-serif"><span style=3D=
+"font-weight:700;font-variant-numeric:normal;font-variant-east-asian:normal=
+;font-variant-alternates:normal;vertical-align:baseline">Technical Backgrou=
+nd:</span><span style=3D"font-variant-numeric:normal;font-variant-east-asia=
+n:normal;font-variant-alternates:normal;vertical-align:baseline">=C2=A0Plea=
+se be prepared to explain your background from a technical perspective and =
+how it may fit with Databricks. You will likely be asked=C2=A0<span style=
+=3D"border-style:none;background:none"><span style=3D"outline:none;border-b=
+ottom:2px rgb(146,84,234);border-top-style:none;border-right-style:none;bor=
+der-left-style:none;background:none">to</span></span>=C2=A0multiple recent =
+or impactful projects. (Remember, this interview is focused on softer skill=
+s)=C2=A0</span></font></p></li><li style=3D"margin-left:11pt;list-style-typ=
+e:disc;color:rgb(0,0,0);background-color:transparent;font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;vertica=
+l-align:baseline"><p role=3D"presentation" style=3D"line-height:1.38;margin=
+-top:0pt;margin-bottom:0pt"><font face=3D"arial, sans-serif"><span style=3D=
+"font-weight:700;font-variant-numeric:normal;font-variant-east-asian:normal=
+;font-variant-alternates:normal;vertical-align:baseline">Career:=C2=A0</spa=
+n><span style=3D"font-variant-numeric:normal;font-variant-east-asian:normal=
+;font-variant-alternates:normal;vertical-align:baseline">We&#39;ll also wan=
+t to understand your overall career growth/history, such as why you left a =
+company for a new opportunity.=C2=A0=C2=A0</span></font></p></li><li style=
+=3D"margin-left:11pt;list-style-type:disc;color:rgb(0,0,0);background-color=
+:transparent;font-variant-numeric:normal;font-variant-east-asian:normal;fon=
+t-variant-alternates:normal;vertical-align:baseline"><p role=3D"presentatio=
+n" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:10pt"><font face=
+=3D"arial, sans-serif"><span style=3D"font-weight:700;font-variant-numeric:=
+normal;font-variant-east-asian:normal;font-variant-alternates:normal;vertic=
+al-align:baseline">Interest in Databricks:</span><span style=3D"font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:nor=
+mal;vertical-align:baseline">=C2=A0Please be prepared to answer why you&#39=
+;re interested in Databricks.</span></font></p></li></ul><p dir=3D"ltr" sty=
+le=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"col=
+or:rgb(0,0,0);background-color:transparent;font-variant-numeric:normal;font=
+-variant-east-asian:normal;font-variant-alternates:normal;vertical-align:ba=
+seline"><font face=3D"arial, sans-serif" style=3D"color:rgb(34,34,34)"><spa=
+n style=3D"background-color:transparent;color:rgb(0,0,0)">You can also revi=
+ew our=C2=A0<a href=3D"https://www.databricks.com/company/careers/culture" =
+target=3D"_blank">culture principles</a>! While the questions don&#39;t alw=
+ays directly relate, it can be good to work these themes into your answers.=
+=C2=A0</span></font><font face=3D"arial, sans-serif"></font></span></p><p d=
+ir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><br>=
+</p><div><span id=3D"m_6317603241175039758m_-2443262514800090129m_-73900174=
+76481580093m_-9212196267211409922m_-7887468608295502549m_575426159046369280=
+2m_-7515408696913874540m_9150509356543062750m_8505516666115293719m_66228303=
+4490774119m_2533002900904815905m_431352196717572898m_-7500664426542098988m_=
+-425170928357492053m_-8515432773894346877m_-3064355039609074518m_-743072016=
+150327349m_-29359816481214754m_6490413049203116626m_-7161495102851445036m_5=
+26045762734136065m_6446180762926855102m_-3697474977373417860m_-361770542571=
+3578248m_6507440823992682618m_-7370752383226814751m_4869631409711555339m_18=
+21135888622809912m_311987506946869625m_-289422531501087234m_633726850639356=
+4327m_459617839263042893m_8758162401434995517m_-8657250127007121002m_-25070=
+88355691410891m_-536534604986946114gmail-docs-internal-guid-f6f8d830-7fff-0=
+7d4-2124-16e4f411aa52"><font face=3D"arial, sans-serif"><p dir=3D"ltr" styl=
+e=3D"line-height:1.38;margin-right:18pt;text-indent:22.5pt;text-align:cente=
+r;margin-top:12pt;margin-bottom:12pt"><span style=3D"color:rgb(224,102,102)=
+;font-weight:700;font-variant-numeric:normal;font-variant-east-asian:normal=
+;font-variant-alternates:normal;vertical-align:baseline">General Tips</span=
+><span style=3D"color:rgb(224,102,102);font-variant-numeric:normal;font-var=
+iant-east-asian:normal;font-variant-alternates:normal;vertical-align:baseli=
+ne"></span></p><p dir=3D"ltr" style=3D"line-height:1.38;padding:0pt 0pt 0pt=
+ 13.5pt"><br></p><ol style=3D"margin-top:0px;margin-bottom:0px"><li dir=3D"=
+ltr" style=3D"margin-left:15px;list-style-type:upper-alpha;background-color=
+:transparent;font-variant-numeric:normal;font-variant-east-asian:normal;fon=
+t-variant-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" role=3D=
+"presentation" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt">=
+<span style=3D"color:rgb(0,0,0);font-weight:700;font-variant-numeric:normal=
+;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-ali=
+gn:baseline">ASK ASK ASK</span><span style=3D"color:rgb(0,0,0);font-variant=
+-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norm=
+al;vertical-align:baseline">=C2=A0clarifying questions before diving into t=
+he problem</span></p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-st=
+yle-type:upper-alpha;background-color:transparent;font-variant-numeric:norm=
+al;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-a=
+lign:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D"line-height:1.=
+38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);font-v=
+ariant-numeric:normal;font-variant-east-asian:normal;font-variant-alternate=
+s:normal;vertical-align:baseline">Walk the engineer through your thought pr=
+ocess (thinking out loud)</span></p></li><li dir=3D"ltr" style=3D"margin-le=
+ft:15px;list-style-type:upper-alpha;background-color:transparent;font-varia=
+nt-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:no=
+rmal;vertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D=
+"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rg=
+b(0,0,0);font-variant-numeric:normal;font-variant-east-asian:normal;font-va=
+riant-alternates:normal;vertical-align:baseline">Be mindful of bugs and tes=
+t-driven development</span></p></li><li dir=3D"ltr" style=3D"margin-left:15=
+px;list-style-type:upper-alpha;background-color:transparent;font-variant-nu=
+meric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;=
+vertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D"line=
+-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0=
+,0);font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">Think about the implementabilit=
+y, maintainability and operability of your design</span></p></li><li dir=3D=
+"ltr" style=3D"margin-left:15px;list-style-type:upper-alpha;background-colo=
+r:transparent;font-variant-numeric:normal;font-variant-east-asian:normal;fo=
+nt-variant-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" role=
+=3D"presentation" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0p=
+t"><span style=3D"color:rgb(0,0,0);font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+Also think about trade-offs to your design and be prepared to explain why y=
+ou picked the technologies=C2=A0</span></p></li><li dir=3D"ltr" style=3D"ma=
+rgin-left:15px;list-style-type:upper-alpha;background-color:transparent;fon=
+t-variant-numeric:normal;font-variant-east-asian:normal;font-variant-altern=
+ates:normal;vertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" s=
+tyle=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"c=
+olor:rgb(0,0,0);font-variant-numeric:normal;font-variant-east-asian:normal;=
+font-variant-alternates:normal;vertical-align:baseline">If you are given hi=
+nts, make sure to pay attention to them and implement them where you can</s=
+pan><span style=3D"color:rgb(0,0,0);font-variant-numeric:normal;font-varian=
+t-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline"=
+></span><span style=3D"color:rgb(0,0,0);font-variant-numeric:normal;font-va=
+riant-east-asian:normal;font-variant-alternates:normal;vertical-align:basel=
+ine"></span></p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-style-t=
+ype:upper-alpha;color:rgb(0,0,0);background-color:transparent;font-variant-=
+numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norma=
+l;vertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D"li=
+ne-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-weight=
+:700;font-variant-numeric:normal;font-variant-east-asian:normal;font-varian=
+t-alternates:normal;vertical-align:baseline">Be prepared</span><span style=
+=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">=C2=A0to discuss what motivatio=
+ns you have in your career, your passions, and relevant research as this al=
+l resonates with our teams.</span></p></li><li dir=3D"ltr" style=3D"margin-=
+left:15px;list-style-type:upper-alpha;color:rgb(0,0,0);background-color:tra=
+nsparent;font-variant-numeric:normal;font-variant-east-asian:normal;font-va=
+riant-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" role=3D"pre=
+sentation" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><spa=
+n style=3D"font-weight:700;font-variant-numeric:normal;font-variant-east-as=
+ian:normal;font-variant-alternates:normal;vertical-align:baseline">Subscrib=
+e and watch</span><span style=3D"font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+=C2=A0our</span><a href=3D"https://www.youtube.com/channel/UC3q8O3Bh2Le8Rj1=
+-Q-_UUbA" style=3D"text-decoration-line:none" target=3D"_blank"><span style=
+=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;text-decoration-line:underline;vertical-align:baseline">=
+=C2=A0Databricks=C2=A0<span style=3D"outline:none;border-bottom:2px rgb(50,=
+113,234);border-top-style:none;border-right-style:none;border-left-style:no=
+ne;background:none"><span style=3D"border-style:none;background:none"><span=
+ style=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:n=
+one;border-right-style:none;border-left-style:none;background:none">Youtube=
+</span></span></span>=C2=A0Channel</span></a><span style=3D"font-variant-nu=
+meric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;=
+vertical-align:baseline">=C2=A0to glean more about our organization and tea=
+m.</span></p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-style-type=
+:upper-alpha;color:rgb(0,0,0);background-color:transparent;font-variant-num=
+eric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;v=
+ertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D"line-=
+height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-weight:70=
+0;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-a=
+lternates:normal;vertical-align:baseline">Research the Panel=C2=A0<span sty=
+le=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:none;=
+border-right-style:none;border-left-style:none;background:none">Members:</s=
+pan>=C2=A0</span><span style=3D"font-variant-numeric:normal;font-variant-ea=
+st-asian:normal;font-variant-alternates:normal;vertical-align:baseline"><sp=
+an style=3D"border-style:none;background:none">you will</span>=C2=A0be meet=
+ing with, try to look into their Github repository as it will give you more=
+ information about that engineer, and the more you know about an individual=
+, the better interactions will be experienced.</span></p></li><li dir=3D"lt=
+r" style=3D"margin-left:15px;list-style-type:upper-alpha;color:rgb(0,0,0);b=
+ackground-color:transparent;font-variant-numeric:normal;font-variant-east-a=
+sian:normal;font-variant-alternates:normal;vertical-align:baseline"><p dir=
+=3D"ltr" role=3D"presentation" style=3D"line-height:1.38;margin-top:0pt;mar=
+gin-bottom:0pt"><span style=3D"font-weight:700;font-variant-numeric:normal;=
+font-variant-east-asian:normal;font-variant-alternates:normal;vertical-alig=
+n:baseline">Try our Product:</span><span style=3D"font-variant-numeric:norm=
+al;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-a=
+lign:baseline">=C2=A0Take advantage of being able to use our product for FR=
+EE:=C2=A0</span><a href=3D"https://databricks.com/try-databricks" style=3D"=
+text-decoration-line:none" target=3D"_blank"><span style=3D"font-variant-nu=
+meric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;=
+text-decoration-line:underline;vertical-align:baseline">https://databricks.=
+com/try-databricks</span></a></p></li><li dir=3D"ltr" style=3D"margin-left:=
+15px;list-style-type:upper-alpha;color:rgb(0,0,0);background-color:transpar=
+ent;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" role=3D"presenta=
+tion" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span sty=
+le=3D"font-weight:700;font-variant-numeric:normal;font-variant-east-asian:n=
+ormal;font-variant-alternates:normal;vertical-align:baseline">Analyze Code =
+Base:=C2=A0</span><span style=3D"font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;font-variant-alternates:normal;vertical-align:baseline">Sp=
+end time=C2=A0<span style=3D"outline:none;border-bottom:2px rgb(146,84,234)=
+;border-top-style:none;border-right-style:none;border-left-style:none;backg=
+round:none"><span style=3D"border-style:none;background:none"><span style=
+=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:none;bo=
+rder-right-style:none;border-left-style:none;background:none">to look</span=
+></span></span>=C2=A0into the code of our projects: DeltaLake, Koala, &amp;=
+ DataFlow Reflect and try to draw similar patterns as this reveals the codi=
+ng culture of Databricks. Share these findings with your interviewers.=C2=
+=A0</span></p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-style-typ=
+e:upper-alpha;color:rgb(0,0,0);background-color:transparent;font-variant-nu=
+meric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;=
+vertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D"line=
+-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(69,=
+69,69);font-weight:700;font-variant-numeric:normal;font-variant-east-asian:=
+normal;font-variant-alternates:normal;vertical-align:baseline">Check out</s=
+pan><span style=3D"color:rgb(69,69,69);font-variant-numeric:normal;font-var=
+iant-east-asian:normal;font-variant-alternates:normal;vertical-align:baseli=
+ne">=C2=A0</span><span style=3D"color:rgb(69,69,69);font-weight:700;font-va=
+riant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates=
+:normal;vertical-align:baseline">CTCI</span><span style=3D"color:rgb(69,69,=
+69);font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">=C2=A0as it is a classic CS rec=
+ommended book for interviewing. No one is going to ask you a question you w=
+ill see in that book, but if you are comfortable solving these questions an=
+d writing the code on the whiteboard (or notebook) you are good to go. Time=
+ yourself and resist the urge to type the=C2=A0<span style=3D"outline:none;=
+border-bottom:2px rgb(50,113,234);border-top-style:none;border-right-style:=
+none;border-left-style:none;background:none"><span style=3D"border-style:no=
+ne;background:none">code=E2=80=94=C2=A0</span></span>challenge yourself to =
+use a whiteboard. It is a totally different experience which feels weird at=
+ first, but it makes you a stronger programmer.=C2=A0</span></p></li><li di=
+r=3D"ltr" style=3D"margin-left:15px;list-style-type:upper-alpha;color:rgb(0=
+,0,0);background-color:transparent;font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+<p dir=3D"ltr" role=3D"presentation" style=3D"line-height:1.38;margin-top:0=
+pt;margin-bottom:0pt"><span style=3D"color:rgb(69,69,69);font-weight:700;fo=
+nt-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alter=
+nates:normal;vertical-align:baseline">&quot;Programming Pearls&quot;=C2=A0<=
+/span><span style=3D"color:rgb(69,69,69);font-variant-numeric:normal;font-v=
+ariant-east-asian:normal;font-variant-alternates:normal;vertical-align:base=
+line">written by Jon Bentley. An awesome read that is written much along th=
+e lines of Strunk and White&#39;s Elements of Style about writing, if you h=
+ave read it. It is from the perspective of breaking down the coding process=
+ into smaller consumable parts and slowing down the teaching process many=
+=C2=A0<span style=3D"outline:none;border-bottom:2px rgb(146,84,234);border-=
+top-style:none;border-right-style:none;border-left-style:none;background:no=
+ne">notches down.</span>=C2=A0Awesome read if you have been a programmer al=
+l your life and want to=C2=A0<span style=3D"outline:none;border-bottom:2px =
+rgb(146,84,234);border-top-style:none;border-right-style:none;border-left-s=
+tyle:none;background:none"><span style=3D"border-style:none;background:none=
+"><span style=3D"outline:none;border-bottom:2px rgb(146,84,234);border-top-=
+style:none;border-right-style:none;border-left-style:none;background:none">=
+whack</span></span>=C2=A0in the gut</span>=C2=A0with simple stuff that you =
+should have known the first time you used a compiler.</span></p></li><li di=
+r=3D"ltr" style=3D"margin-left:15px;list-style-type:upper-alpha;color:rgb(0=
+,0,0);background-color:transparent;font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+<p dir=3D"ltr" role=3D"presentation" style=3D"line-height:1.38;margin-top:0=
+pt;margin-bottom:0pt"><span style=3D"font-weight:700;font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;vertica=
+l-align:baseline">Communication and Collaboration:=C2=A0</span><span style=
+=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">Here at Databricks the work is =
+largely=C2=A0<span style=3D"outline:none;border-bottom:2px rgb(50,113,234);=
+border-top-style:none;border-right-style:none;border-left-style:none;backgr=
+ound:none"><span style=3D"border-style:none;background:none"><span style=3D=
+"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:none;borde=
+r-right-style:none;border-left-style:none;background:none">collaborative,</=
+span></span></span>=C2=A0our environment is open and transparent; as such, =
+it=E2=80=99s important that we understand how effectively you communicate a=
+nd how you partner with those around you. Throughout the day, we expect tha=
+t you will be able to verbalize your thought process clearly and actively c=
+ommunicate your approach.</span><span style=3D"font-variant-numeric:normal;=
+font-variant-east-asian:normal;font-variant-alternates:normal;vertical-alig=
+n:baseline"></span></p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-=
+style-type:upper-alpha;color:rgb(0,0,0);background-color:transparent;font-v=
+ariant-numeric:normal;font-variant-east-asian:normal;font-variant-alternate=
+s:normal;vertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" styl=
+e=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font=
+-weight:700;font-variant-numeric:normal;font-variant-east-asian:normal;font=
+-variant-alternates:normal;vertical-align:baseline">Clarify and Gather Requ=
+irements:=C2=A0</span><span style=3D"font-variant-numeric:normal;font-varia=
+nt-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline=
+">Some of the problems you will face are deliberately open-ended. You will =
+be required to identify the relevant requirements and define what problem s=
+olving technique is necessary. Avoid making assumptions and further exhibit=
+ your communication skills by taking a step back to assess the problem and =
+its parameters before diving in to solve it.</span><span style=3D"font-vari=
+ant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:n=
+ormal;vertical-align:baseline"></span></p></li><li dir=3D"ltr" style=3D"mar=
+gin-left:15px;list-style-type:upper-alpha;color:rgb(0,0,0);background-color=
+:transparent;font-variant-numeric:normal;font-variant-east-asian:normal;fon=
+t-variant-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" role=3D=
+"presentation" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:12pt"=
+><span style=3D"font-weight:700;font-variant-numeric:normal;font-variant-ea=
+st-asian:normal;font-variant-alternates:normal;vertical-align:baseline">See=
+k to Improve and Iterate:=C2=A0</span><span style=3D"font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;vertica=
+l-align:baseline">Like most problems within software engineering the techni=
+cal questions are iterative, try your best to be mindful of and strive to i=
+mprove your solutions. We want to see that you can continue to refine your =
+solution and assess tradeoffs to get to a reasonable end state.</span><span=
+ style=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-v=
+ariant-alternates:normal;vertical-align:baseline"></span><span style=3D"fon=
+t-variant-numeric:normal;font-variant-east-asian:normal;font-variant-altern=
+ates:normal;vertical-align:baseline"></span></p></li></ol><br><br><p dir=3D=
+"ltr" style=3D"line-height:1.38"><span style=3D"color:rgb(0,0,0);font-varia=
+nt-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:no=
+rmal;vertical-align:baseline">Hopefully you found this information helpful =
+in better preparing you for what=E2=80=99s ahead. Engineering=C2=A0<span st=
+yle=3D"outline:none;border-bottom:2px rgb(50,113,234);border-top-style:none=
+;border-right-style:none;border-left-style:none;background:none">Interviews=
+ are complex and challenging so ideally this has served=C2=A0<span style=3D=
+"border-style:none;background:none">useful</span></span>=C2=A0in your prepa=
+ration! Don=E2=80=99t forget that this will also be a great opportunity for=
+ you to learn more about us and how you could make an impact on Databricks =
+Engineering. Come with questions and feel free to pick our brains! Ultimate=
+ly we hope you end the day feeling challenged and even more excited about t=
+he potential of becoming a Brickster.</span><span style=3D"color:rgb(0,0,0)=
+;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-al=
+ternates:normal;vertical-align:baseline"></span></p><p dir=3D"ltr" style=3D=
+"line-height:1.38"></p><hr><p></p><p dir=3D"ltr" style=3D"line-height:1.38"=
+><span style=3D"color:rgb(224,102,102);font-weight:700;font-variant-numeric=
+:normal;font-variant-east-asian:normal;font-variant-alternates:normal;verti=
+cal-align:baseline">Preparation and Insight Links:</span><span style=3D"col=
+or:rgb(224,102,102);font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;font-variant-alternates:normal;vertical-align:baseline"></span><span st=
+yle=3D"color:rgb(0,0,0);font-variant-numeric:normal;font-variant-east-asian=
+:normal;font-variant-alternates:normal;vertical-align:baseline"></span><spa=
+n style=3D"color:rgb(0,0,0);font-variant-numeric:normal;font-variant-east-a=
+sian:normal;font-variant-alternates:normal;vertical-align:baseline"></span>=
+<span style=3D"color:rgb(0,0,0);font-variant-numeric:normal;font-variant-ea=
+st-asian:normal;font-variant-alternates:normal;vertical-align:baseline"></s=
+pan><span style=3D"color:rgb(0,0,0);font-variant-numeric:normal;font-varian=
+t-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline"=
+></span></p><ul style=3D"margin-top:0px;margin-bottom:0px"><li dir=3D"ltr" =
+style=3D"margin-left:15px;list-style-type:disc;color:rgb(0,0,0);background-=
+color:transparent;font-variant-numeric:normal;font-variant-east-asian:norma=
+l;font-variant-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" ro=
+le=3D"presentation" style=3D"line-height:1.38;margin-top:12pt;margin-bottom=
+:0pt"><a href=3D"https://blog.pramp.com/how-to-succeed-in-a-system-design-i=
+nterview-27b35de0df26" style=3D"text-decoration-line:none" target=3D"_blank=
+"><span style=3D"font-variant-numeric:normal;font-variant-east-asian:normal=
+;font-variant-alternates:normal;text-decoration-line:underline;vertical-ali=
+gn:baseline">Pramp: How to Succeed in a System Design Interview</span></a><=
+/p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-style-type:disc;colo=
+r:rgb(0,0,0);background-color:transparent;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-variant-alternates:normal;vertical-align:bas=
+eline"><p dir=3D"ltr" role=3D"presentation" style=3D"line-height:1.38;margi=
+n-top:0pt;margin-bottom:0pt"><a href=3D"https://hackernoon.com/anatomy-of-a=
+-system-design-interview-4cb57d75a53" style=3D"text-decoration-line:none" t=
+arget=3D"_blank"><span style=3D"font-variant-numeric:normal;font-variant-ea=
+st-asian:normal;font-variant-alternates:normal;text-decoration-line:underli=
+ne;vertical-align:baseline">Hackernoon: Anatomy of a System Design Intervie=
+w</span></a></p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-style-t=
+ype:disc;color:rgb(0,0,0);background-color:transparent;font-variant-numeric=
+:normal;font-variant-east-asian:normal;font-variant-alternates:normal;verti=
+cal-align:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D"line-heig=
+ht:1.38;margin-top:0pt;margin-bottom:0pt"><a href=3D"https://hackernoon.com=
+/how-not-to-design-netflix-in-your-45-minute-system-design-interview-649533=
+91a054" style=3D"text-decoration-line:none" target=3D"_blank"><span style=
+=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;text-decoration-line:underline;vertical-align:baseline">=
+Hackernoon: How Not to Design=C2=A0</span></a></p></li><li dir=3D"ltr" styl=
+e=3D"margin-left:15px;list-style-type:disc;color:rgb(0,0,0);background-colo=
+r:transparent;font-variant-numeric:normal;font-variant-east-asian:normal;fo=
+nt-variant-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" role=
+=3D"presentation" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0p=
+t"><a href=3D"https://www.educative.io/courses/grokking-the-system-design-i=
+nterview" style=3D"text-decoration-line:none" target=3D"_blank"><span style=
+=3D"font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;text-decoration-line:underline;vertical-align:baseline">=
+Educative: Grokking the System Design Interview</span></a></p></li><li dir=
+=3D"ltr" style=3D"margin-left:15px;list-style-type:disc;color:rgb(0,0,0);ba=
+ckground-color:transparent;font-variant-numeric:normal;font-variant-east-as=
+ian:normal;font-variant-alternates:normal;vertical-align:baseline"><p dir=
+=3D"ltr" role=3D"presentation" style=3D"line-height:1.38;margin-top:0pt;mar=
+gin-bottom:0pt"><a href=3D"https://leetcode.com/" style=3D"text-decoration-=
+line:none" target=3D"_blank"><span style=3D"font-variant-numeric:normal;fon=
+t-variant-east-asian:normal;font-variant-alternates:normal;text-decoration-=
+line:underline;vertical-align:baseline">Leetcode</span></a></p></li><li dir=
+=3D"ltr" style=3D"margin-left:15px;list-style-type:disc;color:rgb(0,0,0);ba=
+ckground-color:transparent;font-variant-numeric:normal;font-variant-east-as=
+ian:normal;font-variant-alternates:normal;vertical-align:baseline"><p dir=
+=3D"ltr" role=3D"presentation" style=3D"line-height:1.38;margin-top:0pt;mar=
+gin-bottom:0pt"><a href=3D"https://www.geeksforgeeks.org/" style=3D"text-de=
+coration-line:none" target=3D"_blank"><span style=3D"font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;text-de=
+coration-line:underline;vertical-align:baseline">Geeks for Geeks</span></a>=
+</p></li><li dir=3D"ltr" style=3D"margin-left:15px;list-style-type:disc;col=
+or:rgb(0,0,0);background-color:transparent;font-variant-numeric:normal;font=
+-variant-east-asian:normal;font-variant-alternates:normal;vertical-align:ba=
+seline"><p dir=3D"ltr" role=3D"presentation" style=3D"line-height:1.38;marg=
+in-top:0pt;margin-bottom:0pt"><a href=3D"https://www.infoworld.com/article/=
+3444198/the-best-open-source-software-of-2019.html#slide27" style=3D"text-d=
+ecoration-line:none" target=3D"_blank"><span style=3D"font-variant-numeric:=
+normal;font-variant-east-asian:normal;font-variant-alternates:normal;text-d=
+ecoration-line:underline;vertical-align:baseline">Infoworld: Best open sour=
+ce software</span></a></p></li><li dir=3D"ltr" style=3D"margin-left:15px;li=
+st-style-type:disc;color:rgb(0,0,0);background-color:transparent;font-varia=
+nt-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:no=
+rmal;vertical-align:baseline"><p dir=3D"ltr" role=3D"presentation" style=3D=
+"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><a href=3D"https://www.=
+databricks.com/" style=3D"text-decoration-line:none" target=3D"_blank"><spa=
+n style=3D"background-color:transparent;font-variant-numeric:normal;font-va=
+riant-east-asian:normal;font-variant-alternates:normal;text-decoration-line=
+:underline;vertical-align:baseline">Databricks Home Page</span></a></p></li=
+></ul><ul style=3D"margin-top:0px;margin-bottom:0px"><li dir=3D"ltr" style=
+=3D"margin-left:15px;list-style-type:disc;color:rgb(0,0,0);background-color=
+:transparent;font-variant-numeric:normal;font-variant-east-asian:normal;fon=
+t-variant-alternates:normal;vertical-align:baseline"><p dir=3D"ltr" role=3D=
+"presentation" style=3D"line-height:1.2;margin-right:0.0449982pt;margin-top=
+:0pt;margin-bottom:0pt"><a href=3D"https://www.databricks.com/company/caree=
+rs" style=3D"text-decoration-line:none" target=3D"_blank"><span style=3D"ba=
+ckground-color:transparent;font-variant-numeric:normal;font-variant-east-as=
+ian:normal;font-variant-alternates:normal;text-decoration-line:underline;ve=
+rtical-align:baseline">Databricks Careers Site</span></a></p></li><li dir=
+=3D"ltr" style=3D"margin-left:15px;list-style-type:disc;color:rgb(0,0,0);ba=
+ckground-color:transparent;font-variant-numeric:normal;font-variant-east-as=
+ian:normal;font-variant-alternates:normal;vertical-align:baseline"><p dir=
+=3D"ltr" role=3D"presentation" style=3D"line-height:1.2;margin-right:0.0449=
+982pt;margin-top:0pt;margin-bottom:0pt"><a href=3D"https://www.databricks.c=
+om/blog" style=3D"text-decoration-line:none" target=3D"_blank"><span style=
+=3D"background-color:transparent;font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;font-variant-alternates:normal;text-decoration-line:underl=
+ine;vertical-align:baseline">Databricks Blog Site</span></a></p></li><li di=
+r=3D"ltr" style=3D"margin-left:15px;list-style-type:disc;color:rgb(0,0,0);b=
+ackground-color:transparent;font-variant-numeric:normal;font-variant-east-a=
+sian:normal;font-variant-alternates:normal;vertical-align:baseline"><p dir=
+=3D"ltr" role=3D"presentation" style=3D"line-height:1.2;margin-right:0.0449=
+982pt;margin-top:0pt;margin-bottom:0pt"><a href=3D"https://www.databricks.c=
+om/resources/demos?itm_data=3Dnavbar_watchdemos" style=3D"text-decoration-l=
+ine:none" target=3D"_blank"><span style=3D"background-color:transparent;fon=
+t-variant-numeric:normal;font-variant-east-asian:normal;font-variant-altern=
+ates:normal;text-decoration-line:underline;vertical-align:baseline">Databri=
+cks Demo Site</span></a></p></li></ul></font></span></div></div></div></div=
+></div></div></div></div></div></div><div><br></div><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature" da=
+ta-smartmail=3D"gmail_signature"><div dir=3D"ltr"><table width=3D"260" cell=
+padding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"font-family:Times;bac=
+kground:none;border:0px;margin:0px;padding:0px"><tbody><tr><td valign=3D"to=
+p" style=3D"padding:20px 0px"><a href=3D"http://www.databricks.com" target=
+=3D"_blank"><img height=3D"32" src=3D"https://databricks.com/wp-content/upl=
+oads/2022/01/databricks-logo-signature.png"></a></td></tr><tr><td><table ce=
+llpadding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"background:none;bor=
+der:0px;margin:0px;padding-left:38px"><tbody><tr><td colspan=3D"2" style=3D=
+"padding-bottom:2px;color:rgb(51,51,51);font-size:14px;font-family:Arial,He=
+lvetica,sans-serif"><b>Alex Verkunich</b></td></tr><tr><td colspan=3D"2" st=
+yle=3D"padding-bottom:12px;color:rgb(51,51,51);font-size:14px;font-family:A=
+rial,Helvetica,sans-serif">Sr. Technical Recruiter</td></tr><tr><td style=
+=3D"padding-bottom:2px;color:rgb(51,51,51);font-size:14px;font-family:Arial=
+,Helvetica,sans-serif"><br></td></tr><tr><td valign=3D"top" style=3D"paddin=
+g-bottom:12px;vertical-align:top;color:rgb(51,51,51);font-size:14px;font-fa=
+mily:Arial,Helvetica,sans-serif"><a href=3D"mailto:alex.verkunich@databrick=
+s.com" target=3D"_blank">alex.verkunich@databricks.com</a></td></tr><tr><td=
+ valign=3D"top" style=3D"padding-bottom:2px;vertical-align:top;color:rgb(51=
+,51,51);font-size:12px;font-family:Arial,Helvetica,sans-serif"><br></td></t=
+r></tbody></table></td></tr></tbody></table></div></div></div>
+</div>
+</div>
+
+--00000000000010f39006567af00b--
