@@ -12,7 +12,7 @@ Companion to [databricks-full-loop.md](databricks-full-loop.md). That doc = *wha
 | **Study window** | **Tue 2026-07-14 → Wed 2026-08-05** (23 days), **Thu Aug 6** = light taper |
 | **Daily budget** | **2–3 focused hrs/day** (alongside work); more on weekends |
 | **Bar** | **Aim L5** — pass with flying colors, strengthen comp leverage |
-| **Language** | **C#** (match workspace; rounds are language-agnostic) |
+| **Language** | **Pseudocode in the room** (language-agnostic per `[S1]`); C# used only as an optional demo/harness vehicle, **not** the subject — see the 2026-07-15 reframe in §2 |
 | **Biggest gap** | **Concurrency / single-machine systems programming — from scratch** |
 | **Q2 (Spark/data-platform design)** | **Assume NOT in scope** — no large-scale/data-platform design round |
 | **Q5 (design tool)** | Not critical as long as the systems round is solid |
@@ -38,22 +38,28 @@ The loop is four rounds `[S1]`,`[S2]`. Our starting position differs wildly acro
 
 A 12-lesson track mirroring the `system_design/` study style (verbose, from-zero, worked examples, self-check, **and the same sourcing directive** — when each lesson is written, facts get cited + a Sources appendix; nothing from memory). Proposed home: a new **`systems_programming/`** track (see [Section 6](#6-proposed-workspace-structure)).
 
-| # | Lesson | Core content | Ships (C# you implement) |
+> **⚠️ Teaching reframe (2026-07-15), from Lesson 2 on.** The round is language-agnostic and the candidate **writes pseudocode in the room, not C#** (email `[S1]`: *"an actual pseudocode implementation that is reliable, fast, scalable … not expected to write compiling code … but ready to write sufficiently specific code to have a conversation around tradeoffs, techniques, solutions … structuring of classes, strong cohesion & weak coupling, separation of concerns, SRP"*). Consequences for how lessons are taught:
+> - **Concept-first, primitives in generic pseudocode** (`lock(m){}`, `wait(cv)`, `signal()`, CAS) — not `System.Threading` APIs. Lesson 1 over-invested in C# quirks; those are demoted to short "language notes."
+> - **"Sufficiently specific pseudocode"** = the middle between system-design hand-waving and compiling code: real class structure + method bodies where the synchronization lives, arguable line-by-line, but syntax/compilation irrelevant.
+> - **Framed as design + tradeoffs**, around the three graded axes **reliable / fast / scalable**, with **OO design quality (SRP, cohesion/coupling, separation of concerns) woven through every lesson**, not saved for Lesson 12.
+> - **The C# "Ships" column below is now optional** — a *watch-it-happen* harness kept only for the ~4 lessons where seeing non-determinism matters (races L2, deadlock L3, memory model L4, thread-safe cache L9). `async`/`await` is one axis (L8), not the spine.
+
+| # | Lesson | Core content | Optional demo (watch-it-happen) |
 |---|---|---|---|
 | 1 | **Threads & the execution model** | process vs thread, `Thread` vs `Task`, scheduling, context switches, cores, why concurrency (throughput/latency) | spin up threads, observe interleaving |
 | 2 | **Shared state & race conditions** | data race, critical section, atomicity, the `count++` race, non-determinism | reproduce a race, then a lost update |
-| 3 | **Mutual exclusion & locks** | `lock`/`Monitor`, mutex, spinlock, granularity, contention; **deadlock** (4 conditions), livelock, lock ordering | fix Lesson 2's race; force + fix a deadlock |
-| 4 | **Memory model & visibility** | reordering, `volatile`, memory barriers, `Interlocked` (CAS), why locks give visibility too | Interlocked counter; volatile flag stop |
-| 5 | **Condition synchronization** | `Monitor.Wait`/`Pulse`/`PulseAll`, condition variables, spurious wakeups, **producer–consumer** | bounded blocking queue → **async logger draining a message queue** `[S7]` |
-| 6 | **Higher-level primitives** | `SemaphoreSlim`, `ManualResetEventSlim`, `CountdownEvent`, `Barrier`, `ReaderWriterLockSlim` | rate-of-N gate; reader-writer map |
-| 7 | **Concurrent data structures** | thread-safe queue/map, `ConcurrentDictionary`, **lock-free basics** (Treiber stack, CAS loop, ABA), lock striping | striped-lock hashmap; CAS stack |
+| 3 | **Mutual exclusion & locks** | mutex/lock, spinlock, granularity, contention; **deadlock** (4 conditions), livelock, lock ordering | fix Lesson 2's race; force + fix a deadlock |
+| 4 | **Memory model & visibility** | instruction/memory reordering, visibility, memory barriers/fences, atomic read-write, compare-and-swap (CAS), why locks give visibility too | atomic counter; visible stop-flag |
+| 5 | **Condition synchronization** | condition variables (wait / signal / broadcast), spurious wakeups, **producer–consumer** | bounded blocking queue → **async logger draining a message queue** `[S7]` |
+| 6 | **Higher-level primitives** | semaphore, latch / manual-reset event, countdown latch, barrier, read-write lock | rate-of-N gate; reader-writer map |
+| 7 | **Concurrent data structures** | thread-safe queue/map, **lock-free basics** (Treiber stack, CAS loop, ABA), lock striping/sharding | striped-lock hashmap; CAS stack |
 | 8 | **Thread pools & task scheduling** | pool model, work queues, blocking vs async, oversubscription, `async/await` as a model | fixed pool + work queue |
 | 9 | **Thread-safe cache** ⭐ (the canonical Q `[S1]`) | LRU/LFU **under concurrency**, lock striping/sharding, eviction, **TTL expiry thread**, read-heavy tuning — *builds on the Caching lesson* | concurrent LRU cache w/ TTL |
 | 10 | **Durability & crash-safety** | write-ahead log, `fsync`/flush, atomic rename, crash recovery, **"power goes down"** `[S1]`, idempotency, checkpoints | append-only log + recovery |
 | 11 | **Disk & network I/O** | blocking vs non-blocking, buffering, batching, backpressure, OS page cache, sequential vs random | batched writer w/ backpressure |
 | 12 | **Interview integration** | the **rate limiter** (token bucket, thread-safe) `[S1]`,`[S3]`; driving the solution; handling **added requirements mid-flight** `[S1]`; class design — SRP, **strong cohesion / weak coupling**, separation of concerns `[S1]`; trade-off narration | thread-safe token-bucket limiter |
 
-Each lesson: **learn → implement in C# → short self-check**. Lesson 9 and 12 double as full mock systems-programming problems. The **"efficient logger that processes messages in a queue"** — a reported Databricks concurrency question `[S7]`, considered particularly challenging — is built in Lesson 5 (bounded blocking queue) and revisited under load/failure in Lesson 12.
+Each lesson: **learn (concept-first, pseudocode) → optional watch-it-happen demo → short self-check**. Lesson 9 and 12 double as full mock systems-programming problems. The **"efficient logger that processes messages in a queue"** — a reported Databricks concurrency question `[S7]`, considered particularly challenging — is built in Lesson 5 (bounded blocking queue) and revisited under load/failure in Lesson 12.
 
 ---
 

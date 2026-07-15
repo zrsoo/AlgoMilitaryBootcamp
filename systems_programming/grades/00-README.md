@@ -6,4 +6,4 @@ One file per lesson, written **after** the spoken quiz on that lesson (the next-
 - Record the question, the grade, what was right, and the specific gap to re-drill.
 - Files land here as `01-threads-execution-model.md`, `02-shared-state-races.md`, etc., as each lesson is quizzed.
 
-_No lessons quizzed yet. Lesson 01 taught 2026-07-14; quiz next session._
+_Lesson 01 taught 2026-07-14; quizzed 2026-07-15 → `01-threads-execution-model.md`._
