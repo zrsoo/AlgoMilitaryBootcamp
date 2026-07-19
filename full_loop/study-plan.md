@@ -114,6 +114,15 @@ The email is explicit: **use the STAR method** `[S1]`, and work the **six cultur
 - **Weekend build:** re-implement the race→lock→deadlock trio cleanly; first behavioral read-through aloud.
 
 ### Week 2 — Synchronization & structures (Mon Jul 21 – Sun Jul 27)
+
+> **↻ Re-scope 2026-07-19 (actual carry-forward).** W1 closed with **Algo ✓ and Coding ✓** done, and Systems Programming **Lessons 1–3** written/taught/quizzed — but **Lesson 4 slipped** and the **STAR stories were never drafted** (they were a W1 task). So the real, committed W2 list is **exactly three items**:
+> 1. **Systems Programming Lesson 4** — Memory model & visibility (write + teach).
+> 2. **The 6–8 STAR stories** → `full_loop/behavioral-stories.md` (carried over from W1).
+> 3. **Math touch #2** — number theory (GCD/LCM via Euclid, Sieve, modular arithmetic, fast exponentiation `pow(x,n)`).
+>
+> The original W2 targets below (Lessons 5–8, mock, etc.) now shift right — treat them as the *stretch* plan, not the commitment. Lessons 4→ pushes the whole curriculum back one slot; re-baseline at the Sunday checkpoint.
+
+*Original target (pre-slip):*
 - **Lessons 5–8** (condition sync, primitives, concurrent structures, pools).
 - **Algo:** 4 warm-up rounds (16 one-liners) + 4 timed/compiled cold re-solves.
 - **Math touch:** number theory (GCD/LCM via Euclid, Sieve, modular arithmetic, fast exponentiation `pow(x,n)`).
