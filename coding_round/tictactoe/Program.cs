@@ -1,7 +1,7 @@
 // =============================================================================
 //  Coding Round — Mock 1  (CoderPad-style single-pad harness)
 //
-//  Run:  cd coding_round && dotnet run
+//  Run:  cd coding_round/tictactoe && dotnet run
 //
 //  Workflow (coding-round mode):
 //    1. Design the interface + implement in the SOLUTION region.
@@ -30,7 +30,8 @@ class TicTacToe
     public TicTacToe(int s)
     {
         // If size negative, throw
-        if(s <= 0) throw new ArgumentException($"Cannot create board with size {s}");
+        if(s <= 0) 
+                throw new ArgumentOutOfRangeException(nameof(s), s, "Board size must be a positive integer.");
 
         moves = new();
         size = s;
