@@ -23,7 +23,7 @@ Companion docs: [../../full_loop/study-plan.md](../../full_loop/study-plan.md) (
 | 02 | 02-shared-state-races.md *(planned)* | data race, critical section, atomicity, the `count++` race, non-determinism | reproduce a race, then a lost update |
 | 03 | [03-mutual-exclusion-locks.md](03-mutual-exclusion-locks.md) | mutex/lock, spinlock, lock granularity, contention; deadlock (4 conditions), livelock, lock ordering | fix L2's race; force + fix a deadlock |
 | 04 | [04-memory-model-visibility.md](04-memory-model-visibility.md) | instruction/memory reordering, visibility, memory barriers/fences, atomic read-write, compare-and-swap (CAS), why locks also give visibility | atomic counter; visible stop-flag |
-| 05 | 05-condition-synchronization.md *(planned)* | condition variables (wait/signal/broadcast), spurious wakeups, producer–consumer | bounded blocking queue → async logger |
+| 05 | [05-condition-synchronization.md](05-condition-synchronization.md) | condition variables (wait/signal/broadcast), the atomic release-and-sleep, lost wakeup, `while`-not-`if` (Mesa semantics + spurious), signal vs broadcast (thundering herd), bounded producer–consumer, backpressure, async logger | *(skipped per scope — offer BlockingCollection logger on request)* |
 | 06 | 06-higher-level-primitives.md *(planned)* | semaphore, latch / manual-reset event, countdown latch, barrier, read-write lock | rate-of-N gate; reader-writer map |
 | 07 | 07-concurrent-data-structures.md *(planned)* | thread-safe queue/map, lock-free basics (Treiber stack, CAS loop, ABA), lock striping/sharding | striped-lock hashmap; CAS stack |
 | 08 | 08-thread-pools-scheduling.md *(planned)* | pool model, work queues, blocking vs async, oversubscription, `async`/`await` as a model | fixed pool + work queue |
@@ -53,5 +53,5 @@ Every lesson ends with a **Self-check**. **When we study lesson N, the next sess
 
 ## Status
 
-- 01, 02, 03, 04 written to full depth (v1.0). Rest planned — written in order, one lesson at a time, quizzing on the prior lesson first.
+- 01, 02, 03, 04, 05 written to full depth (v1.0). Rest planned — written in order, one lesson at a time, quizzing on the prior lesson first.
 </invoke>
